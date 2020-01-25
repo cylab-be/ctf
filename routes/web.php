@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('app/challenges', 'ChallengeController');
 Route::resource('app/sets', 'SetController');
+Route::resource('app/sets.questions', 'QuestionController');
