@@ -8,6 +8,7 @@
     @foreach ($challenge->users as $user)
     <tr>
         <td>{{ $user->name }}</td>
+        <td>{{ $user->score($challenge) }}</td>
     </tr>
     @endforeach
     </table>

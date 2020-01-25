@@ -53,4 +53,21 @@ class User extends Authenticatable
 
         return false;
     }
+
+    public function score(Challenge $challenge) : int
+    {
+        $submissions = Submission::
+                where('challenge_id', $challenge->id)
+                ->where('user_id', $this->id)
+                ->get();
+
+        $score = 0;
+        foreach ($submissions as $submission) {
+            if ($submission->flag == $submission->question->flag) {
+                $score += 1;
+            }
+        }
+
+        return $score;
+    }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Challenge;
+use App\Question;
+use App\Submission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -63,5 +65,26 @@ class UserChallengeController extends Controller
     public function scoreboard(Challenge $challenge)
     {
         return view('challenge.scoreboard', ['challenge' => $challenge]);
+    }
+
+    /**
+     * Submit a flag
+     * @param Challenge $challenge
+     * @param \App\Http\Controllers\Question $question
+     */
+    public function submit(Challenge $challenge, Question $question, Request $request)
+    {
+        $submission = new Submission();
+        $submission->user()->associate(Auth::user());
+        $submission->question()->associate($question);
+        $submission->challenge()->associate($challenge);
+        $submission->flag = $request->flag;
+        $submission->save();
+
+        if ($request->flag == $question->flag) {
+            // send an nice message ;-)
+        }
+
+        return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
     }
 }
