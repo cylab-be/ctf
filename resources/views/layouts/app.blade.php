@@ -36,6 +36,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ action('ChallengeController@index') }}">Challenges</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ action('SetController@index') }}">Question sets</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
