@@ -1,0 +1,26 @@
+## Cache composer packages between all jobs and all branches
+## of this project...
+cache:
+  key: one-key-to-rull-them-all
+  paths:
+    - composer-cache/
+
+before_script:
+  # Install all project dependencies
+  - COMPOSER_CACHE_DIR=composer-cache composer install
+  - cp env.gitlab-ci .env
+  - touch storage/db.sqlite
+  - php artisan key:generate
+  - php artisan migrate
+
+# Test with PHP7.2
+test:php72:
+  image: cylab/php72
+  script:
+    - vendor/bin/phpunit --coverage-text --colors=never --coverage-html build/coverage
+    - vendor/bin/phpcs
+  artifacts:
+    paths:
+    - build/
+    expire_in: 1 month
+
