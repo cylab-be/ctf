@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Challenge extends Model
@@ -38,5 +39,15 @@ class Challenge extends Model
         }
 
         return $r;
+    }
+
+    public function timeStart() : Carbon
+    {
+        return Carbon::createFromTimestamp($this->time_start);
+    }
+
+    public function timeEnd() : Carbon
+    {
+        return Carbon::createFromTimestamp($this->time_end);
     }
 }

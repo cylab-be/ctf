@@ -103,6 +103,8 @@ class ChallengeController extends Controller
         $this->validator($request->all())->validate();
 
         $challenge->name = $request->name;
+        $challenge->time_start = $request->time_start;
+        $challenge->time_end = $request->time_end;
         $challenge->save();
         return redirect(action('ChallengeController@index'));
     }
