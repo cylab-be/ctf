@@ -39,7 +39,7 @@ class ChallengeController extends Controller
      */
     public function index()
     {
-        return view("challenge.index", array("challenges" => Challenge::all()->sortBy("name")));
+        return view("app.challenge.index", array("challenges" => Challenge::all()->sortBy("name")));
     }
 
     /**
@@ -50,7 +50,7 @@ class ChallengeController extends Controller
      */
     public function create()
     {
-        return view("challenge.edit", ["challenge" => new Challenge()]);
+        return view("app.challenge.edit", ["challenge" => new Challenge()]);
     }
 
     /**
@@ -79,7 +79,7 @@ class ChallengeController extends Controller
      */
     public function show(Challenge $challenge)
     {
-        return view("challenge.show", array("challenge" => $challenge));
+        return view("app.challenge.show", array("challenge" => $challenge));
     }
 
     /**
@@ -89,7 +89,7 @@ class ChallengeController extends Controller
      */
     public function edit(Challenge $challenge)
     {
-        return view("challenge.edit", array("challenge" => $challenge));
+        return view("app.challenge.edit", array("challenge" => $challenge));
     }
 
     /**

@@ -5,11 +5,6 @@
 @section('content')
 <div class="container">
     <h1>Challenges</h1>
-    <p>
-        <a href="{{ action('ChallengeController@create') }}" class="btn btn-primary">
-            <i class="fas fa-plus-circle"></i> New
-        </a>
-    </p>
 
     <table class="table table-striped">
         <tr>
@@ -23,25 +18,15 @@
             <td>{{ $challenge->timeStart()->diffForHumans() }}</td>
 
             <td class="text-right">
-                <a class="btn btn-primary btn-sm"
-                   href="{{ action('ChallengeController@show', ['challenge' => $challenge]) }}">
-                    <i class="fas fa-search"></i> Show
+                <a class='btn btn-primary'
+                   href='{{ action('UserChallengeController@scoreboard', ['challenge' => $challenge]) }}'>
+                       <i class="fas fa-chess"></i> Scoreboard
                 </a>
 
-                <a class="btn btn-primary btn-sm"
-                   href="{{ action('ChallengeController@edit', ['challenge' => $challenge]) }}">
-                    <i class="fas fa-edit"></i> Edit
+                <a class="btn btn-primary"
+                   href="{{ action('UserChallengeController@join', ['challenge' => $challenge]) }}">
+                    <i class="fas fa-sign-in-alt"></i> Join
                 </a>
-
-                <form method="POST"
-                      action="{{ action('ChallengeController@destroy', ['challenge' => $challenge]) }}"
-                      style="display: inline-block">
-                    {{ csrf_field() }}
-                    {{ method_field("DELETE") }}
-                    <button class="btn btn-danger btn-sm">
-                        <i class="fas fa-times-circle"></i> Delete
-                    </button>
-                </form>
             </td>
         </tr>
         @endforeach

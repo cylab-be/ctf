@@ -21,6 +21,11 @@ class Challenge extends Model
         return $this->belongsToMany(Set::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     /**
      * Return the list of sets that do NOT belong to this challenge (and can
      * be added to the challenge).
@@ -49,5 +54,10 @@ class Challenge extends Model
     public function timeEnd() : Carbon
     {
         return Carbon::createFromTimestamp($this->time_end);
+    }
+
+    public static function upcoming()
+    {
+        return self::where('time_start', '>', time() - 3600)->get();
     }
 }
