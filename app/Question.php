@@ -15,6 +15,7 @@ class Question extends Model
 
     public function statementHTML() : string
     {
-        return $this->statement;
+        $parsedown = new \Parsedown();
+        return $parsedown->text($this->statement);
     }
 }

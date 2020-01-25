@@ -104,6 +104,8 @@ class QuestionController extends Controller
         $this->validator($request->all())->validate();
 
         $question->name = $request->name;
+        $question->statement = $request->statement;
+        $question->flag = $request->flag;
         $question->save();
         return redirect(action("SetController@show", ['set' => $set]));
     }

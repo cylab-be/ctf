@@ -17,7 +17,7 @@
 
                     <p>Flag: {{ $question->flag  }}</p>
 
-                    <p>{!! $question->statementHTML() !!}</p>
+                    <div>{!! $question->statementHTML() !!}</div>
 
                     <div>
                         <a class="btn btn-primary"
