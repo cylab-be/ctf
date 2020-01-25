@@ -40,7 +40,8 @@
                             <div class="col-md-6">
                                 <textarea id="statement"
                                        class="form-control{{ $errors->has('statement') ? ' is-invalid' : '' }}"
-                                       name="statement" required>{{ old('statement', $question->statement) }}</textarea>
+                                       name="statement" rows="10"
+                                       required>{{ old('statement', $question->statement) }}</textarea>
 
                                 @if ($errors->has('statement'))
                                     <span class="invalid-feedback">
