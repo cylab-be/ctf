@@ -33,11 +33,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ action('ChallengeController@index') }}">Challenges</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ action('SetController@index') }}">Question sets</a>
+                        <li class="nav-item dropdown">
+                            <a id="navbarAdminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Manage
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarAdminDropdown">
+                                <a class="nav-link" href="{{ action('ChallengeController@index') }}">Challenges</a>
+                                <a class="nav-link" href="{{ action('SetController@index') }}">Question sets</a>
+                            </div>
                         </li>
                     </ul>
 
