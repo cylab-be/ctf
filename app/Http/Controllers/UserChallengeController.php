@@ -29,6 +29,11 @@ class UserChallengeController extends Controller
      */
     public function join(Challenge $challenge)
     {
+        // user has already joined...
+        if (Auth::user()->belongsToChallenge($challenge)) {
+            return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
+        }
+
         return view('challenge.join', ['challenge' => $challenge]);
     }
 

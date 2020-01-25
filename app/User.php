@@ -41,4 +41,16 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Challenge::class);
     }
+
+    public function belongsToChallenge(Challenge $challenge) : bool
+    {
+        foreach ($this->challenges as $other)
+        {
+            if ($other->id === $challenge->id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
