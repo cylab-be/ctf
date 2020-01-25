@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Challenge;
+use App\Set;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -116,5 +117,18 @@ class ChallengeController extends Controller
     {
         Challenge::find($id)->delete();
         return redirect(action("ChallengeController@index"));
+    }
+
+    public function addSet(Challenge $challenge, Request $request)
+    {
+        $set_id = $request->set_id;
+        $challenge->sets()->attach($set_id);
+        return redirect(action('ChallengeController@show', ['challenge' => $challenge]));
+    }
+
+    public function removeSet(Challenge $challenge, Set $set)
+    {
+        $challenge->sets()->detach([$set->id]);
+        return redirect(action('ChallengeController@show', ['challenge' => $challenge]));
     }
 }

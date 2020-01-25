@@ -20,5 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('app/challenges', 'ChallengeController');
+Route::post('app/challenges/{challenge}/set/add', 'ChallengeController@addSet');
+Route::delete('app/challenges/{challenge}/set/{set}', 'ChallengeController@removeSet');
 Route::resource('app/sets', 'SetController');
 Route::resource('app/sets.questions', 'QuestionController');

@@ -12,4 +12,9 @@ class Set extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+    public function challenges()
+    {
+        return $this->belongsToMany(Challenge::class);
+    }
 }

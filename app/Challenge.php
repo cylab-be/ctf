@@ -14,4 +14,29 @@ class Challenge extends Model
         $this->time_end = time() + 7200;
         parent::__construct($attributes);
     }
+
+    public function sets()
+    {
+        return $this->belongsToMany(Set::class);
+    }
+
+    /**
+     * Return the list of sets that do NOT belong to this challenge (and can
+     * be added to the challenge).
+     * @return type
+     */
+    public function setsAttachable()
+    {
+        $ids = $this->sets()->allRelatedIds()->all();
+        var_dump($ids);
+
+        $r = [];
+        foreach (Set::all() as $set) {
+            if (!in_array($set->id, $ids)) {
+                $r[] = $set;
+            }
+        }
+
+        return $r;
+    }
 }
