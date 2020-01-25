@@ -62,7 +62,7 @@ class SetController extends Controller
         $set = new Set();
         $set->name = $request->name;
         $set->save();
-        return redirect(action('SetController@index'));
+        return redirect(action('SetController@show', ['set' => $set]));
     }
 
     /**
