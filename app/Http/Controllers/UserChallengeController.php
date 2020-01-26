@@ -59,6 +59,11 @@ class UserChallengeController extends Controller
      */
     public function show(Challenge $challenge)
     {
+
+        $now = time();
+        if ($now < $challenge->time_start) {
+            return view('challenge.wait', ['challenge' => $challenge]);
+        }
         return view('challenge.show', ['challenge' => $challenge]);
     }
 
@@ -74,6 +79,15 @@ class UserChallengeController extends Controller
      */
     public function submit(Challenge $challenge, Question $question, Request $request)
     {
+        $now = time();
+        if ($now < $challenge->time_start) {
+            abort(403);
+        }
+
+        if ($now > $challenge->time_end) {
+            abort(403);
+        }
+
         $submission = new Submission();
         $submission->user()->associate(Auth::user());
         $submission->question()->associate($question);
