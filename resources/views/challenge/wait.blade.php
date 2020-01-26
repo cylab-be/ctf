@@ -5,11 +5,11 @@
     <h1 class='text-center my-5'>{{ $challenge->name }}</h1>
 
     <h3 class='text-center my-5'>
-        will start in <b>{{ $challenge->timeStart()->diffForHumans(null, \Carbon\CarbonInterface::DIFF_ABSOLUTE) }}</b>
+        will start in <b>{{ $challenge->timeStartDiffForHumans() }}</b>
     </h3>
 
     <p class='text-center'>
-        {{ $challenge->timeStart()->setTimezone(Auth::user()->timezone)->toDateTimeString() }}
+        {{ $challenge->timeStartForHumans() }}
     </p>
 
 </div>

@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Challenge extends Model
 {
@@ -49,6 +50,20 @@ class Challenge extends Model
     public function timeStart() : Carbon
     {
         return Carbon::createFromTimestamp($this->time_start);
+    }
+
+    public function timeStartForHumans() : string
+    {
+        return $this->timeStart()->setTimezone(Auth::user()->timezone)->toDateTimeString();
+    }
+
+    public function timeStartDiffForHumans() : string
+    {
+        return $this->timeStart()->setTimezone(Auth::user()->timezone)
+                ->diffForHumans(
+                    Carbon::now(Auth::user()->timezone),
+                    \Carbon\CarbonInterface::DIFF_ABSOLUTE
+                );
     }
 
     public function timeEnd() : Carbon

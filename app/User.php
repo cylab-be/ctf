@@ -44,8 +44,7 @@ class User extends Authenticatable
 
     public function belongsToChallenge(Challenge $challenge) : bool
     {
-        foreach ($this->challenges as $other)
-        {
+        foreach ($this->challenges as $other) {
             if ($other->id === $challenge->id) {
                 return true;
             }
