@@ -69,6 +69,23 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="max_submissions" class="col-md-4 col-form-label text-md-right">Allowed submissions</label>
+
+                            <div class="col-md-6">
+                                <input id="max_submissions" type="integer"
+                                       class="form-control{{ $errors->has('max_submissions') ? ' is-invalid' : '' }}"
+                                       name="max_submissions"
+                                       value="{{ old('max_submissions', $question->max_submissions) }}" required>
+
+                                @if ($errors->has('max_submissions'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('max_submissions') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-check"></i> Save

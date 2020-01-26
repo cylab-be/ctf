@@ -27,7 +27,8 @@ class QuestionController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|regex:/^[a-zA-Z0-9\s-\.]+$/|max:255',
             'statement' => 'required|string',
-            'flag' => 'required|string'
+            'flag' => 'required|string',
+            'max_submissions' => 'required|integer'
         ]);
     }
 
@@ -69,6 +70,7 @@ class QuestionController extends Controller
         $question->name = $request->name;
         $question->statement = $request->statement;
         $question->flag = $request->flag;
+        $question->max_submissions = $request->max_submissions;
         $question->save();
         return redirect(action('SetController@show', ['set' => $set]));
     }
@@ -106,6 +108,7 @@ class QuestionController extends Controller
         $question->name = $request->name;
         $question->statement = $request->statement;
         $question->flag = $request->flag;
+        $question->max_submissions = $request->max_submissions;
         $question->save();
         return redirect(action("SetController@show", ['set' => $set]));
     }

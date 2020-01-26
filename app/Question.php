@@ -7,7 +7,15 @@ use Illuminate\Support\Facades\Auth;
 
 class Question extends Model
 {
+
+    const DEFAULT_MAX_SUBMISSIONS = 3;
+
     protected $dateFormat = 'U';
+
+    public function __construct(array $attributes = array()) {
+        $this->max_submissions = self::DEFAULT_MAX_SUBMISSIONS;
+        parent::__construct($attributes);
+    }
 
     public function set()
     {
@@ -23,7 +31,7 @@ class Question extends Model
     public function isSolvedFor(Challenge $challenge) : bool
     {
         $user = Auth::user();
-        
+
         $submissions = Submission::
                 where('user_id', $user->id)
                 ->where('challenge_id', $challenge->id)
