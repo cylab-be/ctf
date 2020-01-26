@@ -1,6 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css">
+<script src="/js/jquery.datetimepicker.full.min.js" defer></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        console.log('scripts loaded...');
+        jQuery('#time_start').datetimepicker();
+        jQuery('#time_end').datetimepicker();
+    });
+</script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -38,10 +49,10 @@
                             <label for="time_start" class="col-md-4 col-form-label text-md-right">Start time:</label>
 
                             <div class="col-md-6">
-                                <input id="time_start" type="integer"
+                                <input id="time_start" type="text"
                                        class="form-control{{ $errors->has('time_start') ? ' is-invalid' : '' }}"
                                        name="time_start"
-                                       value="{{ old('time_start', $challenge->time_start) }}" required>
+                                       value="{{ old('time_start', $challenge->timeStartForHumans()) }}" required>
 
                                 @if ($errors->has('time_start'))
                                     <span class="invalid-feedback">
@@ -55,10 +66,10 @@
                             <label for="time_end" class="col-md-4 col-form-label text-md-right">End time</label>
 
                             <div class="col-md-6">
-                                <input id="time_end" type="integer"
+                                <input id="time_end" type="text"
                                        class="form-control{{ $errors->has('time_end') ? ' is-invalid' : '' }}"
                                        name="time_end"
-                                       value="{{ old('time_end', $challenge->time_end) }}" required>
+                                       value="{{ old('time_end', $challenge->timeEndForHumans()) }}" required>
 
                                 @if ($errors->has('time_end'))
                                     <span class="invalid-feedback">

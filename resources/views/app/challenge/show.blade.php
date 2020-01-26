@@ -10,6 +10,8 @@
                 <div class="card-body">
                     <p>Name: {{ $challenge->name }}</p>
                     <p>Access code: {{ $challenge->code }}</p>
+                    <p>Start: {{ $challenge->timeStartForHumans()  }}</p>
+                    <p>End: {{ $challenge->timeEndForHumans()  }}</p>
 
                     <div>
                         <a class="btn btn-primary"

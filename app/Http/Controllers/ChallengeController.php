@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Challenge;
 use App\Set;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -27,8 +28,8 @@ class ChallengeController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|regex:/^[a-zA-Z0-9\s-\.]+$/|max:255',
-            'time_start' => 'required|integer',
-            'time_end' => 'required|integer'
+            'time_start' => 'required|date',
+            'time_end' => 'required|date'
         ]);
     }
 
@@ -66,8 +67,8 @@ class ChallengeController extends Controller
         $challenge = new Challenge();
         $challenge->name = $request->name;
         $challenge->code = Str::random(6);
-        $challenge->time_start = $request->time_start;
-        $challenge->time_end = $request->time_end;
+        $challenge->time_start = Carbon::createFromFormat("Y/m/d H:i", $request->time_start)->getTimestamp();
+        $challenge->time_end = Carbon::createFromFormat("Y/m/d H:i", $request->time_end)->getTimestamp();
         $challenge->save();
         return redirect(action('ChallengeController@index'));
     }
@@ -103,8 +104,8 @@ class ChallengeController extends Controller
         $this->validator($request->all())->validate();
 
         $challenge->name = $request->name;
-        $challenge->time_start = $request->time_start;
-        $challenge->time_end = $request->time_end;
+        $challenge->time_start = Carbon::createFromFormat("Y/m/d H:i", $request->time_start)->getTimestamp();
+        $challenge->time_end = Carbon::createFromFormat("Y/m/d H:i", $request->time_end)->getTimestamp();
         $challenge->save();
         return redirect(action('ChallengeController@index'));
     }

@@ -54,7 +54,7 @@ class Challenge extends Model
 
     public function timeStartForHumans() : string
     {
-        return $this->timeStart()->setTimezone(Auth::user()->timezone)->toDateTimeString();
+        return $this->timeStart()->setTimezone(Auth::user()->timezone)->format("Y/m/d H:i");
     }
 
     public function timeStartDiffForHumans() : string
@@ -69,6 +69,11 @@ class Challenge extends Model
     public function timeEnd() : Carbon
     {
         return Carbon::createFromTimestamp($this->time_end);
+    }
+
+    public function timeEndForHumans() : string
+    {
+        return $this->timeEnd()->setTimezone(Auth::user()->timezone)->format("Y/m/d H:i");
     }
 
     public static function upcoming()
