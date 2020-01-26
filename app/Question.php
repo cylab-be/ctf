@@ -12,7 +12,8 @@ class Question extends Model
 
     protected $dateFormat = 'U';
 
-    public function __construct(array $attributes = array()) {
+    public function __construct(array $attributes = array())
+    {
         $this->max_submissions = self::DEFAULT_MAX_SUBMISSIONS;
         parent::__construct($attributes);
     }
