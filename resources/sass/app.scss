@@ -9,3 +9,11 @@
 
 // Font awesome
 @import '~@fortawesome/fontawesome-free/css/all.css';
+
+
+// reload message
+div.bottom-right {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}

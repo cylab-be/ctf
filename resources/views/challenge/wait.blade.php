@@ -22,4 +22,21 @@
     </table>
 
 </div>
+
+<div class="text-muted bottom-right">
+    Reload in <span id="reload-countdown">55</span> seconds
+</div>
+
+<script type="text/javascript">
+    var reload_countdown = 60;
+    setInterval(function() {
+        reload_countdown -= 1;
+        $('#reload-countdown').text(reload_countdown);
+
+        if (reload_countdown === 0) {
+            console.log('reload...');
+            location.reload();
+        }
+    }, 1000);
+</script>
 @endsection
