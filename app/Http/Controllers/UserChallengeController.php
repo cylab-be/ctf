@@ -105,7 +105,8 @@ class UserChallengeController extends Controller
         }
 
         return redirect(
-                action('UserChallengeController@show', ['challenge' => $challenge]) .
-                "#q" . $question->id);
+            action('UserChallengeController@show', ['challenge' => $challenge]) .
+            "#q" . $question->id
+        );
     }
 }

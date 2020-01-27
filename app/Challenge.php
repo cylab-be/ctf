@@ -105,7 +105,7 @@ class Challenge extends Model
                 ];
             }
 
-            usort($ranking, function ($l1, $l2){
+            usort($ranking, function ($l1, $l2) {
                 return ($l1['score'] > $l2['score']) ? 1 : -1;
             });
             
