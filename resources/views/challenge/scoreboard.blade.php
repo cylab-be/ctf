@@ -2,13 +2,20 @@
 
 @section('content')
 <div class="container">
-    <h1 class='text-center'>{{ $challenge->name }}</h1>
+    <h1 class='text-center my-5'>{{ $challenge->name }}</h1>
 
     <table class='table table-striped'>
-    @foreach ($challenge->users as $user)
+
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Score</th>
+        </tr>
+    @foreach ($challenge->ranking() as $rank)
     <tr>
-        <td>{{ $user->name }}</td>
-        <td>{{ $user->score($challenge) }}</td>
+        <td>{{ ($loop->index + 1) }}</td>
+        <td>{{ $rank['user']->name }}</td>
+        <td>{{ $rank['score'] }}</td>
     </tr>
     @endforeach
     </table>
