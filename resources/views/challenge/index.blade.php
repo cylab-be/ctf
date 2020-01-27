@@ -7,15 +7,15 @@
     <h1 class='my-5 text-center'>Challenges</h1>
 
     <div class='grid'>
-        <div class="grid-sizer col-md-4"></div>
+        <div class="grid-sizer col-md-6"></div>
 
         @foreach($challenges as $challenge)
-        <div class="grid-item col-md-4 my-4">
+        <div class="grid-item col-md-6 my-4">
             <div class="card grid-item-content">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h4 class="card-title">
                         {{ $challenge->name }}
-                    </h5>
+                    </h4>
 
                     <p>Start {{ $challenge->timeStart()->diffForHumans() }}</p>
 
