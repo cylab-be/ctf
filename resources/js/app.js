@@ -1,7 +1,15 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
+
+
+// Masonry (for research projects)
+var jQueryBridget = require('jquery-bridget');
+var Masonry = require('masonry-layout');
+jQueryBridget( 'masonry', Masonry, $ );
+
+$(document).ready(function(){
+    $('.grid').masonry({
+      itemSelector: '.grid-item',
+      columnWidth: '.grid-sizer',
+      percentPosition: true
+    });
+});
