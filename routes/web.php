@@ -35,4 +35,7 @@ Route::get('challenges/{challenge}/scoreboard', 'UserChallengeController@scorebo
 Route::post('challenges/{challenge}/questions/{question}', 'UserChallengeController@submit');
 
 
-Route::view('hall-of-fame', 'hall-of-fame', ['challenges' => \App\Challenge::all()])->name('hall-of-fame');
+Route::get('hall-of-fame', function() {
+    return view('hall-of-fame', ['challenges' => \App\Challenge::all()]);
+})->name('hall-of-fame');
+
