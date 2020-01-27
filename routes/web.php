@@ -27,10 +27,12 @@ Route::resource('app/sets.questions', 'QuestionController');
 
 
 // user routes
-
 Route::get('challenges', 'UserChallengeController@index');
 Route::get('challenges/{challenge}/join', 'UserChallengeController@join');
 Route::post('challenges/{challenge}/join', 'UserChallengeController@storeJoin');
 Route::get('challenges/{challenge}', 'UserChallengeController@show');
 Route::get('challenges/{challenge}/scoreboard', 'UserChallengeController@scoreboard');
 Route::post('challenges/{challenge}/questions/{question}', 'UserChallengeController@submit');
+
+
+Route::view('hall-of-fame', 'hall-of-fame', ['challenges' => \App\Challenge::all()])->name('hall-of-fame');

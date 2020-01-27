@@ -89,6 +89,32 @@ class Challenge extends Model
         return "PLANNED";
     }
 
+    private $ranking = null;
+
+    public function ranking() : array
+    {
+
+        if ($this->ranking == null) {
+            $ranking = [];
+
+            foreach ($this->users as $user) {
+                $score = $user->score($this);
+                $ranking[] = [
+                    "user" => $user,
+                    "score" => $score
+                ];
+            }
+
+            usort($ranking, function ($l1, $l2){
+                return ($l1['score'] > $l2['score']) ? 1 : -1;
+            });
+            
+            $this->ranking = $ranking;
+        }
+
+        return $this->ranking;
+    }
+
     public static function upcoming()
     {
         return self::where('time_start', '>', time() - 48 * 3600)
