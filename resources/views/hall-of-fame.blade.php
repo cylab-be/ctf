@@ -4,7 +4,10 @@
 
 @section('content')
 <div class="container">
-    <h1>Challenges</h1>
+    <h1 class='my-5'>
+        <i class="fas fa-trophy"></i>
+        Hall of Fame
+    </h1>
 
     <table class="table table-striped">
         <tr>
@@ -17,8 +20,10 @@
             <td>{{ $challenge->name }} <span class='text-muted'>{{ $challenge->status() }}</span></td>
             <td>{{ $challenge->timeEndForHumans() }}</td>
             <td>
+                @if(count($challenge->ranking()) > 0)
                 {{ $challenge->ranking()[0]["user"]->name }}
                 ({{ $challenge->ranking()[0]["score"] }} points)
+                @endif
             </td>
         </tr>
         @endforeach
