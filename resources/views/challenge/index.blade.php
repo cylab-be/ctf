@@ -17,7 +17,7 @@
                         {{ $challenge->name }}
                     </h4>
 
-                    <p>Start {{ $challenge->timeStart()->diffForHumans() }}</p>
+                    <p>Start : {{ $challenge->timeStart()->diffForHumans() }}</p>
 
                     <a class='btn btn-primary'
                        href='{{ action('UserChallengeController@scoreboard', ['challenge' => $challenge]) }}'>

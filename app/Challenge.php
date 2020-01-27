@@ -108,7 +108,7 @@ class Challenge extends Model
             usort($ranking, function ($l1, $l2) {
                 return ($l1['score'] > $l2['score']) ? 1 : -1;
             });
-            
+
             $this->ranking = $ranking;
         }
 
@@ -117,7 +117,7 @@ class Challenge extends Model
 
     public static function upcoming()
     {
-        return self::where('time_start', '>', time() - 48 * 3600)
+        return self::where('time_end', '>', time())
                 ->orderBy('time_start')
                 ->get();
     }
