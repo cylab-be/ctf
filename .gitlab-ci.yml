@@ -6,10 +6,9 @@ cache:
     - composer-cache/
 
 before_script:
-  # Install all project dependencies
-  - COMPOSER_CACHE_DIR=composer-cache composer install
   - cp env.gitlab-ci .env
   - touch storage/app/db.sqlite
+  - COMPOSER_CACHE_DIR=composer-cache composer install
   - php artisan key:generate
   - php artisan migrate
 
