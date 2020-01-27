@@ -12,5 +12,14 @@
         {{ $challenge->timeStartForHumans() }}
     </p>
 
+    <h5 class='mt-5'>Participants</h5>
+    <table class='table'>
+        @foreach($challenge->users as $user)
+        <tr>
+            <td>{{ $user->name }}</td>
+        </tr>
+        @endforeach
+    </table>
+
 </div>
 @endsection

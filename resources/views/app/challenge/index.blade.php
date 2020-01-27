@@ -14,12 +14,14 @@
     <table class="table table-striped">
         <tr>
             <th>Name</th>
+            <th>Status</th>
             <th>Start</th>
             <th></th>
         </tr>
         @foreach($challenges as $challenge)
         <tr>
             <td>{{ $challenge->name }}</td>
+            <td>{{ $challenge->status() }}</td>
             <td>{{ $challenge->timeStart()->diffForHumans() }}</td>
 
             <td class="text-right">

@@ -29,15 +29,15 @@ class Question extends Model
         return $parsedown->text($this->statement);
     }
 
+    public function isAvailableFor(Challenge $challenge) : bool
+    {
+        return (! $this->isSolvedFor($challenge))
+        && ($this->remainingSubmissionsFor($challenge) > 0);
+    }
+
     public function isSolvedFor(Challenge $challenge) : bool
     {
-        $user = Auth::user();
-
-        $submissions = Submission::
-                where('user_id', $user->id)
-                ->where('challenge_id', $challenge->id)
-                ->where('question_id', $this->id)->get();
-
+        $submissions = $this->getSubmissionsFor($challenge);
         foreach ($submissions as $submission) {
             if ($submission->flag == $this->flag) {
                 return true;
@@ -45,5 +45,21 @@ class Question extends Model
         }
 
         return false;
+    }
+
+    public function remainingSubmissionsFor(Challenge $challenge) : int
+    {
+        $submissions = $this->getSubmissionsFor($challenge);
+        return $this->max_submissions - count($submissions);
+    }
+
+    public function getSubmissionsFor(Challenge $challenge)
+    {
+
+        $user = Auth::user();
+        return Submission::
+                where('user_id', $user->id)
+                ->where('challenge_id', $challenge->id)
+                ->where('question_id', $this->id)->get();
     }
 }

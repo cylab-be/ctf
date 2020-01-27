@@ -76,8 +76,23 @@ class Challenge extends Model
         return $this->timeEnd()->setTimezone(Auth::user()->timezone)->format("Y/m/d H:i");
     }
 
+    public function status() : string
+    {
+        if (time() > $this->time_end) {
+            return "FINISHED";
+        }
+
+        if ($this->time_start < time()) {
+            return "RUNNING";
+        }
+
+        return "PLANNED";
+    }
+
     public static function upcoming()
     {
-        return self::where('time_start', '>', time() - 3600)->get();
+        return self::where('time_start', '>', time() - 48 * 3600)
+                ->orderBy('time_start')
+                ->get();
     }
 }

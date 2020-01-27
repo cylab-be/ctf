@@ -8,7 +8,8 @@
     <h2 class='text-center my-4'>{{  $set->name }}</h2>
 
     @foreach ($set->questions as $question)
-    <div class="card mb-3 {{ $question->isSolvedFor($challenge) ? 'border-success' : '' }}">
+    <div class="card mb-4 {{ $question->isSolvedFor($challenge) ? 'border-success' : '' }}"
+         id='q{{ $question->id }}'>
         <div class='card-header'>
             <h4>{{ $question->name }}</h4>
         </div>
@@ -16,7 +17,7 @@
             {!! $question->statementHTML() !!}
         </div>
         <div class='card-footer'>
-            @if (!$question->isSolvedFor($challenge))
+            @if ($question->isAvailableFor($challenge))
             <form method="POST"
                   class="form-inline"
                   action="{{ action('UserChallengeController@submit', ['challenge' => $challenge, 'question' => $question]) }}"
@@ -31,6 +32,7 @@
             </form>
             @endif
 
+            <b>{{ $question->remainingSubmissionsFor($challenge) }}</b> remaining submissions...
         </div>
     </div>
     @endforeach

@@ -14,7 +14,7 @@
         </tr>
         @foreach($challenges as $challenge)
         <tr>
-            <td>{{ $challenge->name }}</td>
+            <td>{{ $challenge->name }} <span class='text-muted'>{{ $challenge->status() }}</span></td>
             <td>{{ $challenge->timeStart()->diffForHumans() }}</td>
 
             <td class="text-right">

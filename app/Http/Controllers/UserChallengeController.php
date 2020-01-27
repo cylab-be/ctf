@@ -64,6 +64,11 @@ class UserChallengeController extends Controller
         if ($now < $challenge->time_start) {
             return view('challenge.wait', ['challenge' => $challenge]);
         }
+
+        if ($now > $challenge->time_end) {
+            return redirect(action('UserChallengeController@scoreboard', ['challenge' => $challenge]));
+        }
+
         return view('challenge.show', ['challenge' => $challenge]);
     }
 
@@ -99,6 +104,8 @@ class UserChallengeController extends Controller
             // send an nice message ;-)
         }
 
-        return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
+        return redirect(
+                action('UserChallengeController@show', ['challenge' => $challenge]) .
+                "#q" . $question->id);
     }
 }
