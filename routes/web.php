@@ -29,11 +29,11 @@ Route::post('app/users/{user}/admin', 'UserController@toggleAdmin');
 
 
 // user routes
-Route::get('challenges', function() {
+Route::get('challenges', function () {
     return view("challenge.index", ["challenges" => Challenge::upcoming()]);
 })->name('challenges');
 
-Route::get('challenges/{challenge}/scoreboard', function(Challenge $challenge) {
+Route::get('challenges/{challenge}/scoreboard', function (Challenge $challenge) {
     return view('challenge.scoreboard', ['challenge' => $challenge]);
 })->name('scoreboard');
 
