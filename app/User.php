@@ -62,7 +62,7 @@ class User extends Authenticatable
 
         $score = 0;
         foreach ($submissions as $submission) {
-            if ($submission->flag == $submission->question->flag) {
+            if ($submission->question->verify($submission->flag)) {
                 $score += 1;
             }
         }

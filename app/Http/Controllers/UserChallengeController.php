@@ -100,7 +100,7 @@ class UserChallengeController extends Controller
         $submission->flag = $request->flag;
         $submission->save();
 
-        if ($request->flag == $question->flag) {
+        if ($question->verify($request->flag)) {
             // send an nice message ;-)
         }
 

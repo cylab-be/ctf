@@ -39,7 +39,7 @@ class Question extends Model
     {
         $submissions = $this->getSubmissionsFor($challenge);
         foreach ($submissions as $submission) {
-            if ($submission->flag == $this->flag) {
+            if ($this->verify($submission->flag)) {
                 return true;
             }
         }
@@ -61,5 +61,10 @@ class Question extends Model
                 where('user_id', $user->id)
                 ->where('challenge_id', $challenge->id)
                 ->where('question_id', $this->id)->get();
+    }
+
+    public function verify(string $flag)
+    {
+        return strcasecmp($flag, $this->flag) == 0;
     }
 }
