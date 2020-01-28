@@ -107,7 +107,25 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if ($id == Auth::user()->id) {
+            // you cannot destroy yourself!
+            return redirect(action("UserController@index"));
+        }
+
         User::find($id)->delete();
         return redirect(action("UserController@index"));
+    }
+
+    public function toggleAdmin(User $user)
+    {
+        if ($user->isAdmin()) {
+            $user->admin = false;
+
+        } else {
+            $user->admin = true;
+        }
+
+        $user->save();
+        return redirect(action('UserController@index'));
     }
 }

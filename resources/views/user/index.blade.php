@@ -40,6 +40,15 @@
                 -->
 
                 <form method="POST"
+                      action="{{ action('UserController@toggleAdmin', ['user' => $user]) }}"
+                      style="display: inline-block">
+                    {{ csrf_field() }}
+                    <button class="btn btn-danger btn-sm">
+                        <i class="fas fa-unlock"></i> Toggle Admin
+                    </button>
+                </form>
+
+                <form method="POST"
                       action="{{ action('UserController@destroy', ['user' => $user]) }}"
                       style="display: inline-block">
                     {{ csrf_field() }}

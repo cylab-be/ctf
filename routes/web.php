@@ -24,6 +24,8 @@ Route::post('app/challenges/{challenge}/set/add', 'ChallengeController@addSet');
 Route::delete('app/challenges/{challenge}/set/{set}', 'ChallengeController@removeSet');
 Route::resource('app/sets', 'SetController');
 Route::resource('app/sets.questions', 'QuestionController');
+Route::resource('app/users', 'UserController');
+Route::post('app/users/{user}/admin', 'UserController@toggleAdmin');
 
 
 // user routes
@@ -39,4 +41,3 @@ Route::get('hall-of-fame', function () {
     return view('hall-of-fame', ['challenges' => \App\Challenge::all()]);
 })->name('hall-of-fame');
 
-Route::resource('app/users', 'UserController');
