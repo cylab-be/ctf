@@ -4,7 +4,10 @@
 
 @section('content')
 <div class="container">
-    <h1 class='my-5 text-center'>Challenges</h1>
+    <h1 class='mt-5 text-center font-weight-bold'>Capture the Flag</h1>
+    <div class="text-muted text-center mb-5">
+        powered by <a href='https:/cylab.be'>https://cylab.be</a>
+    </div>
 
     <div class='grid'>
         <div class="grid-sizer col-md-6"></div>
