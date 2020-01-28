@@ -92,7 +92,6 @@ class Challenge extends Model
     public function ranking()
     {
         return $this->registrations()->orderBy('score', 'DESC')->get();
-
     }
 
     public static function upcoming()

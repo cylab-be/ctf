@@ -115,7 +115,7 @@ class UserChallengeController extends Controller
         if ($request->flag == null) {
             // nothing submitted...
             return redirect(
-                    action('UserChallengeController@show', ['challenge' => $challenge]) .
+                action('UserChallengeController@show', ['challenge' => $challenge]) .
                     "#q" . $question->id
             );
         }
