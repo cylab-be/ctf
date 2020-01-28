@@ -1,0 +1,29 @@
+- plugin: App\Plugins\Shared
+  params:
+  - storage
+- plugin: App\Plugins\Exec
+  params:
+  - mkdir -p bootstrap/cache
+  - mkdir -p storage/framework/cache/data
+  - mkdir -p storage/framework/sessions
+  - mkdir -p storage/framework/testing
+  - mkdir -p storage/framework/views
+  - mkdir -p storage/logs
+  - mkdir -p storage/app
+  - touch storage/app/db.sqlite
+- plugin: App\Plugins\Writable
+  params:
+  - bootstrap/cache
+  - storage/framework/cache/data
+  - storage/framework/sessions
+  - storage/framework/testing
+  - storage/framework/views
+  - storage/logs
+  - storage/app
+  - storage/app/db.sqlite
+- plugin: App\Plugins\Exec
+  params:
+  - composer install
+  - cp env.prod .env
+  - php artisan migrate --force
+
