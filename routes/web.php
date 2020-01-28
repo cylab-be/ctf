@@ -12,12 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(action('UserChallengeController@index'));
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('app/challenges', 'ChallengeController');
 Route::post('app/challenges/{challenge}/set/add', 'ChallengeController@addSet');
