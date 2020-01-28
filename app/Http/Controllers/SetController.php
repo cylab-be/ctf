@@ -11,8 +11,7 @@ class SetController extends Controller
 
     public function __construct()
     {
-        // Uncomment to require authentication
-        // $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     /**

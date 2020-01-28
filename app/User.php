@@ -69,4 +69,9 @@ class User extends Authenticatable
 
         return $score;
     }
+
+    public function isAdmin() : bool
+    {
+        return (bool) $this->admin;
+    }
 }
