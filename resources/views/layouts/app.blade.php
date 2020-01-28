@@ -33,27 +33,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class='nav-item'>
+                        <li class='nav-item mx-3'>
                             <a class='nav-link' href='{{ action('UserChallengeController@index') }}'>Challenges</a>
                         </li>
 
 
-                        <li class='nav-item'>
+                        <li class='nav-item mx-3'>
                             <a class='nav-link' href='{{ route('hall-of-fame') }}'>
                                 <i class="fas fa-trophy"></i> Hall of fame
                             </a>
                         </li>
 
-
-                        <li class="nav-item dropdown">
+                        @if (Auth::user() && Auth::user()->isAdmin())
+                        <li class="nav-item dropdown mx-3">
                             <a id="navbarAdminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 Manage
                             </a>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarAdminDropdown">
                                 <a class="nav-link" href="{{ action('ChallengeController@index') }}">Challenges</a>
-                                <a class="nav-link" href="{{ action('SetController@index') }}">Question sets</a>
+                                <a class="nav-link" href="{{ action('SetController@index') }}">Questions</a>
+                                <a class="nav-link" href="{{ action('UserController@index') }}">Users</a>
                             </div>
                         </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

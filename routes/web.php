@@ -38,3 +38,5 @@ Route::post('challenges/{challenge}/questions/{question}', 'UserChallengeControl
 Route::get('hall-of-fame', function () {
     return view('hall-of-fame', ['challenges' => \App\Challenge::all()]);
 })->name('hall-of-fame');
+
+Route::resource('app/users', 'UserController');
