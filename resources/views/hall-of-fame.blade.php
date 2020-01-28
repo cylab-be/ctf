@@ -21,8 +21,12 @@
             <td>{{ $challenge->timeEndForHumans() }}</td>
             <td>
                 @if(count($challenge->ranking()) > 0)
-                {{ $challenge->ranking()[0]["user"]->name }}
-                ({{ $challenge->ranking()[0]["score"] }} points)
+                @php
+                $first = $challenge->ranking()->first();
+                @endphp
+
+                {{ $first->user->name }}
+                ({{ $first->score }} points)
                 @endif
             </td>
         </tr>

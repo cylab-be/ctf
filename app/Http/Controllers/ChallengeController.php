@@ -69,7 +69,8 @@ class ChallengeController extends Controller
         $challenge->time_start = Carbon::createFromFormat("Y/m/d H:i", $request->time_start)->getTimestamp();
         $challenge->time_end = Carbon::createFromFormat("Y/m/d H:i", $request->time_end)->getTimestamp();
         $challenge->save();
-        return redirect(action('ChallengeController@index'));
+
+        return redirect(action('ChallengeController@show', ['challenge' => $challenge]));
     }
 
     /**

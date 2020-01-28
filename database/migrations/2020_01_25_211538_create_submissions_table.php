@@ -17,9 +17,8 @@ class CreateSubmissionsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('created_at');
             $table->integer('updated_at');
-            $table->bigInteger('user_id');
             $table->bigInteger('question_id');
-            $table->bigInteger('challenge_id');
+            $table->bigInteger('registration_id');
             $table->string('flag');
         });
     }

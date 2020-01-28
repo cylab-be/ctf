@@ -9,9 +9,9 @@ class Submission extends Model
 
     protected $dateFormat = 'U';
 
-    public function user()
+    public function registration()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Registration::class);
     }
 
     public function question()
@@ -19,8 +19,4 @@ class Submission extends Model
         return $this->belongsTo(Question::class);
     }
 
-    public function challenge()
-    {
-        return $this->belongsTo(Challenge::class);
-    }
 }

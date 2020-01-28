@@ -37,20 +37,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function challenges()
+    public function registrations()
     {
-        return $this->belongsToMany(Challenge::class);
-    }
-
-    public function belongsToChallenge(Challenge $challenge) : bool
-    {
-        foreach ($this->challenges as $other) {
-            if ($other->id === $challenge->id) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->hasMany(Registration::class);
     }
 
     public function score(Challenge $challenge) : int

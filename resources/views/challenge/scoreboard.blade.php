@@ -11,11 +11,11 @@
             <th>Name</th>
             <th>Score</th>
         </tr>
-    @foreach ($challenge->ranking() as $rank)
+    @foreach ($challenge->ranking() as $registration)
     <tr>
         <td>{{ ($loop->index + 1) }}</td>
-        <td>{{ $rank['user']->name }}</td>
-        <td>{{ $rank['score'] }}</td>
+        <td>{{ $registration->user->name }}</td>
+        <td>{{ $registration->score }}</td>
     </tr>
     @endforeach
     </table>

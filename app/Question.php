@@ -57,9 +57,9 @@ class Question extends Model
     {
 
         $user = Auth::user();
+        $registration = Registration::find($challenge, $user);
         return Submission::
-                where('user_id', $user->id)
-                ->where('challenge_id', $challenge->id)
+                where('registration_id', $registration->id)
                 ->where('question_id', $this->id)->get();
     }
 

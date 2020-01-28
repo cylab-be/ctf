@@ -14,9 +14,9 @@
 
     <h5 class='mt-5'>Participants</h5>
     <table class='table'>
-        @foreach($challenge->users as $user)
+        @foreach($challenge->registrations as $registration)
         <tr>
-            <td>{{ $user->name }}</td>
+            <td>{{ $registration->user->name }}</td>
         </tr>
         @endforeach
     </table>
@@ -24,7 +24,7 @@
 </div>
 
 <div class="text-muted bottom-right">
-    Reload in <span id="reload-countdown">55</span> seconds
+    Reload in <span id="reload-countdown">60</span> seconds
 </div>
 
 <script type="text/javascript">
