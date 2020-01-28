@@ -23,7 +23,7 @@
                     <p>Start : {{ $challenge->timeStart()->diffForHumans() }}</p>
 
                     <a class='btn btn-primary'
-                       href='{{ action('UserChallengeController@scoreboard', ['challenge' => $challenge]) }}'>
+                       href='{{ route('scoreboard', ['challenge' => $challenge]) }}'>
                         <i class="fas fa-chess"></i> Scoreboard
                     </a>
 

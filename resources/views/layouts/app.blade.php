@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class='nav-item mx-3'>
-                            <a class='nav-link' href='{{ action('UserChallengeController@index') }}'>Challenges</a>
+                            <a class='nav-link' href='{{ route('challenges') }}'>Challenges</a>
                         </li>
 
 

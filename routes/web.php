@@ -11,8 +11,10 @@
 |
 */
 
+use App\Challenge;
+
 Route::get('/', function () {
-    return redirect(action('UserChallengeController@index'));
+    return redirect(route('challenges'));
 });
 
 Auth::routes();
@@ -27,11 +29,17 @@ Route::post('app/users/{user}/admin', 'UserController@toggleAdmin');
 
 
 // user routes
-Route::get('challenges', 'UserChallengeController@index');
+Route::get('challenges', function() {
+    return view("challenge.index", ["challenges" => Challenge::upcoming()]);
+})->name('challenges');
+
+Route::get('challenges/{challenge}/scoreboard', function(Challenge $challenge) {
+    return view('challenge.scoreboard', ['challenge' => $challenge]);
+})->name('scoreboard');
+
 Route::get('challenges/{challenge}/join', 'UserChallengeController@join');
 Route::post('challenges/{challenge}/join', 'UserChallengeController@storeJoin');
 Route::get('challenges/{challenge}', 'UserChallengeController@show');
-Route::get('challenges/{challenge}/scoreboard', 'UserChallengeController@scoreboard');
 Route::post('challenges/{challenge}/questions/{question}', 'UserChallengeController@submit');
 
 

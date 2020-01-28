@@ -21,11 +21,6 @@ class UserChallengeController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-        return view("challenge.index", ["challenges" => Challenge::upcoming()]);
-    }
-
     /**
      * Show the form to join a challenge.
      * @param Challenge $challenge
@@ -78,17 +73,12 @@ class UserChallengeController extends Controller
         }
 
         if (time() > $challenge->time_end) {
-            return redirect(action('UserChallengeController@scoreboard', ['challenge' => $challenge]));
+            return redirect(route('scoreboard', ['challenge' => $challenge]));
         }
 
         return view('challenge.show', [
             'challenge' => $challenge,
             'registration' => $registration]);
-    }
-
-    public function scoreboard(Challenge $challenge)
-    {
-        return view('challenge.scoreboard', ['challenge' => $challenge]);
     }
 
     /**
