@@ -120,7 +120,6 @@ class UserController extends Controller
     {
         if ($user->isAdmin()) {
             $user->admin = false;
-
         } else {
             $user->admin = true;
         }
