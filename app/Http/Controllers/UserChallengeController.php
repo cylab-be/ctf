@@ -103,7 +103,6 @@ class UserChallengeController extends Controller
         }
 
         if ($request->flag == null) {
-
             toastr()->error("Looks like you submitted an empty flag!");
             return redirect(
                 action('UserChallengeController@show', ['challenge' => $challenge]) .
