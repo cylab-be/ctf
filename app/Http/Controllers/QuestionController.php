@@ -71,6 +71,8 @@ class QuestionController extends Controller
         $question->flag = $request->flag;
         $question->max_submissions = $request->max_submissions;
         $question->save();
+
+        toastr()->info("Question saved");
         return redirect(action('SetController@show', ['set' => $set]));
     }
 

@@ -103,7 +103,8 @@ class UserChallengeController extends Controller
         }
 
         if ($request->flag == null) {
-            // nothing submitted...
+
+            toastr()->error("Looks like you submitted an empty flag!");
             return redirect(
                 action('UserChallengeController@show', ['challenge' => $challenge]) .
                     "#q" . $question->id
@@ -117,10 +118,12 @@ class UserChallengeController extends Controller
         $submission->save();
 
         if ($question->verify($request->flag)) {
-            // send an nice message ;-)
+            toastr()->success("<b>Correct</b> answer for " . $question->name . " !");
 
             $registration->score = $registration->score + 1;
             $registration->save();
+        } else {
+            toastr()->error("<b>Wrong</b> answer for " . $question->name . " !");
         }
 
         return redirect(
