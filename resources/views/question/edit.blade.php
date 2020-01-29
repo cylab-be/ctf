@@ -85,8 +85,8 @@
 
                 <div class="form-group row">
                     <div class="col-md-8 offset-md-4">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-check"></i> Save
+                        <button type="submit" id="save" class="btn btn-primary">
+                            <i class="fas fa-check"></i> <u>S</u>ave
                         </button>
                     </div>
                 </div>
@@ -94,4 +94,13 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function(){
+    shortcut.add("Ctrl+S",function() {
+        console.log("Saving...");
+        $("#save").click();
+    });
+});
+</script>
 @endsection

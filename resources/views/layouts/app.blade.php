@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" defer></script>
+    <script src="/js/shortcut.js" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -106,6 +107,5 @@
             {!! toastr()->options().toastr()->notificationsAsString() !!}
         });
     </script>
-    @toastr_render
 </body>
 </html>

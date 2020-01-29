@@ -38,8 +38,10 @@
 
                 <div class="card-body">
                     <p>
-                        <a href="{{ action('QuestionController@create', ['set' => $set]) }}" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> New
+                        <a href="{{ action('QuestionController@create', ['set' => $set]) }}"
+                           class="btn btn-primary"
+                           id="add">
+                            <i class="fas fa-plus-circle"></i> <u>A</u>dd a question
                         </a>
                     </p>
 
@@ -80,4 +82,13 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function(){
+    shortcut.add("Ctrl+A",function() {
+        console.log("Add...");
+        document.getElementById("add").click()
+    });
+});
+</script>
 @endsection
