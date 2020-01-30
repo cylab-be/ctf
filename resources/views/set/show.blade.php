@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-4">
-            <div class="card">
+        <div class="col-lg-4">
+            <div class="card my-3">
                 <div class="card-header">{{ $set->name }}</div>
 
                 <div class="card-body">
@@ -30,8 +30,8 @@
             </div>
         </div>
 
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-lg-8">
+            <div class="card my-3">
                 <div class="card-header">
                     Questions
                 </div>
