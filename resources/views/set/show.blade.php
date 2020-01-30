@@ -53,7 +53,7 @@
                         @foreach($set->questions as $question)
                         <tr>
                             <td>{{ $question->name }}</td>
-                            <td class="text-truncate">{{ $question->statementHTML() }}</td>
+                            <td>{{ substr($question->statement, 0, 50) }}&hellip;</td>
                             <td class="text-right">
                                 <a class="btn btn-primary btn-sm"
                                    href="{{ action('QuestionController@show', ['set' => $set, 'question' => $question]) }}">
