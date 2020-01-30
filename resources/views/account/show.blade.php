@@ -45,6 +45,7 @@
                             </td>
                             <td>{{ $registration->score }}</td>
                         </tr>
+                        @endif
                         @endforeach
                     </table>
 
