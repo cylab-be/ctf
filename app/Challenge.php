@@ -76,6 +76,15 @@ class Challenge extends Model
         return $this->timeEnd()->format("Y/m/d H:i");
     }
 
+    public function timeEndDiffForHumans() : string
+    {
+        return $this->timeEnd()
+                ->diffForHumans(
+                    Carbon::now(),
+                    \Carbon\CarbonInterface::DIFF_ABSOLUTE
+                );
+    }
+
     public function status() : string
     {
         if (time() > $this->time_end) {

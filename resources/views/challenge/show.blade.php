@@ -38,4 +38,11 @@
     @endforeach
     @endforeach
 </div>
+
+<div class="footer fixed-bottom bg-white" style='padding: 0.5rem 1rem'>
+    <div class='container'>
+        Current score : <b>{{ $registration->score }}</b> |
+        Time left: {{ $challenge->timeEndDiffForHumans() }}
+    </div>
+</div>
 @endsection
