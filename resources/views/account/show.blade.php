@@ -33,10 +33,14 @@
                 <div class="card-body">
                     <table class="table">
                         @foreach($user->registrations as $registration)
+                        @php
+                        $challenge = $registration->challenge
+                        @endphp
+                        @if ($challenge !== null)
                         <tr>
                             <td>
-                                <a href="{{ action('UserChallengeController@show', ['challenge' => $registration->challenge]) }}">
-                                    {{ $registration->challenge->name }}
+                                <a href="{{ action('UserChallengeController@show', ['challenge' => $challenge]) }}">
+                                    {{ $challenge->name }}
                                 </a>
                             </td>
                             <td>{{ $registration->score }}</td>
