@@ -46,3 +46,9 @@ Route::post('challenges/{challenge}/questions/{question}', 'UserChallengeControl
 Route::get('hall-of-fame', function () {
     return view('hall-of-fame', ['challenges' => \App\Challenge::all()]);
 })->name('hall-of-fame');
+
+
+Route::get('account', 'AccountController@show');
+Route::get('account/edit', 'AccountController@edit');
+Route::put('account', 'AccountController@update');
+Route::put('account/password', 'AccountController@updatePassword');
