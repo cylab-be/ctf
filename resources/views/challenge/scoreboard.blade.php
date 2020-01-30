@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1 class='text-center my-5'>{{ $challenge->name }}</h1>
+<div class='container-fluid' style='font-size: 1.6rem'>
+    <h1 class='text-center my-3' style='font-size: 200%'>{{ $challenge->name }}</h1>
+    <p class='text-center my-4'>time left: <b>{{ $challenge->timeEndDiffForHumans() }}</b></p>
 
     <table class='table table-striped'>
 
@@ -19,6 +20,9 @@
     </tr>
     @endforeach
     </table>
+
+
+
 </div>
 
 <div class="text-muted bottom-right">
