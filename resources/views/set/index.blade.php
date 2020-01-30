@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Sets</h1>
+    <h1>Question sets</h1>
     <p>
         <a href="{{ action('SetController@create') }}" class="btn btn-primary">
             <i class="fas fa-plus-circle"></i> New
@@ -18,7 +18,7 @@
         </tr>
         @foreach($sets as $set)
         <tr>
-            <td>{{ $set->name }}</td>
+            <td>{{ $set->name }} ({{ $set->questions()->count() }} questions)</td>
             <td class="text-right">
                 <a class="btn btn-primary btn-sm"
                    href="{{ action('SetController@show', ['set' => $set]) }}">
