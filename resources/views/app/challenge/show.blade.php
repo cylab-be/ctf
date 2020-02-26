@@ -13,7 +13,12 @@
                     <p>Start: {{ $challenge->timeStartForHumans()  }}</p>
                     <p>End: {{ $challenge->timeEndForHumans()  }}</p>
 
-                    <div>
+                    <div class="mb-3">
+                        <a class="btn btn-primary"
+                           href="{{ action('ChallengeController@start', ['challenge' => $challenge]) }}">
+                            <i class="fas fa-play"></i> Start NOW
+                        </a>
+
                         <a class="btn btn-primary"
                            href="{{ action('ChallengeController@edit', ['challenge' => $challenge]) }}">
                             <i class="fas fa-edit"></i> Edit
@@ -28,6 +33,13 @@
                                 <i class="fas fa-times-circle"></i> Delete
                             </button>
                         </form>
+                    </div>
+
+                    <div>
+                        <a href="{{ action('ChallengeController@access', ['challenge' => $challenge]) }}"
+                            class="btn btn-primary">
+                               <i class="fas fa-eye"></i> Show access code
+                        </a>
                     </div>
                 </div>
             </div>

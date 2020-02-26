@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::resource('app/challenges', 'ChallengeController');
 Route::get('app/challenges/{challenge}/access', 'ChallengeController@access');
+Route::get('app/challenges/{challenge}/start', 'ChallengeController@start');
 Route::post('app/challenges/{challenge}/set/add', 'ChallengeController@addSet');
 Route::delete('app/challenges/{challenge}/set/{set}', 'ChallengeController@removeSet');
 Route::resource('app/sets', 'SetController');

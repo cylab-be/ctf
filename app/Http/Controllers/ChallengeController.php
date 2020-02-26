@@ -93,6 +93,13 @@ class ChallengeController extends Controller
         return view("app.challenge.access", array("challenge" => $challenge));
     }
 
+    public function start(Challenge $challenge)
+    {
+        $challenge->time_start = time();
+        $challenge->save();
+        return redirect(action('ChallengeController@show', ["challenge" => $challenge]));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
