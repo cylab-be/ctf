@@ -84,6 +84,16 @@ class ChallengeController extends Controller
     }
 
     /**
+     * Show access code for this challenge
+     * @param Challenge $challenge
+     * @return type
+     */
+    public function access(Challenge $challenge)
+    {
+        return view("app.challenge.access", array("challenge" => $challenge));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  Challenge $challenge     * @return \Illuminate\Http\Response

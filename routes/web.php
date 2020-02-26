@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('app/challenges', 'ChallengeController');
+Route::get('app/challenges/{challenge}/access', 'ChallengeController@access');
 Route::post('app/challenges/{challenge}/set/add', 'ChallengeController@addSet');
 Route::delete('app/challenges/{challenge}/set/{set}', 'ChallengeController@removeSet');
 Route::resource('app/sets', 'SetController');
