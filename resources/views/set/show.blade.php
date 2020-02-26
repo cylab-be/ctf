@@ -52,6 +52,7 @@
                         </tr>
                         @foreach($set->questions as $question)
                         <tr>
+                            <td>#{{ $loop->iteration }}</td>
                             <td>{{ $question->name }}</td>
                             <td class="text-right">
                                 <a class="btn btn-primary btn-sm"
