@@ -49,6 +49,7 @@
                         <tr>
                             <th>Name</th>
                             <th></th>
+                            <th></th>
                         </tr>
                         @foreach($set->questions as $question)
                         <tr>
