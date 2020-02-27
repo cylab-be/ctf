@@ -4,7 +4,6 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 class Challenge extends Model
 {
@@ -52,9 +51,17 @@ class Challenge extends Model
         return Carbon::createFromTimestamp($this->time_start);
     }
 
+    const TIME_FORMAT = "l j F Y @ H:i";
+    const TIME_FORMAT_PICKER = "Y/m/d H:i";
+
     public function timeStartForHumans() : string
     {
-        return $this->timeStart()->format("Y/m/d H:i");
+        return $this->timeStart()->format(self::TIME_FORMAT);
+    }
+
+    public function timeStartForPicker() : string
+    {
+        return $this->timeStart()->format(self::TIME_FORMAT_PICKER);
     }
 
     public function timeStartDiffForHumans() : string
@@ -73,7 +80,12 @@ class Challenge extends Model
 
     public function timeEndForHumans() : string
     {
-        return $this->timeEnd()->format("Y/m/d H:i");
+        return $this->timeEnd()->format(self::TIME_FORMAT);
+    }
+
+    public function timeEndForPicker() : string
+    {
+        return $this->timeEnd()->format(self::TIME_FORMAT_PICKER);
     }
 
     public function timeEndDiffForHumans() : string
@@ -87,7 +99,7 @@ class Challenge extends Model
 
     public function status() : string
     {
-        if (time() > $this->time_end) {
+        if ($this->isFinished()) {
             return "FINISHED";
         }
 
@@ -96,6 +108,11 @@ class Challenge extends Model
         }
 
         return "PLANNED";
+    }
+
+    public function isFinished() : bool
+    {
+        return time() > $this->time_end;
     }
 
     public function ranking()

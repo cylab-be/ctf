@@ -52,7 +52,7 @@
                                 <input id="time_start" type="text"
                                        class="form-control{{ $errors->has('time_start') ? ' is-invalid' : '' }}"
                                        name="time_start"
-                                       value="{{ old('time_start', $challenge->timeStartForHumans()) }}" required>
+                                       value="{{ old('time_start', $challenge->timeStartForPicker()) }}" required>
 
                                 @if ($errors->has('time_start'))
                                     <span class="invalid-feedback">
@@ -69,7 +69,7 @@
                                 <input id="time_end" type="text"
                                        class="form-control{{ $errors->has('time_end') ? ' is-invalid' : '' }}"
                                        name="time_end"
-                                       value="{{ old('time_end', $challenge->timeEndForHumans()) }}" required>
+                                       value="{{ old('time_end', $challenge->timeEndForPicker()) }}" required>
 
                                 @if ($errors->has('time_end'))
                                     <span class="invalid-feedback">
