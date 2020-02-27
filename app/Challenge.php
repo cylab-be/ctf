@@ -109,4 +109,11 @@ class Challenge extends Model
                 ->orderBy('time_start')
                 ->get();
     }
+
+    public static function finished()
+    {
+        return self::where('time_end', '<', time())
+                ->orderBy('time_end', 'DESC')
+                ->get();
+    }
 }

@@ -43,7 +43,7 @@
 
                         <li class='nav-item mx-3'>
                             <a class='nav-link' href='{{ route('hall-of-fame') }}'>
-                                <i class="fas fa-trophy"></i> Hall of fame
+                                <i class="fas fa-trophy"></i> Hall of Fame <i class="fas fa-trophy"></i>
                             </a>
                         </li>
 

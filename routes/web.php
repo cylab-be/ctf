@@ -35,10 +35,12 @@ Route::get('challenges', function () {
     return view("challenge.index", ["challenges" => Challenge::upcoming()]);
 })->name('challenges');
 
+// No auth required...
 Route::get('challenges/{challenge}/scoreboard', function (Challenge $challenge) {
     return view('challenge.scoreboard', ['challenge' => $challenge]);
 })->name('scoreboard');
 
+// Must be authenticated
 Route::get('challenges/{challenge}/join', 'UserChallengeController@join');
 Route::post('challenges/{challenge}/join', 'UserChallengeController@storeJoin');
 Route::get('challenges/{challenge}', 'UserChallengeController@show');
@@ -46,7 +48,7 @@ Route::post('challenges/{challenge}/questions/{question}', 'UserChallengeControl
 
 
 Route::get('hall-of-fame', function () {
-    return view('hall-of-fame', ['challenges' => \App\Challenge::all()]);
+    return view('hall-of-fame', ['challenges' => \App\Challenge::finished()]);
 })->name('hall-of-fame');
 
 

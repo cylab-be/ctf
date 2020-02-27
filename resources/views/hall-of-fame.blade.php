@@ -4,30 +4,33 @@
 
 @section('content')
 <div class="container">
-    <h1 class='my-5'>
-        <i class="fas fa-trophy"></i>
+    <h1 class='my-5 text-center'>
+        <i class="fas fa-trophy px-4"></i>
         Hall of Fame
+        <i class="fas fa-trophy px-4"></i>
     </h1>
 
     <table class="table table-striped">
         <tr>
-            <th>Name</th>
-            <th>End</th>
-            <th>Winner</th>
+            <th>Challenge</th>
+            <th class="text-right">Winner</th>
         </tr>
         @foreach($challenges as $challenge)
-        <tr>
-            <td>{{ $challenge->name }} <span class='text-muted'>{{ $challenge->status() }}</span></td>
-            <td>{{ $challenge->timeEndForHumans() }}</td>
-            <td>
-                @if(count($challenge->ranking()) > 0)
-                @php
-                $first = $challenge->ranking()->first();
-                @endphp
 
-                {{ $first->user->name }}
-                ({{ $first->score }} points)
-                @endif
+        @if($challenge->ranking()->count() == 0)
+        @continue
+        @endif
+
+        <tr>
+            <td>
+                <a href="{{ route('scoreboard', ['challenge' => $challenge]) }}">
+                    {{ $challenge->name }}
+                </a>
+                - {{ $challenge->timeEnd()->format('l j F Y') }}
+            </td>
+            <td class="text-right">
+                {{ $challenge->ranking()->first()->user->name }}
+                ({{ $challenge->ranking()->first()->score }} points)
             </td>
         </tr>
         @endforeach
