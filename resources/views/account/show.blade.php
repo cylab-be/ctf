@@ -26,12 +26,14 @@
 
         <div class="col-lg-7">
             <div class="card my-3">
-                <div class="card-header">
-                    My challenges
-                </div>
-
                 <div class="card-body">
                     <table class="table">
+                        <tr>
+                            <th>Challenge</th>
+                            <th>Score</th>
+                            <th class="text-right">Position</th>
+                        </tr>
+
                         @foreach($user->registrations as $registration)
                         @php
                         $challenge = $registration->challenge
@@ -42,8 +44,16 @@
                                 <a href="{{ action('UserChallengeController@show', ['challenge' => $challenge]) }}">
                                     {{ $challenge->name }}
                                 </a>
+                                - {{ $challenge->timeEnd()->format('l j F Y') }}
                             </td>
                             <td>{{ $registration->score }}</td>
+                            <td class="text-right">
+                                @if($registration->position() == 1)
+                                <i class="fas fa-medal"></i>
+                                @endif
+                                {{ $registration->position() }} /
+                                {{ $challenge->participants() }}
+                            </td>
                         </tr>
                         @endif
                         @endforeach

@@ -120,6 +120,11 @@ class Challenge extends Model
         return $this->registrations()->orderBy('score', 'DESC')->get();
     }
 
+    public function participants()
+    {
+        return $this->registrations()->count();
+    }
+
     public static function upcoming()
     {
         return self::where('time_end', '>', time())
