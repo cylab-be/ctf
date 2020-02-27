@@ -15,7 +15,7 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Score</th>
+            <th class="text-right">Score</th>
         </tr>
     @foreach ($challenge->ranking() as $registration)
     <tr>
@@ -26,7 +26,7 @@
             <i class="fas fa-medal px-3"></i>
             @endif
         </td>
-        <td>{{ $registration->score }}</td>
+        <td class="text-right">{{ $registration->score }}</td>
     </tr>
     @endforeach
     </table>
