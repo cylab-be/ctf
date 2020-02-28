@@ -64,7 +64,7 @@
                                 @if (Route::has('password.request'))
                                 or
                                 <a href="{{ route('password.request') }}">
-                                    reset your password
+                                    reset password
                                 </a>
                                 @endif
                             </div>
