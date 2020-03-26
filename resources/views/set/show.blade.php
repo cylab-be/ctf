@@ -31,56 +31,47 @@
         </div>
 
         <div class="col-lg-8">
-            <div class="card my-3">
-                <div class="card-header">
-                    Questions
+            <h3>Questions</h3>
+
+            <p>
+                <a href="{{ action('QuestionController@create', ['set' => $set]) }}"
+                   class="btn btn-primary"
+                   id="add">
+                    <i class="fas fa-plus-circle"></i> <u>A</u>dd a question
+                </a>
+            </p>
+
+            @foreach($set->questions as $question)
+            <div class="card mb-4" id='q{{ $question->id }}'>
+                <div class='card-header'>
+                    <h4>#{{ $loop->iteration }}  {{ $question->name }}</h4>
                 </div>
 
                 <div class="card-body">
-                    <p>
-                        <a href="{{ action('QuestionController@create', ['set' => $set]) }}"
-                           class="btn btn-primary"
-                           id="add">
-                            <i class="fas fa-plus-circle"></i> <u>A</u>dd a question
-                        </a>
-                    </p>
+                    {!! $question->statementHTML() !!}
 
-                    <table class="table table-striped">
-                        <tr>
-                            <th>Name</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        @foreach($set->questions as $question)
-                        <tr>
-                            <td>#{{ $loop->iteration }}</td>
-                            <td>{{ $question->name }}</td>
-                            <td class="text-right">
-                                <a class="btn btn-primary btn-sm"
-                                   href="{{ action('QuestionController@show', ['set' => $set, 'question' => $question]) }}">
-                                    <i class="fas fa-search"></i> Show
-                                </a>
+                    <p>Flag: {{ $question->flag }}</p>
+                    <p>Allowed submissions: {{ $question->max_submissions }}</p>
+                </div>
 
-                                <a class="btn btn-primary btn-sm"
-                                   href="{{ action('QuestionController@edit', ['set' => $set, 'question' => $question]) }}">
-                                    <i class="fas fa-edit"></i> Edit
-                                </a>
+                <div class='card-footer'>
+                    <a class="btn btn-primary btn-sm"
+                       href="{{ action('QuestionController@edit', ['set' => $set, 'question' => $question]) }}">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
 
-                                <form method="POST"
-                                      action="{{ action('QuestionController@destroy', ['set' => $set, 'question' => $question]) }}"
-                                      style="display: inline-block">
-                                    {{ csrf_field() }}
-                                    {{ method_field("DELETE") }}
-                                    <button class="btn btn-danger btn-sm">
-                                        <i class="fas fa-times-circle"></i> Delete
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
+                    <form method="POST"
+                          action="{{ action('QuestionController@destroy', ['set' => $set, 'question' => $question]) }}"
+                          style="display: inline-block">
+                        {{ csrf_field() }}
+                        {{ method_field("DELETE") }}
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fas fa-times-circle"></i> Delete
+                        </button>
+                    </form>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </div>
