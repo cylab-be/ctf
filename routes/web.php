@@ -56,3 +56,8 @@ Route::get('account', 'AccountController@show');
 Route::get('account/edit', 'AccountController@edit');
 Route::put('account', 'AccountController@update');
 Route::put('account/password', 'AccountController@updatePassword');
+
+
+Route::get('help', function() {
+    return view('help');
+})->name('help');

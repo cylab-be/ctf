@@ -47,6 +47,12 @@
                             </a>
                         </li>
 
+                        <li class='nav-item mx-3'>
+                            <a class='nav-link' href='{{ route('help') }}'>
+                                Help
+                            </a>
+                        </li>
+
                         @if (Auth::user() && Auth::user()->isAdmin())
                         <li class="nav-item dropdown mx-3">
                             <a id="navbarAdminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
