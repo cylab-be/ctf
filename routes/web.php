@@ -58,6 +58,6 @@ Route::put('account', 'AccountController@update');
 Route::put('account/password', 'AccountController@updatePassword');
 
 
-Route::get('help', function() {
+Route::get('help', function () {
     return view('help');
 })->name('help');
