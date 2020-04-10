@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 
 /**
  * The user part of challenges...
+ * UserChallengeController@show is the main action.
+ *
  */
 class UserChallengeController extends Controller
 {
@@ -27,8 +29,8 @@ class UserChallengeController extends Controller
      */
     public function join(Challenge $challenge)
     {
-        $registration = Registration::find($challenge, Auth::user());
         // user has already joined...
+        $registration = Registration::find($challenge, Auth::user());
         if ($registration != null) {
             return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
         }
@@ -43,16 +45,20 @@ class UserChallengeController extends Controller
      */
     public function storeJoin(Challenge $challenge, Request $request)
     {
+        // user has already joined...
+        $registration = Registration::find($challenge, Auth::user());
+        if ($registration != null) {
+            return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
+        }
+
         if ($request->code === $challenge->code) {
             $registration = new Registration();
             $registration->challenge_id = $challenge->id;
             $registration->user_id = Auth::user()->id;
             $registration->save();
-
-            return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
         }
 
-        return redirect(action('UserChallengeController@join', ['challenge' => $challenge]));
+        return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
     }
 
     /**
@@ -62,8 +68,8 @@ class UserChallengeController extends Controller
      */
     public function show(Challenge $challenge)
     {
+        // not registered yet
         $registration = Registration::find($challenge, Auth::user());
-
         if ($registration == null) {
             return redirect(action('UserChallengeController@join', ['challenge' => $challenge]));
         }
@@ -89,9 +95,8 @@ class UserChallengeController extends Controller
     public function submit(Challenge $challenge, Question $question, Request $request)
     {
         $registration = Registration::find($challenge, Auth::user());
-
         if ($registration == null) {
-            return redirect(action('UserChallengeController@join', ['challenge' => $challenge]));
+            return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
         }
 
         if (time() < $challenge->time_start) {
@@ -99,7 +104,8 @@ class UserChallengeController extends Controller
         }
 
         if (time() > $challenge->time_end) {
-            abort(403);
+            toastr()->error("Time is up!");
+            return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
         }
 
         if ($request->flag == null) {
@@ -108,6 +114,13 @@ class UserChallengeController extends Controller
                 action('UserChallengeController@show', ['challenge' => $challenge]) .
                     "#q" . $question->id
             );
+        }
+
+        if (!$question->isAvailableFor($registration->challenge)) {
+            // too many submissions or already sent the correct answer
+            return redirect(
+                action('UserChallengeController@show', ['challenge' => $challenge]) .
+                "#q" . $question->id);
         }
 
         $submission = new Submission();

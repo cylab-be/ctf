@@ -29,6 +29,15 @@ class Question extends Model
         return $parsedown->text($this->statement);
     }
 
+    /**
+     * Check if the logged in user is allowed to answer this question. This method
+     * checks that:
+     * 1. the user has not answered correctly
+     * 2. the user has not sent the max number of submissions
+     *
+     * @param \App\Challenge $challenge
+     * @return bool
+     */
     public function isAvailableFor(Challenge $challenge) : bool
     {
         return (! $this->isSolvedFor($challenge))
