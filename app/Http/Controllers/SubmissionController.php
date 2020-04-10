@@ -16,7 +16,7 @@ class SubmissionController extends Controller
     public function index()
     {
         return view('app.submission.index', [
-            'submissions' => Submission::orderBy('id', 'desc')->take(1000)
+            'submissions' => Submission::orderBy('id', 'desc')->take(1000)->get()
         ]);
     }
 }
