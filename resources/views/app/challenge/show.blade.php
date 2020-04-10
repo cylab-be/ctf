@@ -56,8 +56,10 @@
                         @foreach($challenge->sets as $set)
                         <tr>
                             <td>
+                                <a href="{{ action('SetController@show', ['set' => $set]) }}">
                                 {{ $set->name }}
                                 ({{ $set->questions()->count() }} questions)
+                                </a>
                             </td>
                             <td class="text-right">
                                 <form method="POST"
