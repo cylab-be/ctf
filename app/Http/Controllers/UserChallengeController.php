@@ -120,7 +120,8 @@ class UserChallengeController extends Controller
             // too many submissions or already sent the correct answer
             return redirect(
                 action('UserChallengeController@show', ['challenge' => $challenge]) .
-                "#q" . $question->id);
+                "#q" . $question->id
+            );
         }
 
         $submission = new Submission();
