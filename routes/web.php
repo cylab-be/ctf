@@ -29,6 +29,8 @@ Route::resource('app/sets.questions', 'QuestionController');
 Route::resource('app/users', 'UserController');
 Route::post('app/users/{user}/admin', 'UserController@toggleAdmin');
 
+Route::get('app/submissions', 'SubmissionController@index');
+
 
 // user routes
 Route::get('challenges', function () {
