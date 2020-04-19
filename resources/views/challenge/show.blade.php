@@ -4,8 +4,16 @@
 <div class="container">
     <h1 class='text-center'>{{ $challenge->name }}</h1>
 
+    @if (count($challenge->sets) > 1)
+    <div class='text-center my-4'>
+       @foreach ($challenge->sets as $set)
+       <a class='btn btn-sm btn-primary' href='#s{{ $set->id }}'>{{ $set->name }}</a>
+       @endforeach
+    </div>
+    @endif
+
     @foreach ($challenge->sets as $set)
-    <h2 class='text-center my-4'>{{  $set->name }}</h2>
+    <h2 class='text-center my-5' id='s{{ $set->id }}'>{{ $set->name }}</h2>
 
     @foreach ($set->questions as $question)
     <div class="card mb-4 {{ $question->isSolvedFor($challenge) ? 'border-success' : '' }}"
