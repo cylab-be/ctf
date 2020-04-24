@@ -51,7 +51,7 @@
     <div class='container'>
         Current score : <b>{{ $registration->score }}</b> |
         Position : <b>{{ $registration->position() }} / {{ $challenge->participants() }}</b> |
-        Time left : <b>{{ $challenge->timeEndDiffForHumans() }}</b>
+        Time left : <b><span class="timer" data-seconds-left={{ $challenge->timeEndDiffSeconds() }}></span></b>
     </div>
 </div>
 @endsection

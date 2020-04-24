@@ -5,7 +5,8 @@
     <h1 class='text-center my-5'>{{ $challenge->name }}</h1>
 
     <h3 class='text-center my-5'>
-        will start in <b>{{ $challenge->timeStartDiffForHumans() }}</b>
+        will start in
+        <b><span class="timer" data-seconds-left={{ $challenge->timeStartDiffSeconds() }}></span></b>
     </h3>
 
     <p class='text-center'>

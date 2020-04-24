@@ -73,6 +73,17 @@ class Challenge extends Model
                 );
     }
 
+    /**
+     * Number of seconds remaining before the start of the challenge.
+     * Returns a negative value if the challenge is already started.
+     *
+     * @return int
+     */
+    public function timeStartDiffSeconds() : int
+    {
+        return $this->time_start - time();
+    }
+
     public function timeEnd() : Carbon
     {
         return Carbon::createFromTimestamp($this->time_end);
@@ -86,6 +97,11 @@ class Challenge extends Model
     public function timeEndForPicker() : string
     {
         return $this->timeEnd()->format(self::TIME_FORMAT_PICKER);
+    }
+
+    public function timeEndDiffSeconds() : int
+    {
+        return $this->time_end - time();
     }
 
     public function timeEndDiffForHumans() : string

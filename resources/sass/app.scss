@@ -26,3 +26,17 @@ div.bottom-right {
 html {
   scroll-behavior: smooth;
 }
+
+// count down timer
+.jst-hours {
+    display: inline;
+}
+.jst-minutes {
+    display: inline;
+}
+.jst-seconds {
+    display: inline;
+}
+.jst-timeout {
+    color: red;
+}
