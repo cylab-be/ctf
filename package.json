@@ -28,6 +28,7 @@
         "@fortawesome/fontawesome-free": "^5.12.1",
         "jquery-bridget": "^2.0.1",
         "jquery-simple-timer": "^1.0.2",
-        "masonry-layout": "^4.2.2"
+        "masonry-layout": "^4.2.2",
+        "typeface-raleway": "0.0.75"
     }
 }
