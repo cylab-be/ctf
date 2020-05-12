@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class Question extends Model
 {
@@ -25,8 +26,17 @@ class Question extends Model
 
     public function statementHTML() : string
     {
+        $key = "ctf-question-" . $this->id . "-statement";
+
+        if (Cache::has($key)) {
+            return Cache::get($key);
+        }
+
         $parsedown = new \Parsedown();
-        return $parsedown->text($this->statement);
+        $html = $parsedown->text($this->statement);
+        Cache::put($key, $html, 5 * 60);
+
+        return $html;
     }
 
     /**
@@ -62,14 +72,22 @@ class Question extends Model
         return $this->max_submissions - count($submissions);
     }
 
+    private static $submissions_cache = [];
+
     public function getSubmissionsFor(Challenge $challenge)
     {
-
+        if (isset(self::$submissions_cache[$challenge->id])) {
+            return self::$submissions_cache[$challenge->id];
+        }
         $user = Auth::user();
         $registration = Registration::find($challenge, $user);
-        return Submission::
+        $submissions = Submission::
                 where('registration_id', $registration->id)
-                ->where('question_id', $this->id)->get();
+                ->where('question_id', $this->id)
+                ->get();
+
+        self::$submissions_cache[$challenge->id] = $submissions;
+        return $submissions;
     }
 
     public function verify(string $flag)
