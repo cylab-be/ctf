@@ -18,9 +18,9 @@
                         {{ csrf_field() }}
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                            <label for="name" class="col-md-3 col-form-label text-md-right">Name</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <input id="name" type="text"
                                        class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
                                        name="name"
@@ -35,7 +35,29 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
+                            <label for="description" class="col-md-3 col-form-label text-md-right">Description</label>
+
+                            <div class="col-md-9">
+                                <textarea id="description" type="text"
+                                          rows='10'
+                                          placeholder="You can use markdown here..."
+                                          class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
+                                          name="description">{{ old('description', $set->description) }}</textarea>
+
+                                <span class='text-muted'>
+                                    This description is visible for the participants.
+                                </span>
+
+                                @if ($errors->has('description'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-3">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-check"></i> Save
                                 </button>

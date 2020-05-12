@@ -23,7 +23,8 @@ class SetController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|regex:/^[a-zA-Z0-9\s-\.]+$/|max:255'
+            'name' => 'required|string|regex:/^[a-zA-Z0-9\s-\.]+$/|max:255',
+            'description' => 'string|max:2000'
         ]);
     }
 
@@ -60,6 +61,7 @@ class SetController extends Controller
 
         $set = new Set();
         $set->name = $request->name;
+        $set->description = $request->input('description', '');
         $set->save();
         return redirect(action('SetController@show', ['set' => $set]));
     }
@@ -95,8 +97,9 @@ class SetController extends Controller
         $this->validator($request->all())->validate();
 
         $set->name = $request->name;
+        $set->description = $request->input('description', '');
         $set->save();
-        return redirect(action('SetController@index'));
+        return redirect(action('SetController@show', ['set' => $set]));
     }
 
     /**

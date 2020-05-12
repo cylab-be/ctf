@@ -15,6 +15,12 @@
     @foreach ($challenge->sets as $set)
     <h2 class='text-center my-5' id='s{{ $set->id }}'>{{ $set->name }}</h2>
 
+    <div class='card mb-4'>
+        <div class='card-body'>
+            {!! $set->descriptionHTML() !!}
+        </div>
+    </div>
+
     @foreach ($set->questions as $question)
     <div class="card mb-4 {{ $question->isSolvedFor($challenge) ? 'border-success' : '' }}"
          id='q{{ $question->id }}'>

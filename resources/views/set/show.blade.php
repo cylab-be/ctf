@@ -8,7 +8,12 @@
                 <div class="card-header">{{ $set->name }}</div>
 
                 <div class="card-body">
-                    <p>Name: {{ $set->name }}</p>
+                    <p>
+                        <span class='text-muted'>created by</span>
+                        {{ $set->user->name }}
+                        <span class='text-muted'>on</span>
+                        {{ $set->created_at }}
+                    </p>
 
                     <div>
                         <a class="btn btn-primary"
@@ -47,7 +52,11 @@
         </div>
 
         <div class="col-lg-8">
-            <h3>Questions</h3>
+            <h3>{{ $set->name }}</h3>
+
+            <div>
+                {!! $set->descriptionHTML() !!}
+            </div>
 
             <p>
                 <a href="{{ action('QuestionController@create', ['set' => $set]) }}"
