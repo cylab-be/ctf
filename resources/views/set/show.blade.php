@@ -28,6 +28,22 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card my-3">
+                <div class="card-header">Used in following challenges...</div>
+
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                    @foreach ($set->challenges as $challenge)
+                        <li>
+                            <a href="{{ action('ChallengeController@show', ['challenge' => $challenge]) }}">
+                            {{ $challenge->name }}
+                            </a>
+                        </li>
+                    @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div class="col-lg-8">
