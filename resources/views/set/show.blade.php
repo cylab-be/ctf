@@ -54,9 +54,13 @@
         <div class="col-lg-8">
             <h3>{{ $set->name }}</h3>
 
-            <div>
-                {!! $set->descriptionHTML() !!}
+            @if ($set->description)
+            <div class='card mb-4'>
+                <div class='card-body'>
+                    {!! $set->descriptionHTML() !!}
+                </div>
             </div>
+            @endif
 
             <p>
                 <a href="{{ action('QuestionController@create', ['set' => $set]) }}"

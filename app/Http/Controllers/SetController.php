@@ -24,7 +24,7 @@ class SetController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|regex:/^[a-zA-Z0-9\s-\.]+$/|max:255',
-            'description' => 'string|max:2000'
+            'description' => 'string|nullable|max:2000'
         ]);
     }
 
