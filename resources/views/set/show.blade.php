@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <p>
                         <span class='text-muted'>created by</span>
-                        {{ $set->user->name }}
+                        {{ $set->user->name }}<br>
                         <span class='text-muted'>on</span>
                         {{ $set->created_at }}
                     </p>
