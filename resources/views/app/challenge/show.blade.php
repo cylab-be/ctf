@@ -123,8 +123,9 @@
                             <td>{{ $submission->created_at }}</td>
                             <td>{{ $submission->registration->user->name }}</td>
                             <td>
-                                
+                                <a href='{{ action('SetController@show', ['set' => $submission->question->set]) }}#q{{ $submission->question->id }}'>
                                 {{ $submission->question->name }}
+                                </a>
                             </td>
                             <td>{{ $submission->flag }}</td>
                         </tr>
