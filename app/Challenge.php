@@ -167,8 +167,7 @@ class Challenge extends Model
     {
         $stats = [];
 
-        foreach ($this->submissions as $submission)
-        {
+        foreach ($this->submissions as $submission) {
             if (!$submission->isCorrect()) {
                 continue;
             }

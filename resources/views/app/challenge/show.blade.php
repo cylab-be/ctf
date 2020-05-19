@@ -121,7 +121,11 @@
 
                         @foreach ($set->questions as $question)
                         <tr>
-                            <td>{{ $question->name }}</td>
+                            <td>
+                                <a href='{{ action('SetController@show', ['set' => $question->set]) }}#q{{ $question->id }}'>
+                                {{ $question->name }}
+                                </a>
+                            </td>
                             <td class='text-right'>
                                 {{ $challenge->submissionStatistics()[$question->id] ?? 0 }}
                             </td>
