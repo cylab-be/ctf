@@ -34,8 +34,6 @@ class Challenge extends Model
     public function setsAttachable()
     {
         $ids = $this->sets()->allRelatedIds()->all();
-        var_dump($ids);
-
         $r = [];
         foreach (Set::all() as $set) {
             if (!in_array($set->id, $ids)) {

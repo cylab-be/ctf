@@ -63,8 +63,8 @@
                             <td>
                                 <a href="{{ action('SetController@show', ['set' => $set]) }}">
                                 {{ $set->name }}
-                                ({{ $set->questions()->count() }} questions)
                                 </a>
+                                <span class='text-muted'>{{ $set->questions()->count() }} questions</span>
                             </td>
                             <td class="text-right">
                                 <form method="POST"
@@ -89,7 +89,10 @@
 
                         <select name="set_id" id="set_id" class="form-control">
                             @foreach($challenge->setsAttachable() as $set)
-                            <option value="{{ $set->id }}">{{ $set->name }}</option>
+                            <option value="{{ $set->id }}">
+                                {{ $set->name }}
+                                ({{ $set->questions()->count() }} questions)
+                            </option>
                             @endforeach
                         </select>
 
