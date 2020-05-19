@@ -4,11 +4,21 @@
 <div class='container-fluid' style='font-size: 1.6rem'>
     <h1 class='text-center my-3' style='font-size: 200%'>{{ $challenge->name }}</h1>
 
-    @if ($challenge->isFinished())
-    <p class='text-center my-4'>finished since <b>{{ $challenge->timeEndForHumans() }}</b></p>
-    @else
-    <p class='text-center my-4'>time left: <b>{{ $challenge->timeEndDiffForHumans() }}</b></p>
-    @endif
+
+
+    <p class='text-center my-4'>
+        @if ($challenge->isFinished())
+        finished since <b>{{ $challenge->timeEndForHumans() }}</b>
+
+        @elseif ($challenge->isStarted())
+        time left:
+        <span class="timer text-bold" data-seconds-left={{ $challenge->timeEndDiffSeconds() }}></span>
+
+        @else
+        start in:
+        <span class="timer text-bold" data-seconds-left={{ $challenge->timeStartDiffSeconds() }}></span>
+        @endif
+    </p>
 
     <table class='table table-striped'>
 

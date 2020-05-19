@@ -72,7 +72,6 @@ class Question extends Model
         return $this->max_submissions - count($submissions);
     }
 
-    private static $submissions_cache = [];
 
     public function getSubmissionsFor(Challenge $challenge)
     {
@@ -82,8 +81,6 @@ class Question extends Model
                 where('registration_id', $registration->id)
                 ->where('question_id', $this->id)
                 ->get();
-
-        // self::$submissions_cache[$challenge->id] = $submissions;
         return $submissions;
     }
 

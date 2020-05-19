@@ -119,11 +119,16 @@ class Challenge extends Model
             return "FINISHED";
         }
 
-        if ($this->time_start < time()) {
+        if ($this->isStarted()) {
             return "RUNNING";
         }
 
         return "PLANNED";
+    }
+
+    public function isStarted() : bool
+    {
+        return $this->time_start < time();
     }
 
     public function isFinished() : bool
