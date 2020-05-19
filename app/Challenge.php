@@ -163,6 +163,27 @@ class Challenge extends Model
         return $this->submissions()->orderBy('id', 'desc')->take($count)->get();
     }
 
+    public function submissionStatistics() : array
+    {
+        $stats = [];
+
+        foreach ($this->submissions as $submission)
+        {
+            if (!$submission->isCorrect()) {
+                continue;
+            }
+
+            if (! isset($stats[$submission->question_id])) {
+                $stats[$submission->question_id] = 1;
+                continue;
+            }
+
+            $stats[$submission->question_id]++;
+        }
+
+        return $stats;
+    }
+
     public static function upcoming()
     {
         return self::where('time_end', '>', time())
