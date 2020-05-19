@@ -40,6 +40,11 @@
                             class="btn btn-primary">
                                <i class="fas fa-eye"></i> Show access code
                         </a>
+
+                        <a class='btn btn-primary my-2'
+                           href='{{ route('scoreboard', ['challenge' => $challenge]) }}'>
+                            <i class="fas fa-chess"></i> Scoreboard
+                        </a>
                     </div>
                 </div>
             </div>
