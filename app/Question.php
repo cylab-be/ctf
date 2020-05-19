@@ -76,9 +76,6 @@ class Question extends Model
 
     public function getSubmissionsFor(Challenge $challenge)
     {
-        if (isset(self::$submissions_cache[$challenge->id])) {
-            return self::$submissions_cache[$challenge->id];
-        }
         $user = Auth::user();
         $registration = Registration::find($challenge, $user);
         $submissions = Submission::
@@ -86,7 +83,7 @@ class Question extends Model
                 ->where('question_id', $this->id)
                 ->get();
 
-        self::$submissions_cache[$challenge->id] = $submissions;
+        // self::$submissions_cache[$challenge->id] = $submissions;
         return $submissions;
     }
 
