@@ -104,6 +104,34 @@
 
                 </div>
             </div>
+
+            <div class='card my-3'>
+                <div class='card-header'>
+                    Latest submissions
+                </div>
+                <div class='card-body'>
+                    <table class='table'>
+                        <tr>
+                            <th>Time</th>
+                            <th>User</th>
+                            <th>Question</th>
+                            <th>Flag</th>
+                        </tr>
+
+                        @foreach ($challenge->latestSubmissions() as $submission)
+                        <tr>
+                            <td>{{ $submission->created_at }}</td>
+                            <td>{{ $submission->registration->user->name }}</td>
+                            <td>
+                                
+                                {{ $submission->question->name }}
+                            </td>
+                            <td>{{ $submission->flag }}</td>
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

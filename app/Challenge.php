@@ -153,6 +153,16 @@ class Challenge extends Model
         return $max;
     }
 
+    public function submissions()
+    {
+        return $this->hasManyThrough(Submission::class, Registration::class);
+    }
+
+    public function latestSubmissions(int $count = 100)
+    {
+        return $this->submissions()->orderBy('id', 'desc')->take($count)->get();
+    }
+
     public static function upcoming()
     {
         return self::where('time_end', '>', time())
