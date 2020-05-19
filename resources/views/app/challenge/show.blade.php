@@ -123,7 +123,7 @@
                         <tr>
                             <td>
                                 <a href='{{ action('SetController@show', ['set' => $question->set]) }}#q{{ $question->id }}'>
-                                {{ $question->name }}
+                                #{{ $loop->iteration }}  {{ $question->name }}
                                 </a>
                             </td>
                             <td class='text-right'>
