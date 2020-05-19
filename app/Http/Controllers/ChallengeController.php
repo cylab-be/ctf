@@ -80,7 +80,7 @@ class ChallengeController extends Controller
      */
     public function show(Challenge $challenge)
     {
-        return view("app.challenge.show", array("challenge" => $challenge));
+        return view("app.challenge.show", ["challenge" => $challenge]);
     }
 
     /**

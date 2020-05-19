@@ -57,7 +57,7 @@
 
 <div class="footer fixed-bottom bg-white shadow-sm-top" style='padding: 0.5rem 1rem;'>
     <div class='container'>
-        Current score : <b>{{ $registration->score }}</b> |
+        Current score : <b>{{ $registration->score }} / {{ $challenge->maxScore() }}</b> |
         Position : <b>{{ $registration->position() }} / {{ $challenge->participants() }}</b> |
         Time left : <b><span class="timer" data-seconds-left={{ $challenge->timeEndDiffSeconds() }}></span></b>
     </div>

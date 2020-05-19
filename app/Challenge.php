@@ -144,6 +144,15 @@ class Challenge extends Model
         return $this->registrations()->count();
     }
 
+    public function maxScore() : int
+    {
+        $max = 0;
+        foreach ($this->sets as $set) {
+            $max += $set->maxScore();
+        }
+        return $max;
+    }
+
     public static function upcoming()
     {
         return self::where('time_end', '>', time())

@@ -28,4 +28,9 @@ class Set extends Model
         $parsedown = new \Parsedown();
         return $parsedown->text($this->description);
     }
+
+    public function maxScore() : int
+    {
+        return $this->questions()->count();
+    }
 }

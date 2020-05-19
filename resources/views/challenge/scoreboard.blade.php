@@ -36,13 +36,12 @@
             <i class="fas fa-medal px-3"></i>
             @endif
         </td>
-        <td class="text-right">{{ $registration->score }}</td>
+        <td class="text-right">
+            {{ $registration->score }} / {{ $challenge->maxScore() }}
+        </td>
     </tr>
     @endforeach
     </table>
-
-
-
 </div>
 
 
