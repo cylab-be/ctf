@@ -130,7 +130,7 @@ class UserChallengeController extends Controller
         $submission->flag = $request->flag;
         $submission->save();
 
-        if ($question->verify($request->flag)) {
+        if ($submission->isCorrect()) {
             toastr()->success("<b>Correct</b> answer for " . $question->name . " !");
 
             $registration->score = $registration->score + 1;

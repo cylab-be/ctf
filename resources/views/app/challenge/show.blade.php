@@ -127,7 +127,14 @@
                                 {{ $submission->question->name }}
                                 </a>
                             </td>
-                            <td>{{ $submission->flag }}</td>
+                            <td>
+                                {{ $submission->flag }}
+                                @if ($submission->isCorrect())
+                                <i class="fas fa-check-circle text-success"></i>
+                                @else
+                                <i class="fas fa-times-circle text-danger"></i>
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </table>

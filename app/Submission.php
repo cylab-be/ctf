@@ -18,4 +18,9 @@ class Submission extends Model
     {
         return $this->belongsTo(Question::class);
     }
+
+    public function isCorrect() : bool
+    {
+        return $this->question->verify($this->flag);
+    }
 }
