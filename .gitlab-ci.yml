@@ -30,6 +30,7 @@ test:php72:
 
 build:
   image: docker:19.03.1
+  stage: build
   tags:
     - dind
   services:

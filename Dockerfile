@@ -1,3 +1,16 @@
+FROM cylab/php72 AS composer
+
+COPY . /var/www/html
+WORKDIR /var/www/html
+RUN composer install --no-dev
+
+FROM node AS node
+
+COPY . /var/www/html
+WORKDIR /var/www/html
+RUN npm --version && npm install && npm run prod
+
+
 FROM php:7.4-apache
 
 ### PHP
@@ -20,6 +33,11 @@ RUN a2enmod rewrite
 
 # copy source files
 COPY . /var/www/html
+COPY --from=composer /var/www/html/vendor /var/www/html/vendor
+COPY --from=node /var/www/html/public/css /var/www/html/public/css
+COPY --from=node /var/www/html/public/js /var/www/html/public/js
+COPY --from=node /var/www/html/public/fonts /var/www/html/public/fonts
+
 
 # these directories need to be writable by Apache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
@@ -28,6 +46,7 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 COPY env.docker /var/www/html/.env
 
 RUN php artisan config:cache
+RUN php artisan migrate
 
 ### Docker image metadata
 
