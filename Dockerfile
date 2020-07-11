@@ -2,7 +2,7 @@ FROM cylab/php72 AS composer
 
 COPY . /var/www/html
 WORKDIR /var/www/html
-RUN composer install --no-dev
+RUN composer install --no-dev --optimize-autoloader
 
 FROM node AS node
 
@@ -45,8 +45,8 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # copy env file for our Docker image
 COPY env.docker /var/www/html/.env
 
-RUN php artisan config:cache
-RUN php artisan migrate
+## optimize config and create sqlite db structure
+RUN php artisan config:cache && touch storage/app/db.sqlite && php artisan migrate
 
 ### Docker image metadata
 
