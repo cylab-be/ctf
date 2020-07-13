@@ -58,7 +58,7 @@ build:tagged:
     - docker info
   script:
     - docker build -t cylab/ctf:$CI_COMMIT_TAG .
-    - docker tag cylab/ctf:$CI_COMMIT cylab/ctf:latest
+    - docker tag cylab/ctf:$CI_COMMIT_TAG cylab/ctf:latest
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-    - docker push cylab/ctf:$CI_COMMIT
+    - docker push cylab/ctf:$CI_COMMIT_TAG
     - docker push cylab/ctf:latest
