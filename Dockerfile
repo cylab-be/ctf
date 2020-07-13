@@ -1,8 +1,12 @@
+#### Step 1 : composer
+
 FROM cylab/php72 AS composer
 
 COPY . /var/www/html
 WORKDIR /var/www/html
 RUN composer install --no-dev --optimize-autoloader
+
+#### Step 2 : node
 
 FROM node AS node
 
@@ -10,6 +14,7 @@ COPY . /var/www/html
 WORKDIR /var/www/html
 RUN npm --version && npm install && npm run prod
 
+#### Step 3 : the actual docker image
 
 FROM php:7.4-apache
 
@@ -46,7 +51,7 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 COPY env.docker /var/www/html/.env
 
 ## optimize config and create sqlite db structure
-RUN php artisan config:cache && touch storage/app/db.sqlite && php artisan migrate
+RUN php artisan config:cache && mkdir -p storage/app && touch storage/app/db.sqlite && php artisan migrate
 
 ### Docker image metadata
 
