@@ -24,9 +24,14 @@ class Question extends Model
         return $this->belongsTo(Set::class);
     }
 
+    private function statementHTMLCacheKey() : string
+    {
+        return "ctf-question-" . $this->id . "-statement";
+    }
+
     public function statementHTML() : string
     {
-        $key = "ctf-question-" . $this->id . "-statement";
+        $key = $this->statementHTMLCacheKey();
 
         if (Cache::has($key)) {
             return Cache::get($key);
@@ -37,6 +42,11 @@ class Question extends Model
         Cache::put($key, $html, 5 * 60);
 
         return $html;
+    }
+
+    public function save(array $options = array()) {
+        parent::save($options);
+        Cache::forget($this->statementHTMLCacheKey());
     }
 
     /**
