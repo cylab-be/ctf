@@ -50,8 +50,8 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # copy env file for our Docker image
 COPY env.docker /var/www/html/.env
 
-## optimize config and create sqlite db structure
-RUN php artisan config:cache && mkdir -p storage/app && touch storage/app/db.sqlite && php artisan migrate
+## create sqlite db structure
+RUN mkdir -p storage/app && touch storage/app/db.sqlite && php artisan migrate
 
 ### Docker image metadata
 
