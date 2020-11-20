@@ -39,7 +39,8 @@ class ChallengeController extends Controller
      */
     public function index()
     {
-        return view("app.challenge.index", array("challenges" => Challenge::all()->sortBy("name")));
+        return view("app.challenge.index",
+                ["challenges" => Challenge::all()->sortByDescy("time_start")]);
     }
 
     /**
