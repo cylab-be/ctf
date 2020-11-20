@@ -86,6 +86,11 @@ class ChallengeController extends Controller
         return view("app.challenge.show", ["challenge" => $challenge]);
     }
 
+    public function statistics(Challenge $challenge)
+    {
+        return view("app.challenge.statistics", ["challenge" => $challenge]);
+    }
+
     /**
      * Show access code for this challenge
      * @param Challenge $challenge

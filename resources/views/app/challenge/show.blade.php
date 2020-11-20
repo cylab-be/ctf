@@ -45,6 +45,11 @@
                            href='{{ route('scoreboard', ['challenge' => $challenge]) }}'>
                             <i class="fas fa-chess"></i> Scoreboard
                         </a>
+
+                        <a class='btn btn-primary my-2'
+                           href='{{ action('ChallengeController@statistics', ['challenge' => $challenge]) }}'>
+                            <i class="fas fa-list-ol"></i> Stats
+                        </a>
                     </div>
                 </div>
             </div>
