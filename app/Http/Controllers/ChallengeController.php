@@ -41,7 +41,7 @@ class ChallengeController extends Controller
     {
         return view(
             "app.challenge.index",
-            ["challenges" => Challenge::all()->sortByDescy("time_start")]
+            ["challenges" => Challenge::all()->sortByDesc("time_start")]
         );
     }
 
