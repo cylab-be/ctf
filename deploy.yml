@@ -21,6 +21,7 @@
   - storage/logs
   - storage/app
   - storage/app/db.sqlite
+  - vendor/tecnickcom/tcpdf/fonts
 - plugin: App\Plugins\Exec
   params:
   - composer install
