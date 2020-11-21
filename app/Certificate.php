@@ -1,12 +1,8 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace App;
 
-namespace Tests\Unit;
+use Carbon\Carbon;
 
 /**
  * Description of Certificate
@@ -20,12 +16,25 @@ class Certificate
     private $name;
     private $challenge;
     private $link;
+    private $date;
+    private $rank;
+    private $participants;
+    private $score;
 
-    public function __construct(string $name, string $challenge, string $link)
+    public function __construct(
+            string $name, string $challenge, Carbon $date,
+            int $score, int $rank,
+            int $participants, string $link)
     {
         $this->name = $name;
         $this->challenge = $challenge;
+        $this->date = $date;
+        $this->score = $score;
+        $this->rank = $rank;
+        $this->participants = $participants;
         $this->link = $link;
+
+        $this->render();
     }
 
     public function render()
@@ -34,30 +43,27 @@ class Certificate
 
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Nicola Asuni');
-        $pdf->SetTitle('TCPDF Example 002');
-        $pdf->SetSubject('TCPDF Tutorial');
-        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+        $pdf->SetAuthor('ctf.cylab.be');
+        $pdf->SetTitle('CERTIFICATE of COMPLETION - ' . $this->name);
 
         // remove default header/footer
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
-
         $pdf->SetAutoPageBreak(false, 0);
 
         // start page
         $pdf->AddPage();
 
         // background image
-        $img_file = __DIR__ . '/bokeh.jpg';
+        $img_file = __DIR__ . '/../resources/certificate/bokeh.jpg';
         $pdf->Image($img_file, 0, 0, 297, 210, '', '', '', true, 300, '', false, false, 0);
 
         //define('K_PATH_FONTS', __DIR__);
 
         // set font and write some text...
         //var_dump($pdf->AddFont('vollkorn', '', __DIR__ . '/vollkorn.php'));
-        \TCPDF_FONTS::addTTFfont(__DIR__ . '/VollkornBold.ttf');
-        $fontname = \TCPDF_FONTS::addTTFfont(__DIR__ . '/VollkornRegular.ttf');
+        \TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornBold.ttf');
+        $fontname = \TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornRegular.ttf');
         $pdf->SetFont($fontname, '', 28);
 
         $pdf->setColor('text', 60, 60, 60);
@@ -91,13 +97,13 @@ class Certificate
         $pdf->WriteHTML('<p><b>' . $this->challenge . '</b></p>', true, false, true, false, 'C');
 
         $pdf->SetY($pdf->GetY() + 5);
-        $pdf->writeHTML('<p>with a final score of <b>155</b> points</p>', true, false, true, false, 'C');
+        $pdf->writeHTML('<p>with a final score of <b>' . $this->score . '</b> points</p>', true, false, true, false, 'C');
 
         $pdf->SetY($pdf->GetY() + 15);
         $pdf->SetFont($fontname, '', 20);
-        $pdf->writeHTML('<p>Date of challenge: <b>' . date('Ymd') . '</b></p>', true, false, true, false, 'C');
+        $pdf->writeHTML('<p>Date of challenge: <b>' . $this->date->toFormattedDateString() . '</b></p>', true, false, true, false, 'C');
         $pdf->writeHTML(
-            '<p>Ranking: <b>' . ordinal(1) . '</b> out of <b>23</b> participants</p>',
+            '<p>Ranking: <b>' . ordinal($this->rank) . '</b> out of <b>' . $this->participants . '</b> participants</p>',
             true,
             false,
             true,
@@ -121,6 +127,11 @@ class Certificate
     public function save(string $file)
     {
         $this->pdf->Output($file, 'F');
+    }
+
+    public function stream()
+    {
+        $this->pdf->Output();
     }
 }
 

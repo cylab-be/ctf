@@ -163,6 +163,11 @@ class Challenge extends Model
         return $this->submissions()->orderBy('id', 'desc')->take($count)->get();
     }
 
+    public function scoreboardUrl() : string
+    {
+        return route('scoreboard', ['challenge' => $this]);
+    }
+
     private $stats;
 
     public function submissionStatistics() : array

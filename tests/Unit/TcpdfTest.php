@@ -55,9 +55,12 @@ class TcpdfTest extends TestCase
         $c = new Certificate(
             'Thibault Debatty',
             'Advanced Network Security',
+            \Carbon\Carbon::now(),
+            155,
+            2,
+            23,
             'https://ctf.cylab.be/certificate/12345'
         );
-        $c->render();
         $c->save('/tmp/certificate.pdf');
     }
 }

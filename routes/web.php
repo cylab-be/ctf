@@ -60,6 +60,17 @@ Route::get('account/edit', 'AccountController@edit');
 Route::put('account', 'AccountController@update');
 Route::put('account/password', 'AccountController@updatePassword');
 
+Route::get(
+        'registration/{registration}/certificate',
+        function(App\Registration $registration) {
+
+    if (!$registration->challenge->isFinished()) {
+        abort(403);
+    }
+
+    return $registration->certificate()->stream();
+})->name('certificate');
+
 
 Route::get('help', function () {
     return view('help');

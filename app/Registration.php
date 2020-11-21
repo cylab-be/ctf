@@ -30,6 +30,19 @@ class Registration extends Model
         return $position;
     }
 
+    public function certificate() : Certificate
+    {
+        $name = $this->user->name;
+        $challenge = $this->challenge->name;
+        $date = $this->challenge->timeStart();
+        $score = $this->score;
+        $rank = $this->position();
+        $participants = $this->challenge->participants();
+        $link = $this->challenge->scoreboardUrl();
+        return new Certificate(
+                $name, $challenge, $date, $score, $rank, $participants, $link);
+    }
+
     public static function find(Challenge $challenge, User $user) : ?Registration
     {
         return self::where('challenge_id', $challenge->id)

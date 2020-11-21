@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-4">
             <div class="card my-3">
                 <div class="card-header">
                     {{ $user->name }}
@@ -24,14 +24,15 @@
             </div>
         </div>
 
-        <div class="col-lg-7">
+        <div class="col-lg-8">
             <div class="card my-3">
                 <div class="card-body">
                     <table class="table">
                         <tr>
                             <th>Challenge</th>
                             <th>Score</th>
-                            <th class="text-right">Position</th>
+                            <th>Position</th>
+                            <th></th>
                         </tr>
 
                         @foreach($user->registrations as $registration)
@@ -53,6 +54,13 @@
                                 @endif
                                 {{ $registration->position() }} /
                                 {{ $challenge->participants() }}
+                            </td>
+                            <td>
+                                <a class='btn btn-sm btn-primary'
+                                   href="{{ route('certificate', ['registration' => $registration]) }}">
+                                    <i class="fas fa-file-pdf mr-2"></i>
+                                    Certificate
+                                </a>
                             </td>
                         </tr>
                         @endif
