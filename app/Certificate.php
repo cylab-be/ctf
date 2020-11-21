@@ -22,10 +22,14 @@ class Certificate
     private $score;
 
     public function __construct(
-            string $name, string $challenge, Carbon $date,
-            int $score, int $rank,
-            int $participants, string $link)
-    {
+        string $name,
+        string $challenge,
+        Carbon $date,
+        int $score,
+        int $rank,
+        int $participants,
+        string $link
+    ) {
         $this->name = $name;
         $this->challenge = $challenge;
         $this->date = $date;
@@ -97,13 +101,28 @@ class Certificate
         $pdf->WriteHTML('<p><b>' . $this->challenge . '</b></p>', true, false, true, false, 'C');
 
         $pdf->SetY($pdf->GetY() + 5);
-        $pdf->writeHTML('<p>with a final score of <b>' . $this->score . '</b> points</p>', true, false, true, false, 'C');
+        $pdf->writeHTML(
+            '<p>with a final score of <b>' . $this->score . '</b> points</p>',
+            true,
+            false,
+            true,
+            false,
+            'C'
+        );
 
         $pdf->SetY($pdf->GetY() + 15);
         $pdf->SetFont($fontname, '', 20);
-        $pdf->writeHTML('<p>Date of challenge: <b>' . $this->date->toFormattedDateString() . '</b></p>', true, false, true, false, 'C');
         $pdf->writeHTML(
-            '<p>Ranking: <b>' . ordinal($this->rank) . '</b> out of <b>' . $this->participants . '</b> participants</p>',
+            '<p>Date of challenge: <b>' . $this->date->toFormattedDateString() . '</b></p>',
+            true,
+            false,
+            true,
+            false,
+            'C'
+        );
+        $pdf->writeHTML(
+            '<p>Ranking: <b>' . ordinal($this->rank) . '</b> out of <b>'
+                . $this->participants . '</b> participants</p>',
             true,
             false,
             true,

@@ -40,7 +40,14 @@ class Registration extends Model
         $participants = $this->challenge->participants();
         $link = $this->challenge->scoreboardUrl();
         return new Certificate(
-                $name, $challenge, $date, $score, $rank, $participants, $link);
+            $name,
+            $challenge,
+            $date,
+            $score,
+            $rank,
+            $participants,
+            $link
+        );
     }
 
     public static function find(Challenge $challenge, User $user) : ?Registration
