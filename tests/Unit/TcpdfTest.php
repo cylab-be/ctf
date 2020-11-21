@@ -52,7 +52,7 @@ class TcpdfTest extends TestCase
 
     public function testCertificate()
     {
-        $c = new Certificate(
+        $c = new \App\Certificate(
             'Thibault Debatty',
             'Advanced Network Security',
             \Carbon\Carbon::now(),
