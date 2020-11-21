@@ -173,7 +173,6 @@ class Challenge extends Model
 
         $stats = [];
         foreach ($this->submissions as $submission) {
-
             // this question was deleted from the set
             if ($submission->question === null) {
                 continue;
