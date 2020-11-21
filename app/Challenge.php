@@ -163,11 +163,22 @@ class Challenge extends Model
         return $this->submissions()->orderBy('id', 'desc')->take($count)->get();
     }
 
+    private $stats;
+
     public function submissionStatistics() : array
     {
-        $stats = [];
+        if ($this->stats !== null) {
+            return $this->stats;
+        }
 
+        $stats = [];
         foreach ($this->submissions as $submission) {
+
+            // this question was deleted from the set
+            if ($submission->question === null) {
+                continue;
+            }
+
             if (!$submission->isCorrect()) {
                 continue;
             }
@@ -179,8 +190,8 @@ class Challenge extends Model
 
             $stats[$submission->question_id]++;
         }
-
-        return $stats;
+        $this->stats = $stats;
+        return $this->stats;
     }
 
     public static function upcoming()

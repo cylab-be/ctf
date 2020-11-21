@@ -128,7 +128,9 @@
                             <td>{{ $submission->created_at }}</td>
                             <td>{{ $submission->registration->user->name }}</td>
                             <td>
-                                @if ($submission->question !== null)
+                                @if ($submission->question === null)
+                                -- DELETED --
+                                @else
                                 <a href='{{ action('SetController@show', ['set' => $submission->question->set]) }}#q{{ $submission->question->id }}'>
                                 {{ $submission->question->name }}
                                 </a>
@@ -136,7 +138,9 @@
                             </td>
                             <td>
                                 {{ $submission->flag }}
-                                @if ($submission->isCorrect())
+                                @if ($submission->question === null)
+                                <i class="fas fa-question-circle text-warning"></i>
+                                @elseif ($submission->isCorrect())
                                 <i class="fas fa-check-circle text-success"></i>
                                 @else
                                 <i class="fas fa-times-circle text-danger"></i>
