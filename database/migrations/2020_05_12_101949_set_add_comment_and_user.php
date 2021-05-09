@@ -15,8 +15,8 @@ class SetAddCommentAndUser extends Migration
     {
         Schema::table('sets', function (Blueprint $table) {
             $table->integer('user_id')->default(1);
-            $table->text('description')->default("");
-            $table->text('comment')->default("");
+            $table->text('description')->nullable();
+            $table->text('comment')->nullable();
         });
     }
 
