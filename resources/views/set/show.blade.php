@@ -110,7 +110,7 @@
                             <i class="fas fa-arrow-circle-right"></i> Move to
                         </button>
 
-                        <select class="form-control form-control-sm" name="set_id" id="set_id">
+                        <select class="form-control form-control-sm" name="new_set_id" id="new_set_id">
                             @foreach(\App\Set::all()->sortBy('name') as $set)
                             <option value="{{ $set->id }}">
                                 {{ $set->name }}

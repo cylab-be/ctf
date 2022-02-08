@@ -122,7 +122,7 @@ class QuestionController extends Controller
      */
     public function move(Set $set, Question $question, Request $request)
     {
-        $new_set_id = $request->input("set_id");
+        $new_set_id = $request->input("new_set_id");
         $question->set_id = $new_set_id;
         $question->save();
 
