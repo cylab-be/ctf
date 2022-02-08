@@ -139,6 +139,7 @@ class QuestionController extends Controller
     public function destroy(Set $set, $id)
     {
         Question::find($id)->delete();
+        toastr()->info("Question was deleted!");
         return redirect(action("SetController@show", ['set' => $set]));
     }
 }
