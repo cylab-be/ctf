@@ -7,7 +7,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Capture the Flag</title>
+    <title>
+        @hasSection('title')
+        @yield('title') | Capture the Flag
+        @else
+        Capture the Flag
+        @endif
+    </title>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
