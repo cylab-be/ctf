@@ -111,10 +111,10 @@
                         </button>
 
                         <select class="form-control form-control-sm" name="new_set_id" id="new_set_id">
-                            @foreach(\App\Set::all()->sortBy('name') as $set)
-                            <option value="{{ $set->id }}">
-                                {{ $set->name }}
-                                ({{ $set->questions()->count() }} questions)
+                            @foreach($sets as $new_set)
+                            <option value="{{ $new_set->id }}">
+                                {{ $new_set->name }}
+                                ({{ $new_set->questionsCount() }} questions)
                             </option>
                             @endforeach
                         </select>

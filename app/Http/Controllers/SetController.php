@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Set;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -73,7 +72,9 @@ class SetController extends Controller
      */
     public function show(Set $set)
     {
-        return view("set.show", array("set" => $set));
+        return view("set.show", [
+            "set" => $set,
+            "sets" => Set::all()->sortBy('name')]); // used to move a question
     }
 
     /**
