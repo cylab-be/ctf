@@ -27,6 +27,7 @@ Route::post('app/challenges/{challenge}/set/add', 'ChallengeController@addSet');
 Route::delete('app/challenges/{challenge}/set/{set}', 'ChallengeController@removeSet');
 Route::resource('app/sets', 'SetController');
 Route::resource('app/sets.questions', 'QuestionController');
+Route::post('app/sets/{set}/questions/{question}/move', 'QuestionController@move');
 Route::resource('app/users', 'UserController');
 Route::post('app/users/{user}/admin', 'UserController@toggleAdmin');
 

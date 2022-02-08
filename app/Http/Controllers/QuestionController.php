@@ -115,6 +115,22 @@ class QuestionController extends Controller
     }
 
     /**
+     * Move a question to another question set.
+     *
+     * @param Set $set
+     * @param Question $question
+     */
+    public function move(Set $set, Question $question, Request $request)
+    {
+        $new_set_id = $request->input("set_id");
+        $question->set_id = $new_set_id;
+        $question->save();
+
+        toastr()->info("Question was moved");
+        return redirect(action("SetController@show", ['set' => $set]));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

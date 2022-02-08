@@ -98,6 +98,25 @@
                             <i class="fas fa-times-circle"></i> Delete
                         </button>
                     </form>
+
+                    <form method="POST"
+                          class="form-inline"
+                          action="{{ action('QuestionController@move', ['set' => $set, 'question' => $question]) }}"
+                          style="display: inline-block">
+                        {{ csrf_field() }}
+                        <button class="btn btn-warning btn-sm">
+                            <i class="fas fa-arrow-circle-right"></i> Move to
+                        </button>
+
+                        <select class="form-control form-control-sm" name="set_id" id="set_id">
+                            @foreach(\App\Set::all() as $set)
+                            <option value="{{ $set->id }}">
+                                {{ $set->name }}
+                                ({{ $set->questions()->count() }} questions)
+                            </option>
+                            @endforeach
+                        </select>
+                    </form>
                 </div>
             </div>
             @endforeach
