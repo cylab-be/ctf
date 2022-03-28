@@ -35,7 +35,7 @@ class Challenge extends Model
     {
         $ids = $this->sets()->allRelatedIds()->all();
         $r = [];
-        foreach (Set::all() as $set) {
+        foreach (Set::orderBy('name')->get() as $set) {
             if (!in_array($set->id, $ids)) {
                 $r[] = $set;
             }
