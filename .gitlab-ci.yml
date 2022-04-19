@@ -76,5 +76,5 @@ publish:
   script:
     - apk add curl gettext zip
     # use template to create the release docker-compose
-    - envsubst < docker/docker-compose.tmpl > docker-compose.yml
+    - envsubst < docker-compose.tmpl > docker-compose.yml
 
