@@ -13,6 +13,13 @@
 
 use App\Challenge;
 
+$app_url = config("app.url");
+if (!empty($app_url)) {
+    URL::forceRootUrl($app_url);
+    $schema = explode(':', $app_url)[0];
+    URL::forceScheme($schema);
+}
+
 Route::get('/', function () {
     return redirect(route('challenges'));
 });
