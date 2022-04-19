@@ -62,3 +62,20 @@ build:tagged:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - docker push cylab/ctf:$CI_COMMIT_TAG
     - docker push cylab/ctf:latest
+
+#
+# create docker-compose.yml
+# 
+publish:
+  only:
+    - tags
+  stage: build
+  image: alpine
+  artifacts:
+    paths:
+      - docker-compose.yml
+  script:
+    - apk add curl gettext zip
+    # use template to create the release docker-compose
+    - envsubst < docker/docker-compose.tmpl > docker-compose.yml
+

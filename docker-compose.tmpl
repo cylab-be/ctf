@@ -1,0 +1,57 @@
+#
+# cylab/ctf-$CI_COMMIT_TAG
+# 
+
+version: "3"
+services:
+  web:
+    image: cylab/ctf:$CI_COMMIT_TAG
+    container_name: web
+    depends_on:
+      - redis
+      - mysql
+    ports:
+      - 8080:80
+    volumes:
+      - ./volumes/web:/var/www/html/storage
+    env_file: env.app
+    restart: "unless-stopped"
+
+  queue:
+    image: cylab/ctf:$CI_COMMIT_TAG
+    container_name: queue
+    depends_on:
+      - web
+    volumes:
+      - ./volumes/web:/var/www/html/storage
+    entrypoint: php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=60
+    env_file: env.app
+    restart: "unless-stopped"
+
+  scheduler:
+    image: cylab/ctf:$CI_COMMIT_TAG
+    container_name: scheduler
+    depends_on:
+      - web
+    volumes:
+      - ./volumes/web:/var/www/html/storage
+    entrypoint: sh -c "while true; do php /var/www/html/artisan schedule:run --verbose & sleep 60; done"
+    env_file: env.app
+    restart: "unless-stopped"
+
+  redis:
+    image: redis:4-alpine
+    container_name: redis
+    volumes:
+      - ./volumes/redis:/data
+    restart: "unless-stopped"
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+    restart: "unless-stopped"
