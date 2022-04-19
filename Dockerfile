@@ -1,6 +1,6 @@
 #### Step 1 : composer
 
-FROM cylab/php72 AS composer
+FROM cylab/php74 AS composer
 
 COPY . /var/www/html
 WORKDIR /var/www/html
