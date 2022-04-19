@@ -15,3 +15,5 @@ storage/framework/testing
 vendor
 
 env.prod
+
+volumes
