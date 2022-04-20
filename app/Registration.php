@@ -50,10 +50,20 @@ class Registration extends Model
         );
     }
 
+    private static $find_cache = [];
+
     public static function find(Challenge $challenge, User $user) : ?Registration
     {
-        return self::where('challenge_id', $challenge->id)
+        $key = $user->id . ":" . $challenge->_id;
+
+        if (isset(self::$find_cache[$key])) {
+            return self::$find_cache[$key];
+        }
+
+        self::$find_cache[$key] = self::where('challenge_id', $challenge->id)
                 ->where('user_id', $user->id)
                 ->first();
+
+        return self::$find_cache[$key];
     }
 }

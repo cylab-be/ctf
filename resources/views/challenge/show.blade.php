@@ -40,7 +40,8 @@
                   style="display: inline-block">
                 {{ csrf_field() }}
 
-                <input type="text" class='form-control' name='flag'>
+                <input type="text" class='form-control' name='flag'
+                       autocomplete="off">
 
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-check"></i> Submit
