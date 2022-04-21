@@ -15,15 +15,15 @@ class AddIndexes extends Migration
     {
         Schema::table('submissions', function (Blueprint $table) {
             $table->bigInteger('registration_id')->unsigned()->change();
-            $table->foreign('registration_id')->references("id")->on("registrations");
+            // $table->foreign('registration_id')->references("id")->on("registrations");
 
             $table->bigInteger('question_id')->unsigned()->change();
-            $table->foreign('question_id')->references("id")->on("questions");
+            // $table->foreign('question_id')->references("id")->on("questions");
         });
 
         Schema::table('registrations', function (Blueprint $table) {
             $table->bigInteger('challenge_id')->unsigned()->change();
-            $table->foreign('challenge_id')->references("id")->on("challenges");
+            // $table->foreign('challenge_id')->references("id")->on("challenges");
 
             $table->bigInteger('user_id')->unsigned()->change();
             $table->foreign('user_id')->references("id")->on("users");
