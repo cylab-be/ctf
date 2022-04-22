@@ -4,9 +4,13 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Challenge extends Model
 {
+
+    use SoftDeletes;
+
     protected $dateFormat = 'U';
 
     public function __construct(array $attributes = array())
