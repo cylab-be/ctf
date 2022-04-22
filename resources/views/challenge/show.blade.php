@@ -7,7 +7,7 @@
     @if (count($challenge->sets) > 1)
     <div class='text-center my-4'>
        @foreach ($challenge->sets as $set)
-       <a class='btn btn-sm btn-primary' href='#s{{ $set->id }}'>{{ $set->name }}</a>
+       <a class='btn btn-sm btn-primary my-1' href='#s{{ $set->id }}'>{{ $set->name }}</a>
        @endforeach
     </div>
     @endif
