@@ -5,9 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Question extends Model
 {
+
+    use SoftDeletes;
 
     const DEFAULT_MAX_SUBMISSIONS = 3;
 

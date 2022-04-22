@@ -19,7 +19,7 @@ class MassSeeder extends Seeder
      * @return void
      */
 
-    const USERS = 200;
+    const USERS = 100;
     const SETS = 10;
     const QUESTIONS = 100;
     const CHALLENGES = 10;
