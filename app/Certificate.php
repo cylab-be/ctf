@@ -68,7 +68,7 @@ class Certificate
         //var_dump($pdf->AddFont('vollkorn', '', __DIR__ . '/vollkorn.php'));
         //\TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornBold.ttf');
         //$fontname = \TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornRegular.ttf');
-        $fontname = 'times';
+        $fontname = 'helvetica';
         $pdf->SetFont($fontname, '', 28);
 
         $pdf->setColor('text', 60, 60, 60);
