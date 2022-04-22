@@ -68,9 +68,9 @@ class Certificate
         //$font = $pdf->addTTFfont(__DIR__ . '/../resources/certificate/VollkornRegular.ttf');
         //var_dump($pdf->AddFont('vollkorn', '', __DIR__ . '/vollkorn.php'));
         //\TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornBold.ttf');
-        $font = \TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornRegular.ttf');
-        \TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornBold.ttf');
-        //$font = 'dejavuserif';
+        //$font = \TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornRegular.ttf');
+        //\TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornBold.ttf');
+        $font = 'dejavuserif';
         //$font = 'vollkorn';
 
         $pdf->SetFont($font, '', 28);
