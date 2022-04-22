@@ -15,10 +15,10 @@ class ChallengeSetIndexes extends Migration
     {
         Schema::table('challenge_set', function (Blueprint $table) {
             $table->bigInteger('challenge_id')->unsigned()->change();
-            // $table->foreign('challenge_id')->references("id")->on("challenges");
+            $table->foreign('challenge_id')->references("id")->on("challenges");
 
             $table->bigInteger('set_id')->unsigned()->change();
-            // $table->foreign('set_id')->references("id")->on("sets");
+            $table->foreign('set_id')->references("id")->on("sets");
         });
     }
 
