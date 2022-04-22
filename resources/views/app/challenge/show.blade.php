@@ -134,7 +134,7 @@
                     <td>{{ $submission->created_at->toTimeString() }}</td>
                     <td>{{ $submission->registration->user->name }}</td>
                     <td>
-                        @if ($submission->question === null)
+                        @if ($submission->question === null || $submission->question->set === null)
                         -- DELETED --
                         @else
                         <a href='{{ action('SetController@show', ['set' => $submission->question->set]) }}#q{{ $submission->question->id }}'>
@@ -144,7 +144,7 @@
                     </td>
 
                     <td>
-                        @if ($submission->question === null)
+                        @if ($submission->question === null || $submission->question->set === null)
                         -- DELETED --
                         @else
                         <a href='{{ action('SetController@show', ['set' => $submission->question->set]) }}#q{{ $submission->question->id }}'>
