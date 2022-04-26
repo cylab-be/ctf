@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', $challenge->name)
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -109,48 +111,60 @@
 
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class='card my-3'>
-                <div class='card-header'>
-                    Latest submissions
-                </div>
-                <div class='card-body'>
-                    <table class='table'>
-                        <tr>
-                            <th>Time</th>
-                            <th>User</th>
-                            <th>Question</th>
-                            <th>Flag</th>
-                        </tr>
 
-                        @foreach ($challenge->latestSubmissions() as $submission)
-                        <tr>
-                            <td>{{ $submission->created_at }}</td>
-                            <td>{{ $submission->registration->user->name }}</td>
-                            <td>
-                                @if ($submission->question === null)
-                                -- DELETED --
-                                @else
-                                <a href='{{ action('SetController@show', ['set' => $submission->question->set]) }}#q{{ $submission->question->id }}'>
-                                {{ $submission->question->name }}
-                                </a>
-                                @endif
-                            </td>
-                            <td>
-                                {{ $submission->flag }}
-                                @if ($submission->question === null)
-                                <i class="fas fa-question-circle text-warning"></i>
-                                @elseif ($submission->isCorrect())
-                                <i class="fas fa-check-circle text-success"></i>
-                                @else
-                                <i class="fas fa-times-circle text-danger"></i>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>
+    <div class='card my-3'>
+        <div class='card-header'>
+            Latest submissions
+        </div>
+        <div class='card-body'>
+            <table class='table'>
+                <tr>
+                    <th>Time</th>
+                    <th>User</th>
+                    <th>Set</th>
+                    <th>Question</th>
+                    <th>Flag</th>
+                </tr>
+
+                @foreach ($challenge->latestSubmissions() as $submission)
+                <tr>
+                    <td>{{ $submission->created_at->toTimeString() }}</td>
+                    <td>{{ $submission->registration->user->name }}</td>
+                    <td>
+                        @if ($submission->question === null || $submission->question->set === null)
+                        -- DELETED --
+                        @else
+                        <a href='{{ action('SetController@show', ['set' => $submission->question->set]) }}#q{{ $submission->question->id }}'>
+                        {{ $submission->question->set->name }}
+                        </a>
+                        @endif
+                    </td>
+
+                    <td>
+                        @if ($submission->question === null || $submission->question->set === null)
+                        -- DELETED --
+                        @else
+                        <a href='{{ action('SetController@show', ['set' => $submission->question->set]) }}#q{{ $submission->question->id }}'>
+                        {{ $submission->question->name }}
+                        </a>
+                        @endif
+                    </td>
+                    <td>
+                        {{ $submission->flag }}
+                        @if ($submission->question === null)
+                        <i class="fas fa-question-circle text-warning"></i>
+                        @elseif ($submission->isCorrect())
+                        <i class="fas fa-check-circle text-success"></i>
+                        @else
+                        <i class="fas fa-times-circle text-danger"></i>
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+            </table>
         </div>
     </div>
 </div>

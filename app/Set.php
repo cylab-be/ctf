@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Set extends Model
 {
+
+    use SoftDeletes;
+
     protected $dateFormat = 'U';
 
     public function questions()
@@ -31,6 +35,18 @@ class Set extends Model
 
     public function maxScore() : int
     {
-        return $this->questions()->count();
+        return $this->questionsCount();
+    }
+
+    private $questions_count = null;
+
+    public function questionsCount() : int
+    {
+        // cache the query result, as it will be used extensively!
+        if ($this->questions_count == null) {
+            $this->questions_count = $this->questions()->count();
+        }
+
+        return $this->questions_count;
     }
 }

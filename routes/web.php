@@ -13,6 +13,13 @@
 
 use App\Challenge;
 
+$app_url = config("app.url");
+if (!empty($app_url)) {
+    URL::forceRootUrl($app_url);
+    $schema = explode(':', $app_url)[0];
+    URL::forceScheme($schema);
+}
+
 Route::get('/', function () {
     return redirect(route('challenges'));
 });
@@ -27,6 +34,7 @@ Route::post('app/challenges/{challenge}/set/add', 'ChallengeController@addSet');
 Route::delete('app/challenges/{challenge}/set/{set}', 'ChallengeController@removeSet');
 Route::resource('app/sets', 'SetController');
 Route::resource('app/sets.questions', 'QuestionController');
+Route::post('app/sets/{set}/questions/{question}/move', 'QuestionController@move');
 Route::resource('app/users', 'UserController');
 Route::post('app/users/{user}/admin', 'UserController@toggleAdmin');
 

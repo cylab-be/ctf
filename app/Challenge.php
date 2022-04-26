@@ -4,9 +4,13 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Challenge extends Model
 {
+
+    use SoftDeletes;
+
     protected $dateFormat = 'U';
 
     public function __construct(array $attributes = array())
@@ -35,7 +39,7 @@ class Challenge extends Model
     {
         $ids = $this->sets()->allRelatedIds()->all();
         $r = [];
-        foreach (Set::all() as $set) {
+        foreach (Set::orderBy('name')->get() as $set) {
             if (!in_array($set->id, $ids)) {
                 $r[] = $set;
             }

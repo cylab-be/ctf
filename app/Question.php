@@ -5,9 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Question extends Model
 {
+
+    use SoftDeletes;
 
     const DEFAULT_MAX_SUBMISSIONS = 3;
 
@@ -83,15 +86,24 @@ class Question extends Model
         return $this->max_submissions - count($submissions);
     }
 
+    private static $submissions_cache = [];
 
     public function getSubmissionsFor(Challenge $challenge)
     {
         $user = Auth::user();
+        $key = $user->id . ":" . $challenge->id . ":" . $this->id;
+
+        if (isset(self::$submissions_cache[$key])) {
+            return self::$submissions_cache[$key];
+        }
+
         $registration = Registration::find($challenge, $user);
         $submissions = Submission::
                 where('registration_id', $registration->id)
                 ->where('question_id', $this->id)
                 ->get();
+        self::$submissions_cache[$key] = $submissions;
+
         return $submissions;
     }
 

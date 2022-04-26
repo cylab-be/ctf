@@ -1,0 +1,60 @@
+#
+# docker-compose.yaml
+# https://cylab.be/blog/190/run-a-development-environment-for-laravel-with-docker-compose
+#
+# This docker-compose can be used to run a complete development environment for Laravel projects
+#
+
+version: "3"
+services:
+  web:
+    image: cylab/laravel-dev
+    depends_on:
+      - redis
+      - mysql
+    ports:
+      - 8080:80
+    volumes:
+      - .:/var/www/html
+    env_file: env.dev
+
+  queue:
+    image: cylab/laravel-dev
+    depends_on:
+      - web
+    volumes:
+      - .:/var/www/html
+    entrypoint: php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=60
+    restart: unless-stopped
+    env_file: env.dev
+
+  scheduler:
+    image: cylab/laravel-dev
+    depends_on:
+      - web
+    volumes:
+      - .:/var/www/html
+    entrypoint: sh -c "while true; do php /var/www/html/artisan schedule:run --verbose & sleep 60; done"
+    env_file: env.dev
+
+  node:
+    image: node:12-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+    entrypoint: /bin/sh -c "npm install && npm run watch-poll"
+    depends_on:
+      - web
+
+  redis:
+    image: redis:4-alpine
+    volumes:
+      - ./volumes/redis:/data
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel

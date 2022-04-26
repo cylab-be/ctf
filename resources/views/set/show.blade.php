@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', $set->name)
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -97,6 +99,25 @@
                         <button class="btn btn-danger btn-sm">
                             <i class="fas fa-times-circle"></i> Delete
                         </button>
+                    </form>
+
+                    <form method="POST"
+                          class="form-inline"
+                          action="{{ action('QuestionController@move', ['set' => $set, 'question' => $question]) }}"
+                          style="display: inline-block">
+                        {{ csrf_field() }}
+                        <button class="btn btn-warning btn-sm">
+                            <i class="fas fa-arrow-circle-right"></i> Move to
+                        </button>
+
+                        <select class="form-control form-control-sm" name="new_set_id" id="new_set_id">
+                            @foreach($sets as $new_set)
+                            <option value="{{ $new_set->id }}">
+                                {{ $new_set->name }}
+                                ({{ $new_set->questionsCount() }} questions)
+                            </option>
+                            @endforeach
+                        </select>
                     </form>
                 </div>
             </div>
