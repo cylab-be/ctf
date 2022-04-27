@@ -24,7 +24,7 @@ class QuestionController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|regex:/^[a-zA-Z0-9\s-\.]+$/|max:255',
+            'name' => 'required|string|max:255',
             'statement' => 'required|string',
             'flag' => 'required|string',
             'max_submissions' => 'required|integer'
