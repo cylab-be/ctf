@@ -37,7 +37,7 @@
             @endif
         </td>
         <td class="text-right">
-            {{ $registration->score }} / {{ $challenge->maxScore() }}
+            {{ $registration->score }}
         </td>
     </tr>
     @endforeach
