@@ -17,11 +17,6 @@
 
                     <div class="mb-3">
                         <a class="btn btn-primary"
-                           href="{{ action('ChallengeController@start', ['challenge' => $challenge]) }}">
-                            <i class="fas fa-play"></i> Start NOW
-                        </a>
-
-                        <a class="btn btn-primary"
                            href="{{ action('ChallengeController@edit', ['challenge' => $challenge]) }}">
                             <i class="fas fa-edit"></i> Edit
                         </a>
@@ -35,6 +30,22 @@
                                 <i class="fas fa-times-circle"></i> Delete
                             </button>
                         </form>
+                    </div>
+
+                    <div class="mb-3">
+                        @if (! $challenge->isStarted())
+                        <a class="btn btn-primary"
+                           href="{{ action('ChallengeController@start', ['challenge' => $challenge]) }}">
+                            <i class="fas fa-play"></i> Start NOW
+                        </a>
+                        @endif
+
+                        @if ($challenge->isRunning())
+                        <a class="btn btn-dark"
+                           href="{{ action('ChallengeController@stop', ['challenge' => $challenge]) }}">
+                            <i class="fas fa-stop"></i> Stop NOW
+                        </a>
+                        @endif
                     </div>
 
                     <div>

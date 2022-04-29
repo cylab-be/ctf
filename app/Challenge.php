@@ -138,6 +138,11 @@ class Challenge extends Model
         return time() > $this->time_end;
     }
 
+    public function isRunning() : bool
+    {
+        return $this->isStarted() && ! $this->isFinished();
+    }
+
     public function ranking()
     {
         return $this->registrations()->orderBy('score', 'DESC')->get();

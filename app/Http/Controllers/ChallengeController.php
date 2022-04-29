@@ -108,6 +108,13 @@ class ChallengeController extends Controller
         return redirect(action('ChallengeController@show', ["challenge" => $challenge]));
     }
 
+    public function stop(Challenge $challenge)
+    {
+        $challenge->time_end = time();
+        $challenge->save();
+        return redirect(action('ChallengeController@show', ["challenge" => $challenge]));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
