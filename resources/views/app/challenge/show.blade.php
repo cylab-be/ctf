@@ -86,6 +86,11 @@
                             </td>
                         </tr>
                         @endforeach
+                        <tr>
+                            <td colspan="2">
+                                Total: <b>{{ $challenge->questionsCount() }}</b> questions
+                            </td>
+                        </tr>
                     </table>
 
                     <form method="POST"

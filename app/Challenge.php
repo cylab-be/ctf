@@ -143,11 +143,34 @@ class Challenge extends Model
         return $this->registrations()->orderBy('score', 'DESC')->get();
     }
 
-    public function participants()
+    /**
+     * Number of participants
+     * @return int
+     */
+    public function participants() : int
     {
         return $this->registrations()->count();
     }
 
+    /**
+     * Number of questions
+     * @return int
+     */
+    public function questionsCount() : int
+    {
+        $count = 0;
+        foreach ($this->sets as $set) {
+            /** @var Set $set */
+            $count += $set->questionsCount();
+        }
+
+        return $count;
+    }
+
+    /**
+     * Maximum score that a participant can achieve.
+     * @return int
+     */
     public function maxScore() : int
     {
         $max = 0;
