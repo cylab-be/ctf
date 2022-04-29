@@ -32,7 +32,7 @@
         <td>{{ ($loop->iteration) }}</td>
         <td>
             {{ $registration->user->name }}
-            @if ($loop->iteration == 1)
+            @if ($loop->iteration == 1 && $registration->score > 0)
             <i class="fas fa-medal px-3"></i>
             @endif
         </td>
