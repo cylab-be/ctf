@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
     use Notifiable;
 
     /**
@@ -42,7 +43,7 @@ class User extends Authenticatable
         return $this->hasMany(Registration::class);
     }
 
-    public function score(Challenge $challenge) : int
+    public function score(Challenge $challenge): int
     {
         $submissions = Submission::
                 where('challenge_id', $challenge->id)
@@ -59,8 +60,17 @@ class User extends Authenticatable
         return $score;
     }
 
-    public function isAdmin() : bool
+    public function isAdmin(): bool
     {
         return (bool) $this->admin;
+    }
+
+    public function gravatar(?int $size = 40): string
+    {
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5(strtolower(trim($this->email)));
+        $url .= "?s=$size";
+
+        return $url;
     }
 }

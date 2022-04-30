@@ -5,19 +5,26 @@
     <div class="row">
         <div class="col-lg-4">
             <div class="card my-3">
-                <div class="card-header">
-                    {{ $user->name }}
-                </div>
-
                 <div class="card-body">
-                    <p>Name: {{ $user->name }}</p>
-                    <p>Email: {{ $user->email }}</p>
+                    <div class="border rounded-circle bg-white gravatar">
+                        <img src="{{ $user->gravatar(140) }}">
+                    </div>
+
+                    <p><b>{{ $user->name }}</b></p>
+                    <p>{{ $user->email }}</p>
                     <p>Password: *****</p>
 
                     <p>
                         <a class="btn btn-primary"
                            href='{{ action('AccountController@edit')  }}'>
                             <i class="fas fa-edit"></i> Modify
+                        </a>
+                    </p>
+
+                    <p>
+                        Set your avatar on 
+                        <a href="https://gravatar.com/" target="_blank">
+                            https://gravatar.com/
                         </a>
                     </p>
                 </div>

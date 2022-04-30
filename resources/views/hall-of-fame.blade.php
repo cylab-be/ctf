@@ -21,16 +21,18 @@
         @continue
         @endif
 
-        <tr>
-            <td>
+        <tr >
+            <td class="align-middle">
                 <a href="{{ route('scoreboard', ['challenge' => $challenge]) }}">
                     {{ $challenge->name }}
                 </a>
                 - {{ $challenge->timeEnd()->format('l j F Y') }}
             </td>
-            <td class="text-right">
+            <td class="text-right align-middle">
                 {{ $challenge->ranking()->first()->user->name }}
                 ({{ $challenge->ranking()->first()->score }} points)
+                <img class="rounded"
+                     src="{{ $challenge->ranking()->first()->user->gravatar(40) }}">
             </td>
         </tr>
         @endforeach
