@@ -73,6 +73,11 @@ class QuestionController extends Controller
         $question->save();
 
         toastr()->info("Question saved");
+
+        if (! is_null($request->input('save-add'))) {
+            return redirect(action('QuestionController@create', ['set' => $set]));
+        }
+
         return redirect(action('SetController@show', ['set' => $set]));
     }
 

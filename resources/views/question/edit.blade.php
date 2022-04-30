@@ -52,7 +52,7 @@
                 <div class="form-group row">
                     <label for="flag" class="col-md-4 col-form-label text-md-right">Flag</label>
 
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <input id="flag" type="text"
                                class="form-control{{ $errors->has('flag') ? ' is-invalid' : '' }}"
                                name="flag"
@@ -88,6 +88,11 @@
                         <button type="submit" id="save" class="btn btn-primary">
                             <i class="fas fa-check"></i> <u>S</u>ave
                         </button>
+
+                        <button type="submit" id="save-add" name="save-add" value="1"
+                                class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> Save and <u>a</u>dd a new question
+                        </button>
                     </div>
                 </div>
             </form>
@@ -100,6 +105,11 @@ document.addEventListener('DOMContentLoaded', function(){
     shortcut.add("Ctrl+S",function() {
         console.log("Saving...");
         $("#save").click();
+    });
+
+    shortcut.add("Ctrl+A",function() {
+        console.log("Saving...");
+        $("#save-add").click();
     });
 });
 </script>
