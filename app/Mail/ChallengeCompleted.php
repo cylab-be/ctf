@@ -37,7 +37,7 @@ class ChallengeCompleted extends Mailable
     public function build()
     {
         return $this->markdown('emails.challenge.completed')->subject(
-                $this->registration->challenge->name . " : Challenge completed \xF0\x9F\x8E\x89	"
+            $this->registration->challenge->name . " : Challenge completed \xF0\x9F\x8E\x89	"
         );
     }
 }
