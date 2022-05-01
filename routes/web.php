@@ -64,10 +64,10 @@ Route::get('hall-of-fame', function () {
 })->name('hall-of-fame');
 
 
-Route::get('account', 'AccountController@show');
-Route::get('account/edit', 'AccountController@edit');
-Route::put('account', 'AccountController@update');
-Route::put('account/password', 'AccountController@updatePassword');
+Route::get('profile', 'AccountController@show');
+Route::get('profile/edit', 'AccountController@edit');
+Route::put('profile', 'AccountController@update');
+Route::put('profile/password', 'AccountController@updatePassword');
 
 Route::get(
     'registration/{registration}/certificate',
