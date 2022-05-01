@@ -46,6 +46,13 @@
                             <i class="fas fa-stop"></i> Stop NOW
                         </a>
                         @endif
+
+                        @if ($challenge->isFinished())
+                        <a class="btn btn-dark"
+                           href="{{ action('ChallengeController@notifyCompleted', ['challenge' => $challenge]) }}">
+                            <i class="fas fa-envelope"></i> Send result to participants
+                        </a>
+                        @endif
                     </div>
 
                     <div>
