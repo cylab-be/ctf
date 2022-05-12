@@ -19,6 +19,9 @@ php artisan migrate
 # password: password
 php artisan db:seed
 
+# create questions, challenges, users and submissions:
+php artisan db:seed --class MassSeeder
+
 # launch dev server at http://127.0.0.1:8000
 php artisan serve
 ```
