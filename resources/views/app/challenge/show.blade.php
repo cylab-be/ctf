@@ -70,6 +70,11 @@
                            href='{{ action('ChallengeController@statistics', ['challenge' => $challenge]) }}'>
                             <i class="fas fa-list-ol"></i> Stats
                         </a>
+
+                        <a class='btn btn-success my-2'
+                           href='{{ action('ChallengeController@solution', ['challenge' => $challenge]) }}'>
+                            <i class="fas fa-check-double"></i> Solution
+                        </a>
                     </div>
                 </div>
             </div>

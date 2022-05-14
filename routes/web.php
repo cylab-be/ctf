@@ -31,6 +31,7 @@ Route::get('app/challenges/{challenge}/access', 'ChallengeController@access');
 Route::get('app/challenges/{challenge}/start', 'ChallengeController@start');
 Route::get('app/challenges/{challenge}/stop', 'ChallengeController@stop');
 Route::get('app/challenges/{challenge}/statistics', 'ChallengeController@statistics');
+Route::get('app/challenges/{challenge}/solution', 'ChallengeController@solution');
 Route::post('app/challenges/{challenge}/set/add', 'ChallengeController@addSet');
 Route::delete('app/challenges/{challenge}/set/{set}', 'ChallengeController@removeSet');
 Route::get('app/challenges/{challenge}/notify-completed', 'ChallengeController@notifyCompleted');
