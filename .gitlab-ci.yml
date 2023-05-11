@@ -23,22 +23,21 @@ test:php74:
   script:
     - vendor/bin/phpunit --coverage-text --colors=never --coverage-html build/coverage
     - vendor/bin/phpcs
+    - vendor/bin/phpstan
   artifacts:
     paths:
     - build/
     expire_in: 1 month
 
 build:
-  image: docker:19.03.1
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
   stage: release
   tags:
     - dind
-  services:
-    - docker:19.03.1-dind
-  variables:
-    DOCKER_TLS_CERTDIR: "/certs"
-  before_script:
-    - docker info
   script:
     - docker build -t cylab/ctf .
 
@@ -46,16 +45,14 @@ build:
 build:tagged:
   only:
     - tags
-  image: docker:19.03.1
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
   stage: release
   tags:
     - dind
-  services:
-    - docker:19.03.1-dind
-  variables:
-    DOCKER_TLS_CERTDIR: "/certs"
-  before_script:
-    - docker info
   script:
     - docker build -t cylab/ctf:$CI_COMMIT_TAG .
     - docker tag cylab/ctf:$CI_COMMIT_TAG cylab/ctf:latest
