@@ -24,10 +24,11 @@ class QuestionController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|regex:/^[a-zA-Z0-9\s-\.]+$/|max:255',
+            'name' => 'required|string|max:255',
             'statement' => 'required|string',
             'flag' => 'required|string',
-            'max_submissions' => 'required|integer'
+            'max_submissions' => 'required|integer|min:1',
+            'points' => 'required|integer|min:1'
         ]);
     }
 
@@ -70,9 +71,15 @@ class QuestionController extends Controller
         $question->statement = $request->statement;
         $question->flag = $request->flag;
         $question->max_submissions = $request->max_submissions;
+        $question->points = $request->points;
         $question->save();
 
         toastr()->info("Question saved");
+
+        if (! is_null($request->input('save-add'))) {
+            return redirect(action('QuestionController@create', ['set' => $set]));
+        }
+
         return redirect(action('SetController@show', ['set' => $set]));
     }
 
@@ -110,6 +117,7 @@ class QuestionController extends Controller
         $question->statement = $request->statement;
         $question->flag = $request->flag;
         $question->max_submissions = $request->max_submissions;
+        $question->points = $request->points;
         $question->save();
         return redirect(action("SetController@show", ['set' => $set]));
     }

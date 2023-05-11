@@ -26,10 +26,14 @@
     @foreach ($set->questions as $question)
     <div class="card mb-4 {{ $question->isSolvedFor($challenge) ? 'border-success' : '' }}"
          id='q{{ $question->id }}'>
-        <div class='card-header'>
-            <h4>#{{ $loop->iteration }}  {{ $question->name }}</h4>
-        </div>
-        <div class="card-body">
+        <div class='card-body'>
+            <h4>
+                #{{ $loop->iteration }}  {{ $question->name }}
+            </h4>
+            <div class="mb-4">
+                Value: <b>{{ $question->points }}</b> {{ Str::plural('point', $question->points) }}
+            </div>
+            
             {!! $question->statementHTML() !!}
         </div>
         <div class='card-footer'>
@@ -41,7 +45,7 @@
                 {{ csrf_field() }}
 
                 <input type="text" class='form-control' name='flag'
-                       autocomplete="off">
+                       autocomplete="off" placeholder="Flag">
 
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-check"></i> Submit
@@ -58,7 +62,7 @@
 
 <div class="footer fixed-bottom bg-white shadow-sm-top" style='padding: 0.5rem 1rem;'>
     <div class='container'>
-        Current score : <b>{{ $registration->score }} / {{ $challenge->maxScore() }}</b> |
+        Current score : <b>{{ $registration->score }}</b> |
         Position : <b>{{ $registration->position() }} / {{ $challenge->participants() }}</b> |
         Time left : <b><span class="timer" data-seconds-left={{ $challenge->timeEndDiffSeconds() }}></span></b>
     </div>

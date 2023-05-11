@@ -3,11 +3,13 @@ namespace App\Http\Controllers;
 
 use App\Challenge;
 use App\Set;
+use App\Mail\ChallengeCompleted;
+
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ChallengeController extends Controller
 {
@@ -91,6 +93,11 @@ class ChallengeController extends Controller
         return view("app.challenge.statistics", ["challenge" => $challenge]);
     }
 
+    public function solution(Challenge $challenge)
+    {
+        return view("app.challenge.solution", ["challenge" => $challenge]);
+    }
+
     /**
      * Show access code for this challenge
      * @param Challenge $challenge
@@ -104,6 +111,13 @@ class ChallengeController extends Controller
     public function start(Challenge $challenge)
     {
         $challenge->time_start = time();
+        $challenge->save();
+        return redirect(action('ChallengeController@show', ["challenge" => $challenge]));
+    }
+
+    public function stop(Challenge $challenge)
+    {
+        $challenge->time_end = time();
         $challenge->save();
         return redirect(action('ChallengeController@show', ["challenge" => $challenge]));
     }
@@ -158,5 +172,14 @@ class ChallengeController extends Controller
     {
         $challenge->sets()->detach([$set->id]);
         return redirect(action('ChallengeController@show', ['challenge' => $challenge]));
+    }
+
+    public function notifyCompleted(Challenge $challenge)
+    {
+        foreach ($challenge->registrations as $registration) {
+            /** @var Registration $registration */
+            Mail::to($registration->user)->send(new ChallengeCompleted($registration));
+        }
+        return redirect(action('ChallengeController@show', ["challenge" => $challenge]));
     }
 }

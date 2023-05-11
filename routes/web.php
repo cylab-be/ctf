@@ -29,9 +29,13 @@ Auth::routes();
 Route::resource('app/challenges', 'ChallengeController');
 Route::get('app/challenges/{challenge}/access', 'ChallengeController@access');
 Route::get('app/challenges/{challenge}/start', 'ChallengeController@start');
+Route::get('app/challenges/{challenge}/stop', 'ChallengeController@stop');
 Route::get('app/challenges/{challenge}/statistics', 'ChallengeController@statistics');
+Route::get('app/challenges/{challenge}/solution', 'ChallengeController@solution');
 Route::post('app/challenges/{challenge}/set/add', 'ChallengeController@addSet');
 Route::delete('app/challenges/{challenge}/set/{set}', 'ChallengeController@removeSet');
+Route::get('app/challenges/{challenge}/notify-completed', 'ChallengeController@notifyCompleted');
+
 Route::resource('app/sets', 'SetController');
 Route::resource('app/sets.questions', 'QuestionController');
 Route::post('app/sets/{set}/questions/{question}/move', 'QuestionController@move');
@@ -63,10 +67,10 @@ Route::get('hall-of-fame', function () {
 })->name('hall-of-fame');
 
 
-Route::get('account', 'AccountController@show');
-Route::get('account/edit', 'AccountController@edit');
-Route::put('account', 'AccountController@update');
-Route::put('account/password', 'AccountController@updatePassword');
+Route::get('profile', 'AccountController@show');
+Route::get('profile/edit', 'AccountController@edit');
+Route::put('profile', 'AccountController@update');
+Route::put('profile/password', 'AccountController@updatePassword');
 
 Route::get(
     'registration/{registration}/certificate',

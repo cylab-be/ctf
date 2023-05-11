@@ -6,6 +6,10 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
+/**
+ * @property iterable<Registration> $registrations
+ */
 class Challenge extends Model
 {
 
@@ -138,16 +142,44 @@ class Challenge extends Model
         return time() > $this->time_end;
     }
 
+    public function isRunning() : bool
+    {
+        return $this->isStarted() && ! $this->isFinished();
+    }
+
     public function ranking()
     {
         return $this->registrations()->orderBy('score', 'DESC')->get();
     }
 
-    public function participants()
+    /**
+     * Number of participants
+     * @return int
+     */
+    public function participants() : int
     {
         return $this->registrations()->count();
     }
 
+    /**
+     * Number of questions
+     * @return int
+     */
+    public function questionsCount() : int
+    {
+        $count = 0;
+        foreach ($this->sets as $set) {
+            /** @var Set $set */
+            $count += $set->questionsCount();
+        }
+
+        return $count;
+    }
+
+    /**
+     * Maximum score that a participant can achieve.
+     * @return int
+     */
     public function maxScore() : int
     {
         $max = 0;

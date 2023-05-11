@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property Challenge $challenge
+ * @property User $user
+ */
 class Registration extends Model
 {
 
@@ -54,7 +58,7 @@ class Registration extends Model
 
     public static function find(Challenge $challenge, User $user) : ?Registration
     {
-        $key = $user->id . ":" . $challenge->_id;
+        $key = $user->id . ":" . $challenge->id;
 
         if (isset(self::$find_cache[$key])) {
             return self::$find_cache[$key];

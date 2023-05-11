@@ -16,6 +16,8 @@
                     </p>
 
                     <p>Flag: {{ $question->flag  }}</p>
+                    
+                    <p>Value: <b>{{ $question->points }}</b> points</p>
 
                     <div>{!! $question->statementHTML() !!}</div>
 

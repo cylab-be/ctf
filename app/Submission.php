@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property Registration $registration
+ * @property Question $question 
+ */
 class Submission extends Model
 {
 

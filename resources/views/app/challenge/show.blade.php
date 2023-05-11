@@ -17,11 +17,6 @@
 
                     <div class="mb-3">
                         <a class="btn btn-primary"
-                           href="{{ action('ChallengeController@start', ['challenge' => $challenge]) }}">
-                            <i class="fas fa-play"></i> Start NOW
-                        </a>
-
-                        <a class="btn btn-primary"
                            href="{{ action('ChallengeController@edit', ['challenge' => $challenge]) }}">
                             <i class="fas fa-edit"></i> Edit
                         </a>
@@ -35,6 +30,29 @@
                                 <i class="fas fa-times-circle"></i> Delete
                             </button>
                         </form>
+                    </div>
+
+                    <div class="mb-3">
+                        @if (! $challenge->isStarted())
+                        <a class="btn btn-primary"
+                           href="{{ action('ChallengeController@start', ['challenge' => $challenge]) }}">
+                            <i class="fas fa-play"></i> Start NOW
+                        </a>
+                        @endif
+
+                        @if ($challenge->isRunning())
+                        <a class="btn btn-dark"
+                           href="{{ action('ChallengeController@stop', ['challenge' => $challenge]) }}">
+                            <i class="fas fa-stop"></i> Stop NOW
+                        </a>
+                        @endif
+
+                        @if ($challenge->isFinished())
+                        <a class="btn btn-dark"
+                           href="{{ action('ChallengeController@notifyCompleted', ['challenge' => $challenge]) }}">
+                            <i class="fas fa-envelope"></i> Send result to participants
+                        </a>
+                        @endif
                     </div>
 
                     <div>
@@ -51,6 +69,11 @@
                         <a class='btn btn-primary my-2'
                            href='{{ action('ChallengeController@statistics', ['challenge' => $challenge]) }}'>
                             <i class="fas fa-list-ol"></i> Stats
+                        </a>
+
+                        <a class='btn btn-success my-2'
+                           href='{{ action('ChallengeController@solution', ['challenge' => $challenge]) }}'>
+                            <i class="fas fa-check-double"></i> Solution
                         </a>
                     </div>
                 </div>
@@ -86,6 +109,11 @@
                             </td>
                         </tr>
                         @endforeach
+                        <tr>
+                            <td colspan="2">
+                                Total: <b>{{ $challenge->questionsCount() }}</b> questions
+                            </td>
+                        </tr>
                     </table>
 
                     <form method="POST"
