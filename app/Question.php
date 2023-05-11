@@ -47,10 +47,14 @@ class Question extends Model
         return $html;
     }
 
-    public function save(array $options = array())
+    public function save(array $options = array()) : bool
     {
-        parent::save($options);
-        Cache::forget($this->statementHTMLCacheKey());
+        if (parent::save($options)) {
+            Cache::forget($this->statementHTMLCacheKey());
+            return true;
+        }
+        
+        return false;
     }
 
     /**

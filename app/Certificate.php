@@ -87,7 +87,7 @@ class Certificate
         );
 
         $pdf->SetY($pdf->GetY() + 10);
-        $pdf->Write(0, 'This certifies that', '', 0, 'C', true);
+        $pdf->Write(0, 'This certifies that', '', false, 'C', true);
 
         $pdf->SetY($pdf->GetY() + 5);
         $pdf->WriteHTML(
@@ -100,7 +100,7 @@ class Certificate
         );
 
         $pdf->SetY($pdf->GetY() + 5);
-        $pdf->Write(0, 'completed the capture-the-flag challenge', '', 0, 'C', true);
+        $pdf->Write(0, 'completed the capture-the-flag challenge', '', false, 'C', true);
 
         $pdf->SetY($pdf->GetY() + 5);
         $pdf->WriteHTML('<p><b>' . $this->challenge . '</b></p>', true, false, true, false, 'C');
@@ -138,7 +138,7 @@ class Certificate
         $pdf->SetY($pdf->GetY() + 10);
         // https://tcpdf.org/examples/example_050/
         $options = [];
-        $pdf->write2DBarcode($this->link, 'QRCODE,Q', '', '', 15, 15, $options, 'N');
+        $pdf->write2DBarcode($this->link, 'QRCODE,Q', null, null, 15, 15, $options, 'N');
 
         $pdf->SetY($pdf->GetY() + 2);
         $pdf->SetFont($font, '', 11);
