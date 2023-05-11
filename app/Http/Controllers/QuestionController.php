@@ -27,7 +27,8 @@ class QuestionController extends Controller
             'name' => 'required|string|max:255',
             'statement' => 'required|string',
             'flag' => 'required|string',
-            'max_submissions' => 'required|integer'
+            'max_submissions' => 'required|integer|min:1',
+            'points' => 'required|integer|min:1'
         ]);
     }
 
@@ -70,6 +71,7 @@ class QuestionController extends Controller
         $question->statement = $request->statement;
         $question->flag = $request->flag;
         $question->max_submissions = $request->max_submissions;
+        $question->points = $request->points;
         $question->save();
 
         toastr()->info("Question saved");
@@ -115,6 +117,7 @@ class QuestionController extends Controller
         $question->statement = $request->statement;
         $question->flag = $request->flag;
         $question->max_submissions = $request->max_submissions;
+        $question->points = $request->points;
         $question->save();
         return redirect(action("SetController@show", ['set' => $set]));
     }

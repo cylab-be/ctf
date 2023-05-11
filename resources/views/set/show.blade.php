@@ -83,6 +83,7 @@
 
                     <p>Flag: {{ $question->flag }}</p>
                     <p>Allowed submissions: {{ $question->max_submissions }}</p>
+                    <p>Value: <b>{{ $question->points }}</b> {{ Str::plural('point', $question->points) }}</p>
                 </div>
 
                 <div class='card-footer'>

@@ -82,6 +82,23 @@
                         @endif
                     </div>
                 </div>
+                
+                <div class="form-group row">
+                    <label for="max_submissions" class="col-md-4 col-form-label text-md-right">Points</label>
+
+                    <div class="col-md-8">
+                        <input id="points" type="integer"
+                               class="form-control{{ $errors->has('points') ? ' is-invalid' : '' }}"
+                               name="points"
+                               value="{{ old('points', $question->points) }}" required>
+
+                        @if ($errors->has('points'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('points') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
 
                 <div class="form-group row">
                     <div class="col-md-8 offset-md-4">

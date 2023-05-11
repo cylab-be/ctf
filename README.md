@@ -8,21 +8,17 @@ Capture The Flag engine...
 
 ## Contributing
 
-
+Easiest way to launch a dev environment is using docker compose:
 
 ```bash
-docker-compose up
-php artisan migrate
+docker compose up
 
 # create the default admin account
 # email: ctf@example.org
 # password: password
-php artisan db:seed
+docker compose exec web php artisan db:seed
 
 # create questions, challenges, users and submissions:
-php artisan db:seed --class MassSeeder
-
-# launch dev server at http://127.0.0.1:8000
-php artisan serve
+docker compose exec web php artisan db:seed --class MassSeeder
 ```
 
