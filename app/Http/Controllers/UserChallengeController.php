@@ -64,7 +64,6 @@ class UserChallengeController extends Controller
     /**
      * Show the questions of a challenge (if started...)
      * @param Challenge $challenge
-     * @return type
      */
     public function show(Challenge $challenge)
     {
@@ -90,7 +89,7 @@ class UserChallengeController extends Controller
     /**
      * Submit a flag
      * @param Challenge $challenge
-     * @param \App\Http\Controllers\Question $question
+     * @param Question $question
      */
     public function submit(Challenge $challenge, Question $question, Request $request)
     {

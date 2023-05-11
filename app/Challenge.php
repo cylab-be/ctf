@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property iterable<Registration> $registrations
+ * @property iterable<Set> $sets
+ * @property iterable<Submission> $submissions
  */
 class Challenge extends Model
 {
@@ -37,7 +39,7 @@ class Challenge extends Model
     /**
      * Return the list of sets that do NOT belong to this challenge (and can
      * be added to the challenge).
-     * @return type
+     * @return iterable<Set>
      */
     public function setsAttachable()
     {

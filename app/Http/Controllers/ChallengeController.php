@@ -37,7 +37,6 @@ class ChallengeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -51,7 +50,6 @@ class ChallengeController extends Controller
      * Show the form for creating a new resource.
      * We use the same view for create and update => provide an empty Challenge.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -62,7 +60,6 @@ class ChallengeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -81,7 +78,7 @@ class ChallengeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Challenge $challenge     * @return \Illuminate\Http\Response
+     * @param  Challenge $challenge
      */
     public function show(Challenge $challenge)
     {
@@ -101,7 +98,6 @@ class ChallengeController extends Controller
     /**
      * Show access code for this challenge
      * @param Challenge $challenge
-     * @return type
      */
     public function access(Challenge $challenge)
     {
@@ -125,7 +121,7 @@ class ChallengeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Challenge $challenge     * @return \Illuminate\Http\Response
+     * @param  Challenge $challenge
      */
     public function edit(Challenge $challenge)
     {
@@ -136,7 +132,7 @@ class ChallengeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Challenge $challenge     * @return \Illuminate\Http\Response
+     * @param  Challenge $challenge
      */
     public function update(Request $request, Challenge $challenge)
     {
@@ -153,7 +149,6 @@ class ChallengeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
@@ -177,7 +172,6 @@ class ChallengeController extends Controller
     public function notifyCompleted(Challenge $challenge)
     {
         foreach ($challenge->registrations as $registration) {
-            /** @var Registration $registration */
             Mail::to($registration->user)->send(new ChallengeCompleted($registration));
         }
         return redirect(action('ChallengeController@show', ["challenge" => $challenge]));

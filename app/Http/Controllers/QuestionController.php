@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use App\Set;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -35,7 +34,6 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index(Set $set)
     {
@@ -46,7 +44,6 @@ class QuestionController extends Controller
      * Show the form for creating a new resource.
      * We use the same view for create and update => provide an empty Question.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create(Set $set)
     {
@@ -59,7 +56,6 @@ class QuestionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Set $set, Request $request)
     {
@@ -86,7 +82,7 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Question $question     * @return \Illuminate\Http\Response
+     * @param  Question $question
      */
     public function show(Set $set, Question $question)
     {
@@ -96,7 +92,7 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Question $question     * @return \Illuminate\Http\Response
+     * @param  Question $question
      */
     public function edit(Set $set, Question $question)
     {
@@ -107,7 +103,7 @@ class QuestionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Question $question     * @return \Illuminate\Http\Response
+     * @param  Question $question
      */
     public function update(Set $set, Request $request, Question $question)
     {
@@ -142,7 +138,6 @@ class QuestionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Set $set, $id)
     {

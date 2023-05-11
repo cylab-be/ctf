@@ -30,7 +30,6 @@ class SetController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -41,7 +40,6 @@ class SetController extends Controller
      * Show the form for creating a new resource.
      * We use the same view for create and update => provide an empty Set.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -52,7 +50,6 @@ class SetController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -68,7 +65,7 @@ class SetController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Set $set     * @return \Illuminate\Http\Response
+     * @param  Set $set
      */
     public function show(Set $set)
     {
@@ -80,7 +77,7 @@ class SetController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Set $set     * @return \Illuminate\Http\Response
+     * @param  Set $set
      */
     public function edit(Set $set)
     {
@@ -91,7 +88,7 @@ class SetController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Set $set     * @return \Illuminate\Http\Response
+     * @param  Set $set
      */
     public function update(Request $request, Set $set)
     {
@@ -107,7 +104,6 @@ class SetController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

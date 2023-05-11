@@ -5,7 +5,6 @@ namespace App\Mail;
 use App\Registration;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -15,7 +14,7 @@ class ChallengeCompleted extends Mailable
 
     /**
      *
-     * @var App\Registration
+     * @var \App\Registration
      */
     public $registration;
 

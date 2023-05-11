@@ -69,17 +69,8 @@ class AccountController extends Controller
     }
 
     /**
-     * Show the form to update user password
-     */
-    public function password()
-    {
-        return view('account.password', ['user' => Auth::user()]);
-    }
-
-    /**
      * Update the password
      * @param Request $request
-     * @return type
      */
     public function updatePassword(Request $request)
     {
