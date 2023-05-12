@@ -20,5 +20,10 @@
 
     <!-- Show progression -->
     <arg value="p"/>
+
+    <!-- Add rules from slevomat 
+    https://cylab.be/blog/169/detect-unnecessary-use-statements-with-php-codesniffer -->
+    <config name="installed_paths" value="../../slevomat/coding-standard"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses"/>
 </ruleset>
 
