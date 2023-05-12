@@ -20,6 +20,10 @@ class Certificate
     private $rank;
     private $participants;
     private $score;
+    
+    //private static $BACKGROUND = "bokeh.jpg";
+    private static $BACKGROUND = "bg-blue-soft-wave.jpg";
+    private static $FONT = "dejavusans";
 
     public function __construct(
         string $name,
@@ -59,21 +63,11 @@ class Certificate
         $pdf->AddPage();
 
         // background image
-        $img_file = __DIR__ . '/../resources/certificate/bokeh.jpg';
+        $img_file = __DIR__ . '/../resources/certificate/' . self::$BACKGROUND;
         $pdf->Image($img_file, 0, 0, 297, 210, '', '', '', true, 300, '', false, false, 0);
 
-        //define('K_PATH_FONTS', __DIR__);
 
-        // set font and write some text...
-        //$font = $pdf->addTTFfont(__DIR__ . '/../resources/certificate/VollkornRegular.ttf');
-        //var_dump($pdf->AddFont('vollkorn', '', __DIR__ . '/vollkorn.php'));
-        //\TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornBold.ttf');
-        //$font = \TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornRegular.ttf');
-        //\TCPDF_FONTS::addTTFfont(__DIR__ . '/../resources/certificate/VollkornBold.ttf');
-        $font = 'dejavuserif';
-        //$font = 'vollkorn';
-
-        $pdf->SetFont($font, '', 28);
+        $pdf->SetFont(self::$FONT, '', 28);
 
         $pdf->setColor('text', 60, 60, 60);
         $pdf->SetY(30);
@@ -116,7 +110,7 @@ class Certificate
         );
 
         $pdf->SetY($pdf->GetY() + 15);
-        $pdf->SetFont($font, '', 20);
+        $pdf->SetFont(self::$FONT, '', 20);
         $pdf->writeHTML(
             '<p>Date of challenge: <b>' . $this->date->toFormattedDateString() . '</b></p>',
             true,
@@ -141,7 +135,7 @@ class Certificate
         $pdf->write2DBarcode($this->link, 'QRCODE,Q', null, null, 15, 15, $options, 'N');
 
         $pdf->SetY($pdf->GetY() + 2);
-        $pdf->SetFont($font, '', 11);
+        $pdf->SetFont(self::$FONT, '', 11);
         $pdf->writeHTML('<p>' . $this->link . '</p>', true, false, true, false, 'L');
         $pdf->writeHTML('<p>Powered by https://cylab.be</p>', true, false, true, false, 'L');
 
