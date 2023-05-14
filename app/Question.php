@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property Set $set
+ * @property integer $points
  */
 class Question extends Model
 {
@@ -16,12 +17,14 @@ class Question extends Model
     use SoftDeletes;
 
     const DEFAULT_MAX_SUBMISSIONS = 3;
+    const DEFAULT_POINTS = 1;
 
     protected $dateFormat = 'U';
 
     public function __construct(array $attributes = array())
     {
         $this->max_submissions = self::DEFAULT_MAX_SUBMISSIONS;
+        $this->points = self::DEFAULT_POINTS;
         parent::__construct($attributes);
     }
 
