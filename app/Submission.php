@@ -7,11 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property Registration $registration
  * @property Question $question
+ * @property integer $points
  */
 class Submission extends Model
 {
 
     protected $dateFormat = 'U';
+    
+    public function save(array $options = [])
+    {
+        
+        if ($this->question->verify($this->flag)) {
+            $this->points = $this->question->points;
+        }
+
+        return parent::save($options);
+    }
 
     public function registration()
     {
