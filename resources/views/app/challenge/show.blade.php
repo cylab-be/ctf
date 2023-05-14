@@ -155,6 +155,8 @@
                     <th>Set</th>
                     <th>Question</th>
                     <th>Flag</th>
+                    <th></th>
+                    <th>Points</th>
                 </tr>
 
                 @foreach ($challenge->latestSubmissions() as $submission)
@@ -182,6 +184,8 @@
                     </td>
                     <td>
                         {{ $submission->flag }}
+                    </td>
+                    <td>
                         @if ($submission->question === null)
                         <i class="fas fa-question-circle text-warning"></i>
                         @elseif ($submission->isCorrect())
@@ -189,6 +193,9 @@
                         @else
                         <i class="fas fa-times-circle text-danger"></i>
                         @endif
+                    </td>
+                    <td>
+                        {{ $submission->points }}
                     </td>
                 </tr>
                 @endforeach
