@@ -9,7 +9,7 @@ use App\Submission;
  *
  * @author tibo
  */
-class FirstPoint
+class FirstPoint implements Award
 {
     /**
      *
@@ -27,6 +27,17 @@ class FirstPoint
     public function __construct(int $time, ?Submission $submission)
     {
         $this->time = $time;
+        $this->submission = $submission;
+    }
+    
+    
+    public function compareWithSubmission(Submission $submission) : void
+    {
+        if ($submission->created_at->timestamp > $this->time) {
+            return;
+        }
+        
+        $this->time = $submission->created_at->timestamp;
         $this->submission = $submission;
     }
 }

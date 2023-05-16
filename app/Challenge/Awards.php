@@ -15,17 +15,22 @@ class Awards
      */
     public $first_point;
     
+    /**
+     *
+     * @var Quickest
+     */
+    public $quickest;
+    
     public function __construct(\App\Challenge $challenge)
     {
         // Initialize
         $this->first_point = new FirstPoint(PHP_INT_MAX, null);
+        $this->quickest = new Quickest(PHP_INT_MAX, null);
         
         foreach ($challenge->registrations as $registration) {
             foreach ($registration->submissions as $submission) {
-                // First Point
-                if ($submission->created_at->timestamp < $this->first_point->time) {
-                    $this->first_point = new FirstPoint($submission->created_at->timestamp, $submission);
-                }
+                $this->first_point->compareWithSubmission($submission);
+                $this->quickest->compareWithSubmission($submission);
             }
         }
     }

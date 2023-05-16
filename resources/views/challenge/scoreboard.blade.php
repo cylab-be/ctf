@@ -62,8 +62,26 @@
                 </tr>
                 <tr>
                     <td>First point</td>
-                    <td>{{ $awards->first_point->submission->registration->user->name }}</td>
+                    <td class="text-right">
+                        {{ $awards->first_point->submission->registration->user->name ?? '-' }}
+                    </td>
                 </tr>
+                
+                <tr>
+                    <td>Quickest</td>
+                    <td class="text-right">
+                        {{ $awards->quickest->submission->registration->user->name ?? '-' }}
+                    </td>
+                </tr>
+                
+                @if (! is_null($awards->quickest->submission)) :
+                <tr>
+                    <td colspan="2" class="text-muted">
+                        Got flag in <b>{{ $awards->quickest->delay }}</b> seconds
+                    </td>
+                </tr>
+                @endif
+                
             </table>
         </div>
     </div>
