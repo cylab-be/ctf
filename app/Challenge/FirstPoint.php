@@ -15,7 +15,7 @@ class FirstPoint implements Award
      *
      * @var integer
      */
-    public $time;
+    public $time = PHP_INT_MAX;
     
     
     /**
@@ -23,12 +23,6 @@ class FirstPoint implements Award
      * @var \App\Submission
      */
     public $submission;
-    
-    public function __construct(int $time, ?Submission $submission)
-    {
-        $this->time = $time;
-        $this->submission = $submission;
-    }
     
     
     public function compareWithSubmission(Submission $submission) : void

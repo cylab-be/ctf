@@ -24,8 +24,8 @@ class Awards
     public function __construct(\App\Challenge $challenge)
     {
         // Initialize
-        $this->first_point = new FirstPoint(PHP_INT_MAX, null);
-        $this->quickest = new Quickest(PHP_INT_MAX, null);
+        $this->first_point = new FirstPoint();
+        $this->quickest = new Quickest();
         
         foreach ($challenge->registrations as $registration) {
             foreach ($registration->submissions as $submission) {

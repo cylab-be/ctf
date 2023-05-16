@@ -15,7 +15,7 @@ class Quickest implements Award
      *
      * @var integer
      */
-    public $delay;
+    public $delay = PHP_INT_MAX;
     
     /**
      *
@@ -28,12 +28,6 @@ class Quickest implements Award
      * @var \App\Submission
      */
     public $previous;
-    
-    public function __construct(int $delay, ?Submission $submission)
-    {
-        $this->delay = $delay;
-        $this->submission = $submission;
-    }
     
     
     public function compareWithSubmission(Submission $submission): void
