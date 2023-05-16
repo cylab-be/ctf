@@ -103,6 +103,25 @@
                 </tr>
                 @endif
                 
+                <tr>
+                    <td>Best stat</td>
+                    <td class="text-right">
+                        @if (! is_null($awards->ratio->submission))
+                        <img class="rounded"
+                         src="{{ $awards->ratio->submission->registration->user->gravatar(40) }}">
+                        {{ $awards->ratio->submission->registration->user->name }}
+                        @endif
+                    </td>
+                </tr>
+                
+                @if (! is_null($awards->ratio->submission))
+                <tr>
+                    <td colspan="2" class="text-muted text-right">
+                        <b>{{ round($awards->ratio->ratio * 100) }}%</b> of answers are correct
+                    </td>
+                </tr>
+                @endif
+                
             </table>
         </div>
     </div>

@@ -21,17 +21,23 @@ class Awards
      */
     public $quickest;
     
+    /**
+     *
+     * @var Ratio
+     */
+    public $ratio;
+    
     public function __construct(\App\Challenge $challenge)
     {
         // Initialize
         $this->first_point = new FirstPoint();
         $this->quickest = new Quickest();
+        $this->ratio = new Ratio();
         
         foreach ($challenge->registrations as $registration) {
-            foreach ($registration->submissions as $submission) {
-                $this->first_point->compareWithSubmission($submission);
-                $this->quickest->compareWithSubmission($submission);
-            }
+            $this->first_point->compareRegistration($registration);
+            $this->quickest->compareRegistration($registration);
+            $this->ratio->compareRegistration($registration);
         }
     }
 }

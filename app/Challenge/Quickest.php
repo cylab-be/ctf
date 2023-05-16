@@ -2,7 +2,7 @@
 
 namespace App\Challenge;
 
-use App\Submission;
+use App\Registration;
 
 /**
  * Quickest correct answer
@@ -23,44 +23,27 @@ class Quickest implements Award
      */
     public $submission;
     
-    /**
-     * the previous correct submission, the one used for comparison
-     * @var \App\Submission
-     */
-    public $previous;
     
-    
-    public function compareWithSubmission(Submission $submission): void
+    public function compareRegistration(Registration $registration): void
     {
-        if (! $submission->isCorrect()) {
-            return;
-        }
+        // time of last correct submission for this user
+        $time_last_correct = $registration->challenge->time_start;
         
-        if ($this->previous == null) {
-            // keep track of this correct submission, to compare at next call
-            $this->previous = $submission;
+        foreach ($registration->submissions as $submission) {
+            if (! $submission->isCorrect()) {
+                continue;
+            }
+
+            $delay = $submission->created_at->timestamp - $time_last_correct;
             
-            return;
+            if ($delay < $this->delay) {
+                // found a new quickest
+                $this->delay = $delay;
+                $this->submission = $submission;
+            }
+
+            // keep track for next iteration
+            $time_last_correct = $submission->created_at->timestamp;
         }
-        
-        if (! $submission->registration->is($this->previous->registration)) {
-            // we are comparing submissions from two different users...
-            // keep track of this correct submission, to compare at next call
-            $this->previous = $submission;
-            
-            return;
-        }
-        
-        $delay = $submission->created_at->timestamp - $this->previous->created_at->timestamp;
-        if ($delay >= $this->delay) {
-            return;
-        }
-        
-        // found a new quickest
-        $this->delay = $delay;
-        $this->submission = $submission;
-        
-        // keep track of this correct submission, to compare at next call
-        $this->previous = $submission;
     }
 }

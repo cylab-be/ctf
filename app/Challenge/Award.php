@@ -2,7 +2,7 @@
 
 namespace App\Challenge;
 
-use App\Submission;
+use App\Registration;
 
 /**
  *
@@ -10,5 +10,5 @@ use App\Submission;
  */
 interface Award
 {
-    public function compareWithSubmission(Submission $submission) : void;
+    public function compareRegistration(Registration $registration) : void;
 }

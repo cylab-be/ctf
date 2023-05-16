@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property Challenge $challenge
  * @property User $user
- * @property iterable<Submission> $submissions
+ * @property \Illuminate\Database\Eloquent\Collection|iterable<Submission> $submissions
  */
 class Registration extends Model
 {

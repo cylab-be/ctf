@@ -2,7 +2,7 @@
 
 namespace App\Challenge;
 
-use App\Submission;
+use App\Registration;
 
 /**
  * Description of FirstPoint
@@ -25,14 +25,17 @@ class FirstPoint implements Award
     public $submission;
     
     
-    public function compareWithSubmission(Submission $submission) : void
+    public function compareRegistration(Registration $registration) : void
     {
-        if ($submission->created_at->timestamp > $this->time) {
-            return;
-        }
         
-        $this->time = $submission->created_at->timestamp;
-        $this->submission = $submission;
+        foreach ($registration->submissions as $submission) {
+            if ($submission->created_at->timestamp > $this->time) {
+                return;
+            }
+
+            $this->time = $submission->created_at->timestamp;
+            $this->submission = $submission;
+        }
     }
     
     public function timeAfterStart() : int
