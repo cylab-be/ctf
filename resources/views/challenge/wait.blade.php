@@ -4,20 +4,25 @@
 <div class="container">
     <h1 class='text-center my-5'>{{ $challenge->name }}</h1>
 
-    <h3 class='text-center my-5'>
+    <h3 class='text-center my-3'>
         will start in
         <b><span class="timer" data-seconds-left={{ $challenge->timeStartDiffSeconds() }}></span></b>
     </h3>
-
+    
     <p class='text-center'>
-        {{ $challenge->timeStartForHumans() }}
+        In the meantime, you can <b>change your avatar</b> on your 
+        <a href="{{ action("AccountController@show") }}">profile page</a>...
     </p>
 
-    <h5 class='mt-5'>Participants</h5>
+    <h5 class='mt-5 text-center'>Participants</h5>
     <table class='table'>
         @foreach($challenge->registrations as $registration)
         <tr>
-            <td>{{ $registration->user->name }}</td>
+            <td>
+                <img class="rounded"
+                     src="{{ $registration->user->gravatar(40) }}">
+                {{ $registration->user->name }}
+            </td>
         </tr>
         @endforeach
     </table>
