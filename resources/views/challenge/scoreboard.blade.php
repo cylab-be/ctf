@@ -74,7 +74,7 @@
                     </td>
                 </tr>
                 
-                @if (! is_null($awards->quickest->submission)) :
+                @if (! is_null($awards->quickest->submission))
                 <tr>
                     <td colspan="2" class="text-muted">
                         Got flag in <b>{{ $awards->quickest->delay }}</b> seconds
