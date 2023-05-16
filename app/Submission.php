@@ -36,6 +36,6 @@ class Submission extends Model
 
     public function isCorrect() : bool
     {
-        return $this->question->verify($this->flag);
+        return $this->points > 0;
     }
 }
