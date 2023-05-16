@@ -40,4 +40,9 @@ class FirstPoint implements Award
         $this->time = $submission->created_at->timestamp;
         $this->submission = $submission;
     }
+    
+    public function timeAfterStart() : int
+    {
+        return $this->time - $this->submission->registration->challenge->time_start;
+    }
 }

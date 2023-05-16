@@ -70,6 +70,13 @@
                         @endif
                     </td>
                 </tr>
+                @if (! is_null($awards->first_point->submission))
+                <tr>
+                    <td colspan="2" class="text-muted">
+                        Got first flag in <b>{{ $awards->first_point->timeAfterStart() }}</b> seconds
+                    </td>
+                </tr>
+                @endif
                 
                 <tr>
                     <td>Quickest</td>
@@ -85,7 +92,7 @@
                 @if (! is_null($awards->quickest->submission))
                 <tr>
                     <td colspan="2" class="text-muted">
-                        Got flag in <b>{{ $awards->quickest->delay }}</b> seconds
+                        Got a correct flag in <b>{{ $awards->quickest->delay }}</b> seconds
                     </td>
                 </tr>
                 @endif
