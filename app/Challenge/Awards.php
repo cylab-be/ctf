@@ -27,17 +27,25 @@ class Awards
      */
     public $ratio;
     
+    /**
+     *
+     * @var Streak
+     */
+    public $streak;
+    
     public function __construct(\App\Challenge $challenge)
     {
         // Initialize
         $this->first_point = new FirstPoint();
         $this->quickest = new Quickest();
         $this->ratio = new Ratio();
+        $this->streak = new Streak();
         
         foreach ($challenge->registrations as $registration) {
             $this->first_point->compareRegistration($registration);
             $this->quickest->compareRegistration($registration);
             $this->ratio->compareRegistration($registration);
+            $this->streak->compareRegistration($registration);
         }
     }
 }

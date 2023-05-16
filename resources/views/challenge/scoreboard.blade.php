@@ -122,6 +122,25 @@
                 </tr>
                 @endif
                 
+                <tr>
+                    <td>Longest streak</td>
+                    <td class="text-right">
+                        @if (! is_null($awards->streak->submission))
+                        <img class="rounded"
+                         src="{{ $awards->streak->submission->registration->user->gravatar(40) }}">
+                        {{ $awards->streak->submission->registration->user->name }}
+                        @endif
+                    </td>
+                </tr>
+                
+                @if (! is_null($awards->streak->submission))
+                <tr>
+                    <td colspan="2" class="text-muted text-right">
+                        <b>{{ $awards->streak->count }}</b> correct answers is a row
+                    </td>
+                </tr>
+                @endif
+                
             </table>
         </div>
     </div>
