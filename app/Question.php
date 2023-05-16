@@ -117,8 +117,11 @@ class Question extends Model
         return $submissions;
     }
 
-    public function verify(string $flag)
+    public function verify(string $flag) : bool
     {
-        return strcasecmp($flag, $this->flag) == 0;
+        // ^ and $ match begin/end of line
+        // i : case insensitive
+        $pattern = '/' . $this->flag . '/i';
+        return preg_match($pattern, $flag) === 1;
     }
 }

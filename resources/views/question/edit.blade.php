@@ -53,10 +53,25 @@
                     <label for="flag" class="col-md-4 col-form-label text-md-right">Flag</label>
 
                     <div class="col-md-8">
-                        <input id="flag" type="text"
-                               class="form-control{{ $errors->has('flag') ? ' is-invalid' : '' }}"
-                               name="flag"
-                               value="{{ old('flag', $question->flag) }}" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">/</div>
+                            </div>
+                            <input id="flag" type="text"
+                                   class="form-control{{ $errors->has('flag') ? ' is-invalid' : '' }}"
+                                   name="flag"
+                                   value="{{ old('flag', $question->flag) }}" required
+                                   aria-describedby="flag-help">
+                            <div class="input-group-append">
+                                <div class="input-group-text">/ i</div>
+                            </div>
+                        </div>
+
+                        <small id="flag-help" class="form-text text-muted">
+                            The flag is a regular expression, like <code>dokos?|hydra</code>. 
+                            You can use <code>^</code> and <code>$</code> to match the beginning/end of string
+                            and force exact match: <code>^(dokos?|hydra)$</code>
+                        </small>
 
                         @if ($errors->has('flag'))
                             <span class="invalid-feedback">
