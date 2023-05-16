@@ -31,15 +31,21 @@
             @foreach ($challenge->ranking() as $registration)
             <tr>
                 <td class="align-middle">
+                    @if ($loop->iteration == 1 && $registration->score > 0)
+                    <img src="/images/gold-40.png">
+                    @elseif ($loop->iteration == 2 && $registration->score > 0)
+                    <img src="/images/silver-40.png">
+                    @elseif ($loop->iteration == 3 && $registration->score > 0)
+                    <img src="/images/bronze-40.png">
+                    @else
                     {{ ($loop->iteration) }}
+                    @endif
+                    
                 </td>
                 <td class="align-middle">
                     <img class="rounded"
                          src="{{ $registration->user->gravatar(40) }}">
                     {{ $registration->user->name }}
-                    @if ($loop->iteration == 1 && $registration->score > 0)
-                    <i class="fas fa-medal px-3"></i>
-                    @endif
                 </td>
                 <td class="text-right align-middle">
                     {{ $registration->score }}
