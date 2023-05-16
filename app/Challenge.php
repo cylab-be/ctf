@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Challenge\Awards;
+
 /**
  * @property iterable<Registration> $registrations
  * @property iterable<Set> $sets
@@ -247,5 +249,10 @@ class Challenge extends Model
         return self::where('time_end', '<', time())
                 ->orderBy('time_end', 'DESC')
                 ->get();
+    }
+    
+    public function awards() : Awards
+    {
+        return new Awards($this);
     }
 }

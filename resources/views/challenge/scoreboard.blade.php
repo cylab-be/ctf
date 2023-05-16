@@ -20,32 +20,53 @@
         @endif
     </p>
 
-    <table class='table table-striped'>
-
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th class="text-right">Score</th>
-        </tr>
-    @foreach ($challenge->ranking() as $registration)
-    <tr>
-        <td class="align-middle">
-            {{ ($loop->iteration) }}
-        </td>
-        <td class="align-middle">
-            <img class="rounded"
-                 src="{{ $registration->user->gravatar(40) }}">
-            {{ $registration->user->name }}
-            @if ($loop->iteration == 1 && $registration->score > 0)
-            <i class="fas fa-medal px-3"></i>
-            @endif
-        </td>
-        <td class="text-right align-middle">
-            {{ $registration->score }}
-        </td>
-    </tr>
-    @endforeach
-    </table>
+    <div class="row">
+        <div class="col">
+            <table class='table table-striped'>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th class="text-right">Score</th>
+                </tr>
+            @foreach ($challenge->ranking() as $registration)
+            <tr>
+                <td class="align-middle">
+                    {{ ($loop->iteration) }}
+                </td>
+                <td class="align-middle">
+                    <img class="rounded"
+                         src="{{ $registration->user->gravatar(40) }}">
+                    {{ $registration->user->name }}
+                    @if ($loop->iteration == 1 && $registration->score > 0)
+                    <i class="fas fa-medal px-3"></i>
+                    @endif
+                </td>
+                <td class="text-right align-middle">
+                    {{ $registration->score }}
+                </td>
+            </tr>
+            @endforeach
+            </table>
+        </div>
+        
+        
+        @php
+        $awards = $challenge->awards();
+        @endphp
+        <div class="col">
+            <table class="table table-striped">
+                <tr>
+                    <th colspan="2">
+                        Special awards
+                    </th>
+                </tr>
+                <tr>
+                    <td>First point</td>
+                    <td>{{ $awards->first_point->submission->registration->user->name }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 
 

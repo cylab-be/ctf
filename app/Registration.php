@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property Challenge $challenge
  * @property User $user
+ * @property iterable<Submission> $submissions
  */
 class Registration extends Model
 {
@@ -21,6 +22,11 @@ class Registration extends Model
     public function challenge()
     {
         return $this->belongsTo(Challenge::class);
+    }
+    
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class);
     }
 
     public function position() : int

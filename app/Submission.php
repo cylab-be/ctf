@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Registration $registration
  * @property Question $question
  * @property integer $points
+ * @property \Carbon\Carbon $created_at
  */
 class Submission extends Model
 {
