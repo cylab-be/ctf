@@ -63,14 +63,22 @@
                 <tr>
                     <td>First point</td>
                     <td class="text-right">
-                        {{ $awards->first_point->submission->registration->user->name ?? '-' }}
+                        @if (! is_null($awards->first_point->submission))
+                        <img class="rounded"
+                         src="{{ $awards->first_point->submission->registration->user->gravatar(40) }}">
+                        {{ $awards->first_point->submission->registration->user->name }}
+                        @endif
                     </td>
                 </tr>
                 
                 <tr>
                     <td>Quickest</td>
                     <td class="text-right">
-                        {{ $awards->quickest->submission->registration->user->name ?? '-' }}
+                        @if (! is_null($awards->quickest->submission))
+                        <img class="rounded"
+                         src="{{ $awards->quickest->submission->registration->user->gravatar(40) }}">
+                        {{ $awards->quickest->submission->registration->user->name }}
+                        @endif
                     </td>
                 </tr>
                 
