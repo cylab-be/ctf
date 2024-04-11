@@ -11,6 +11,7 @@
 
 {!! $question->statementHTML() !!}
 
+@if ($question->files->isNotEmpty())
 <h5>Files</h5>
 <ul>
     @foreach ($question->files as $file)
@@ -19,3 +20,4 @@
     </li>
     @endforeach
 </ul>
+@endif
