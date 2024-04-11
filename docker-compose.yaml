@@ -5,7 +5,6 @@
 # This docker-compose can be used to run a complete development environment for Laravel projects
 #
 
-version: "3"
 services:
   web:
     image: cylab/laravel-dev
@@ -24,9 +23,11 @@ services:
       - web
     volumes:
       - .:/var/www/html
-    entrypoint: php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=60
+    command: ["php", "artisan", "queue:work", "--verbose", "--tries=3", "--timeout=60"]
     restart: unless-stopped
     env_file: env.dev
+    environment:
+      WAIT_HOSTS: web:80
 
   scheduler:
     image: cylab/laravel-dev
@@ -34,8 +35,10 @@ services:
       - web
     volumes:
       - .:/var/www/html
-    entrypoint: sh -c "while true; do php /var/www/html/artisan schedule:run --verbose & sleep 60; done"
+    command: ["/scheduler.sh"]
     env_file: env.dev
+    environment:
+      WAIT_HOSTS: web:80
 
   node:
     image: node:12-alpine
