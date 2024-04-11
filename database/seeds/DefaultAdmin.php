@@ -19,5 +19,9 @@ class DefaultAdmin extends Seeder
         $admin->admin = true;
         $admin->password = Hash::make('password');
         $admin->save();
+        
+        echo "Created default admin account:\n";
+        echo "> email    : ctf@example.org\n";
+        echo "> password : password\n";
     }
 }
