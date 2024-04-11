@@ -2,7 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Set;
+
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class SetController extends Controller
@@ -58,6 +60,7 @@ class SetController extends Controller
         $set = new Set();
         $set->name = $request->name;
         $set->description = $request->input('description', '');
+        $set->user_id = Auth::id();
         $set->save();
         return redirect(action('SetController@show', ['set' => $set]));
     }
