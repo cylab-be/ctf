@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property Set $set
  * @property integer $points
+ * @property Illuminate\Database\Eloquent\Collection<QuestionFile> $files
  */
 class Question extends Model
 {
@@ -123,5 +124,10 @@ class Question extends Model
         // i : case insensitive
         $pattern = '/' . $this->flag . '/i';
         return preg_match($pattern, $flag) === 1;
+    }
+    
+    public function files()
+    {
+        return $this->hasMany(QuestionFile::class);
     }
 }

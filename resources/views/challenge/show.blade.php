@@ -27,14 +27,7 @@
     <div class="card mb-4 {{ $question->isSolvedFor($challenge) ? 'border-success' : '' }}"
          id='q{{ $question->id }}'>
         <div class='card-body'>
-            <h4>
-                #{{ $loop->iteration }}  {{ $question->name }}
-            </h4>
-            <div class="mb-4">
-                Value: <b>{{ $question->points }}</b> {{ Str::plural('point', $question->points) }}
-            </div>
-            
-            {!! $question->statementHTML() !!}
+            @include("question.partials.show", ["question" => $question])
         </div>
         <div class='card-footer'>
             @if ($question->isAvailableFor($challenge))

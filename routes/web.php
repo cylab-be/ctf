@@ -26,6 +26,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// challenges management
 Route::resource('app/challenges', 'ChallengeController');
 Route::get('app/challenges/{challenge}/access', 'ChallengeController@access');
 Route::get('app/challenges/{challenge}/start', 'ChallengeController@start');
@@ -36,9 +37,13 @@ Route::post('app/challenges/{challenge}/set/add', 'ChallengeController@addSet');
 Route::delete('app/challenges/{challenge}/set/{set}', 'ChallengeController@removeSet');
 Route::get('app/challenges/{challenge}/notify-completed', 'ChallengeController@notifyCompleted');
 
+
+// questions management
 Route::resource('app/sets', 'SetController');
 Route::resource('app/sets.questions', 'QuestionController');
 Route::post('app/sets/{set}/questions/{question}/move', 'QuestionController@move');
+Route::post('app/sets/{set}/questions/{question}/upload', 'QuestionController@uploadFile');
+Route::delete('app/sets/{set}/questions/{question}/files/{file}', 'QuestionController@destroyFile');
 Route::resource('app/users', 'UserController');
 Route::post('app/users/{user}/admin', 'UserController@toggleAdmin');
 

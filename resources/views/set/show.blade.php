@@ -74,16 +74,8 @@
 
             @foreach($set->questions as $question)
             <div class="card mb-4" id='q{{ $question->id }}'>
-                <div class='card-header'>
-                    <h4>#{{ $loop->iteration }}  {{ $question->name }}</h4>
-                </div>
-
                 <div class="card-body">
-                    {!! $question->statementHTML() !!}
-
-                    <p>Flag: {{ $question->flag }}</p>
-                    <p>Allowed submissions: {{ $question->max_submissions }}</p>
-                    <p>Value: <b>{{ $question->points }}</b> {{ Str::plural('point', $question->points) }}</p>
+                    @include("question.partials.show", ["question" => $question])
                 </div>
 
                 <div class='card-footer'>

@@ -2,7 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\QuestionFile;
 use App\Set;
+
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -11,15 +14,6 @@ class QuestionController extends Controller
     public function __construct()
     {
         $this->middleware('admin');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     */
-    public function index(Set $set)
-    {
-        return view("question.index", ["questions" => $set->questions]);
     }
 
     /**
@@ -73,6 +67,46 @@ class QuestionController extends Controller
         return redirect(action('QuestionController@edit', [
             'question' => $question,
             'set' => $question->set]));
+    }
+    
+    public function uploadFile(Request $request, Set $set, Question $question)
+    {
+        $request->validate([
+            "file" => [
+                'required', 'file',
+                // max file size in kB
+                'max:10240'
+            ]
+        ]);
+
+        // store screenshot
+        $filename = Storage::putFileAs(
+            'public/questions/' . $question->id,
+            $request->file('file'),
+            $request->file('file')->getClientOriginalName()
+        );
+
+        // save to DB
+        $file = new QuestionFile();
+        $file->filename = $filename;
+        $file->question()->associate($question);
+        $file->save();
+
+        toastr()->info("File uploaded and saved");
+        return redirect(action('QuestionController@edit', [
+            'question' => $question,
+            'set' => $question->set]));
+    }
+    
+    public function destroyFile(Set $set, Question $question, QuestionFile $file)
+    {
+        Storage::delete($file->filename);
+        $file->delete();
+        
+        toastr()->warning("File deleted");
+        return redirect(action("QuestionController@edit", [
+            "question" => $question,
+            "set" => $set]));
     }
 
     /**

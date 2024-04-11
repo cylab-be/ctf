@@ -68,7 +68,7 @@
                         </div>
 
                         <small id="flag-help" class="form-text text-muted">
-                            The flag is a regular expression, like <code>dokos?|hydra</code>. 
+                            The flag is a regular expression, like <code>dokos?|hydra</code>.<br>
                             You can use <code>^</code> and <code>$</code> to match the beginning/end of string
                             and force exact match: <code>^(dokos?|hydra)$</code>
                         </small>
@@ -125,9 +125,25 @@
                                 class="btn btn-primary">
                             <i class="fas fa-plus-circle"></i> Save and <u>a</u>dd a new question
                         </button>
+                        
+                        <a class="btn btn-success"
+                           href="{{ action("SetController@show", ["set" => $question->set]) }}">
+                            Back
+                        </a>
+                        
+                        @if (! $question->exists)
+                        <small class="form-text text-muted">
+                            Save the question to add files.
+                        </small>
+                        @endif
                     </div>
                 </div>
             </form>
+            
+            @if($question->exists)
+            @include('question.files')
+            @endif
+            
         </div>
     </div>
 </div>
