@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
+ * @property string $name
+ * @property string $description
+ * @property User $user
  * @property iterable<Question> $questions
+ * @property iterable<Challenge> $challenges
  */
 class Set extends Model
 {
