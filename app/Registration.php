@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property Challenge $challenge
  * @property User $user
+ * @property int $score
  * @property \Illuminate\Database\Eloquent\Collection|iterable<Submission> $submissions
  */
 class Registration extends Model
@@ -38,6 +39,18 @@ class Registration extends Model
             }
         }
         return $position;
+    }
+    
+    /**
+     * Score as a percentage (e.g. "23%")
+     *
+     * Useful for displaying progress bar.
+     *
+     * @return string
+     */
+    public function scoreProcent() : string
+    {
+        return (100.0 * $this->score / $this->challenge->maxScore()) . "%";
     }
 
     public function certificate() : Certificate

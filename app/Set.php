@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $name
  * @property string $description
  * @property User $user
- * @property iterable<Question> $questions
- * @property iterable<Challenge> $challenges
+ * @property \Illuminate\Database\Eloquent\Collection<Question> $questions
+ * @property \Illuminate\Database\Eloquent\Collection<Challenge> $challenges
  */
 class Set extends Model
 {
@@ -42,7 +42,7 @@ class Set extends Model
 
     public function maxScore() : int
     {
-        return $this->questionsCount();
+        return $this->questions->sum("points");
     }
 
     private $questions_count = null;
