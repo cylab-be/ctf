@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use App\Set;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -15,29 +14,12 @@ class QuestionController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'statement' => 'required|string',
-            'flag' => 'required|string',
-            'max_submissions' => 'required|integer|min:1',
-            'points' => 'required|integer|min:1'
-        ]);
-    }
-
-    /**
      * Display a listing of the resource.
      *
      */
     public function index(Set $set)
     {
-        return view("question.index", array("questions" => $set->questions));
+        return view("question.index", ["questions" => $set->questions]);
     }
 
     /**
@@ -59,10 +41,22 @@ class QuestionController extends Controller
      */
     public function store(Set $set, Request $request)
     {
-        $this->validator($request->all())->validate();
-
         $question = new Question();
         $question->set()->associate($set);
+        
+        return $this->saveAndRedirect($request, $question);
+    }
+    
+    public function saveAndRedirect(Request $request, Question $question)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'statement' => 'required|string',
+            'flag' => 'required|string',
+            'max_submissions' => 'required|integer|min:1',
+            'points' => 'required|integer|min:1'
+        ]);
+        
         $question->name = $request->name;
         $question->statement = $request->statement;
         $question->flag = $request->flag;
@@ -73,10 +67,12 @@ class QuestionController extends Controller
         toastr()->info("Question saved");
 
         if (! is_null($request->input('save-add'))) {
-            return redirect(action('QuestionController@create', ['set' => $set]));
+            return redirect(action('QuestionController@create', ['set' => $question->set]));
         }
 
-        return redirect(action('SetController@show', ['set' => $set]));
+        return redirect(action('QuestionController@edit', [
+            'question' => $question,
+            'set' => $question->set]));
     }
 
     /**
@@ -86,7 +82,7 @@ class QuestionController extends Controller
      */
     public function show(Set $set, Question $question)
     {
-        return view("question.show", array("question" => $question));
+        return view("question.show", ["question" => $question]);
     }
 
     /**
@@ -96,7 +92,7 @@ class QuestionController extends Controller
      */
     public function edit(Set $set, Question $question)
     {
-        return view("question.edit", array("question" => $question));
+        return view("question.edit", ["question" => $question]);
     }
 
     /**
@@ -107,15 +103,7 @@ class QuestionController extends Controller
      */
     public function update(Set $set, Request $request, Question $question)
     {
-        $this->validator($request->all())->validate();
-
-        $question->name = $request->name;
-        $question->statement = $request->statement;
-        $question->flag = $request->flag;
-        $question->max_submissions = $request->max_submissions;
-        $question->points = $request->points;
-        $question->save();
-        return redirect(action("SetController@show", ['set' => $set]));
+        return $this->saveAndRedirect($request, $question);
     }
 
     /**
