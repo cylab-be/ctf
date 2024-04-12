@@ -11,6 +11,10 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
 
+html {
+    height: 100%;
+}
+
 // reload message
 div.bottom-right {
     position: fixed;
@@ -59,4 +63,36 @@ div.gravatar > img {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.bg-white-90 {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.bg-white-80 {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-cyber {
+    height: 100%;
+    background-image: url(/images/cyber.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.martian-mono-400 {
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.martian-mono-600 {
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
