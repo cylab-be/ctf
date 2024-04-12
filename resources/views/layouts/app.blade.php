@@ -21,7 +21,6 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    @toastr_css
 </head>
 <body @hasSection('body-class') class='@yield('body-class')' @endif>
     @include("layouts.partials.navbar")
