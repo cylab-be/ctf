@@ -12,11 +12,18 @@
                         <li>
                             <a class="text-decoration-none" 
                                href='{{ action("UserChallengeController@showSet", ["challenge" => $challenge, "set" => $s]) }}'>
-                                {{ $s->name }}
+                                {{ $s->name }} [{{ $s->maxScore() }} points]
                             </a>
                         </li>
                         @endforeach
                     </ul>
+                    
+                    <p>
+                        <a href="{{ route("scoreboard", ["challenge" => $challenge]) }}"
+                           class="text-decoration-none">
+                            Scoreboard
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>
