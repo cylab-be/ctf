@@ -6,6 +6,8 @@ use App\Challenge;
 use App\Question;
 use App\Submission;
 use App\Registration;
+use App\Set;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -67,8 +69,10 @@ class UserChallengeController extends Controller
      */
     public function show(Challenge $challenge)
     {
-        // not registered yet
+        
         $registration = Registration::find($challenge, Auth::user());
+        
+        // not registered yet
         if ($registration == null) {
             return redirect(action('UserChallengeController@join', ['challenge' => $challenge]));
         }
@@ -80,10 +84,37 @@ class UserChallengeController extends Controller
         if (time() > $challenge->time_end) {
             return redirect(route('scoreboard', ['challenge' => $challenge]));
         }
+        
+        $set = $challenge->sets->first();
+        
+        return redirect(action("UserChallengeController@showSet", ["challenge" => $challenge, "set" => $set]));
+    }
+    
+    public function showSet(Challenge $challenge, Set $set)
+    {
+        $registration = Registration::find($challenge, Auth::user());
+        
+        // not registered yet
+        if ($registration == null) {
+            return redirect(action('UserChallengeController@join', ['challenge' => $challenge]));
+        }
 
+        if (time() < $challenge->time_start) {
+            return view('challenge.wait', ['challenge' => $challenge]);
+        }
+
+        if (time() > $challenge->time_end) {
+            return redirect(route('scoreboard', ['challenge' => $challenge]));
+        }
+        
+        if (! $challenge->sets->contains($set)) {
+            abort(404);
+        }
+        
         return view('challenge.show', [
             'challenge' => $challenge,
-            'registration' => $registration]);
+            'registration' => $registration,
+            "set" => $set]);
     }
 
     /**
@@ -106,21 +137,17 @@ class UserChallengeController extends Controller
             toastr()->error("Time is up!");
             return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
         }
+        
+        $set = $question->set;
 
         if ($request->flag == null) {
             toastr()->error("Looks like you submitted an empty flag!");
-            return redirect(
-                action('UserChallengeController@show', ['challenge' => $challenge]) .
-                    "#q" . $question->id
-            );
+            return redirect(action("UserChallengeController@showSet", ["challenge" => $challenge, "set" => $set]));
         }
 
         if (!$question->isAvailableFor($registration->challenge)) {
             // too many submissions or already sent the correct answer
-            return redirect(
-                action('UserChallengeController@show', ['challenge' => $challenge]) .
-                "#q" . $question->id
-            );
+            return redirect(action("UserChallengeController@showSet", ["challenge" => $challenge, "set" => $set]));
         }
 
         $submission = new Submission();
@@ -138,9 +165,6 @@ class UserChallengeController extends Controller
             toastr()->error("<b>Wrong</b> answer for " . $question->name . " !");
         }
 
-        return redirect(
-            action('UserChallengeController@show', ['challenge' => $challenge]) .
-            "#q" . $question->id
-        );
+        return redirect(action("UserChallengeController@showSet", ["challenge" => $challenge, "set" => $set]));
     }
 }

@@ -64,6 +64,7 @@ Route::get('challenges/{challenge}/scoreboard', function (Challenge $challenge) 
 Route::get('challenges/{challenge}/join', 'UserChallengeController@join');
 Route::post('challenges/{challenge}/join', 'UserChallengeController@storeJoin');
 Route::get('challenges/{challenge}', 'UserChallengeController@show');
+Route::get('challenges/{challenge}/set/{set}', 'UserChallengeController@showSet');
 Route::post('challenges/{challenge}/questions/{question}', 'UserChallengeController@submit');
 
 

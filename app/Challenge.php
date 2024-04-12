@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Challenge\Awards;
 
 /**
- * @property iterable<Registration> $registrations
- * @property iterable<Set> $sets
- * @property iterable<Submission> $submissions
+ * @property \Illuminate\Database\Eloquent\Collection<Registration> $registrations
+ * @property \Illuminate\Database\Eloquent\Collection<Set> $sets
+ * @property \Illuminate\Database\Eloquent\Collection<Submission> $submissions
  */
 class Challenge extends Model
 {
