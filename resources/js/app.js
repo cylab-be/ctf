@@ -1,5 +1,7 @@
 require('./bootstrap');
 
+window.toastr = require('toastr');
+
 require("jquery-simple-timer")($);
 $(function () {
     $('.timer').startTimer();

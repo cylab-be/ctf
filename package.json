@@ -30,6 +30,7 @@
         "jquery-simple-timer": "^1.0.2",
         "laravel-mix-purgecss": "^6.0.0",
         "masonry-layout": "^4.2.2",
+        "toastr": "^2.1.4",
         "typeface-raleway": "0.0.75"
     }
 }
