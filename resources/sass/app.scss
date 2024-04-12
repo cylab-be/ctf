@@ -1,5 +1,7 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// https://cylab.be/blog/159/laravel-optimization-self-hosted-fonts
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import "@fontsource/nunito";
+@import "~@fontsource/nunito/500.css";
 
 // Variables
 @import 'variables';
