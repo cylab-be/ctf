@@ -1,6 +1,6 @@
 #### Step 1 : composer
 
-FROM cylab/php74 AS composer
+FROM cylab/php:7.4 AS composer
 
 COPY . /var/www/html
 WORKDIR /var/www/html
@@ -8,7 +8,7 @@ RUN composer install --no-dev --optimize-autoloader
 
 #### Step 2 : node
 
-FROM node AS node
+FROM node:12-alpine AS node
 
 COPY . /var/www/html
 WORKDIR /var/www/html
@@ -16,7 +16,7 @@ RUN npm --version && npm install && npm run prod
 
 #### Step 3 : the actual docker image
 
-FROM cylab/laravel74
+FROM cylab/laravel:7.4
 
 ### Laravel application
 
