@@ -1,7 +1,5 @@
 require('./bootstrap');
 
-require('typeface-raleway')
-
 // Masonry (for the list of opened challenges)
 var jQueryBridget = require('jquery-bridget');
 var Masonry = require('masonry-layout');
