@@ -32,6 +32,7 @@
                 {{ $challenge->ranking()->first()->user->name }}
                 ({{ $challenge->ranking()->first()->score }} points)
                 <img class="rounded"
+                     loading="lazy" 
                      src="{{ $challenge->ranking()->first()->user->gravatar(40) }}">
             </td>
         </tr>

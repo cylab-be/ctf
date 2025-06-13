@@ -27,13 +27,13 @@
                     <table class='table'>
                         @foreach ($challenge->ranking() as $registration)
                         <tr>
-                            <td class="text-center align-middle">
+                            <td class="align-middle">
                                 {{ ($loop->iteration) }}
                             </td>
                             <td class="text-center">
-                                <img class="rounded" src="{{ $registration->user->gravatar(30) }}">
+                                <img class="rounded" loading="lazy" src="{{ $registration->user->gravatar(30) }}">
                             </td>
-                            <td class="align-middle text-left">
+                            <td class="align-middle">
                                 {{ $registration->user->name }}
                             </td>
                             <td class="align-middle" style="width: 40%">
