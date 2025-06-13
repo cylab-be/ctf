@@ -63,10 +63,9 @@ build:tagged:
 
 deploy:
   stage: deploy
-  only:
-    - tags
-    # only deploy when we push on the master branch
-    - master
+  rules:
+    # only for tags push
+    - if: $CI_COMMIT_TAG
   image: alpine
   before_script:
     # install envsubst and ssh-add
