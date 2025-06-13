@@ -22,6 +22,10 @@ FROM cylab/laravel74
 
 # copy source files
 COPY . /var/www/html
+
+# default env value
+COPY production/stack.env /var/www/html/.env
+
 COPY --from=composer /var/www/html/vendor /var/www/html/vendor
 COPY --from=node /var/www/html/public/css /var/www/html/public/css
 COPY --from=node /var/www/html/public/js /var/www/html/public/js

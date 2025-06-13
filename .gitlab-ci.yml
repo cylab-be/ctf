@@ -61,41 +61,16 @@ build:tagged:
     - docker push cylab/ctf:$CI_COMMIT_TAG
     - docker push cylab/ctf:latest
 
-#
-# create and upload docker-compose.yml
-# 
-publish:
-  only:
-    - tags
-  stage: release
-  image: alpine
-  artifacts:
-    paths:
-      - docker-compose.yml
-  script:
-    - apk add curl gettext zip
-    # use template to create the release docker-compose
-    - envsubst < docker-compose.tmpl > docker-compose.yml
-    # upload to artifacts.cylab.be
-    - "curl https://artifacts.cylab.be/api/ctf/$CI_COMMIT_TAG/docker-compose.yml --request POST --header \"Authorization: Bearer $UPLOAD_TOKEN\" -F \"file=@./docker-compose.yml\""
-    - "curl https://artifacts.cylab.be/api/ctf/latest/docker-compose.yml --request POST --header \"Authorization: Bearer $UPLOAD_TOKEN\" -F \"file=@./docker-compose.yml\""
-
-
 deploy:
-  only:
-    - tags
-  image: cylab/php74
   stage: deploy
-  environment:
-    name: ctf.cylab.be
-    url: https://ctf.cylab.be
+  only:
+    # only deploy when we push on the master branch
+    - master
+  image: alpine
+  before_script:
+    # install envsubst and ssh-add
+    - apk add curl
   script:
-    # import ssh private key
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-    - mkdir -p ~/.ssh
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    # in cylab/php74, envoy is already installed...
-    - ~/.composer/vendor/bin/envoy run deploy
+    - curl -X POST $DEPLOY_HOOK
 
 

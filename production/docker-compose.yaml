@@ -1,11 +1,11 @@
 #
-# cylab/ctf-$CI_COMMIT_TAG
-# 
+# cylab/ctf
+# https://gitlab.cylab.be/cylab/ctf
+#
 
-version: "3"
 services:
   web:
-    image: cylab/ctf:$CI_COMMIT_TAG
+    image: cylab/ctf
     container_name: web
     depends_on:
       - redis
@@ -13,49 +13,51 @@ services:
     ports:
       - 80
     volumes:
-      - ./volumes/web:/var/www/html/storage
+      - web:/var/www/html/storage
     env_file: env.app
     restart: "unless-stopped"
-    labels:
-      - traefik.http.routers.ctf.rule=Host(`ctf.cylab.be`)
-      - traefik.http.routers.ctf.tls=true
-      - traefik.http.routers.ctf.tls.certresolver=letsencrypt
 
   queue:
-    image: cylab/ctf:$CI_COMMIT_TAG
+    image: cylab/ctf
     container_name: queue
     depends_on:
       - web
     volumes:
-      - ./volumes/web:/var/www/html/storage
+      - web:/var/www/html/storage
     entrypoint: php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=60
-    env_file: env.app
+    env_file: stack.env
     restart: "unless-stopped"
 
   scheduler:
-    image: cylab/ctf:$CI_COMMIT_TAG
+    image: cylab/ctf
     container_name: scheduler
     depends_on:
       - web
     volumes:
-      - ./volumes/web:/var/www/html/storage
+      - web:/var/www/html/storage
     entrypoint: sh -c "while true; do php /var/www/html/artisan schedule:run --verbose & sleep 60; done"
-    env_file: env.app
+    env_file: stack.env
     restart: "unless-stopped"
 
   redis:
     image: redis:4-alpine
     container_name: redis
     volumes:
-      - ./volumes/redis:/data
+      - redis:/data
     restart: "unless-stopped"
 
   mysql:
     image: mysql:5.7
     container_name: mysql
     volumes:
-      - ./volumes/mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: laravel
     restart: "unless-stopped"
+
+
+volumes:
+  web:
+  mysql:
+  redis:
