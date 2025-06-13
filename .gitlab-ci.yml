@@ -1,5 +1,6 @@
 stages:
   - test
+  - release
   - deploy
 
 ## Cache composer packages between all jobs and all branches
