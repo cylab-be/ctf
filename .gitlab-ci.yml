@@ -1,6 +1,5 @@
 stages:
   - test
-  - release
   - deploy
 
 ## Cache composer packages between all jobs and all branches
@@ -36,7 +35,7 @@ build:
     - docker:20.10.16-dind
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
-  stage: release
+  stage: test
   tags:
     - dind
   script:
@@ -64,6 +63,7 @@ build:tagged:
 deploy:
   stage: deploy
   only:
+    - tags
     # only deploy when we push on the master branch
     - master
   image: alpine
