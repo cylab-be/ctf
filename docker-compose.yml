@@ -1,0 +1,86 @@
+#
+# docker-compose.yaml
+#
+# to create a development environment with docker-compose
+# https://cylab.be/blog/336/use-docker-compose-to-create-a-dev-environment-for-laravel
+#
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    # defined in .env
+    user: "${UID}:${GID}"
+    depends_on:
+      - redis
+      - mysql
+    ports:
+      - 8080:80
+    volumes:
+      - .:/var/www/html
+    env_file: .env
+    environment:
+      WAIT_HOSTS: mysql:3306
+      APACHE_RUN_USER: "#${UID}"
+      APACHE_RUN_GROUP: "#${GID}"
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    # defined in .env
+    user: "${UID}:${GID}"
+    depends_on:
+      - web
+    volumes:
+      - .:/var/www/html
+    command: ["/queue.sh"]
+    env_file: .env
+    environment:
+      WAIT_HOSTS: web:80
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    # defined in .env
+    user: "${UID}:${GID}"
+    depends_on:
+      - web
+    volumes:
+      - .:/var/www/html
+    command: ["/scheduler.sh"]
+    env_file: .env
+    environment:
+      WAIT_HOSTS: web:80
+
+
+  node:
+    image: node:22-alpine
+    user: "${UID}:${GID}"
+    working_dir: /app
+    volumes:
+      - .:/app
+    entrypoint: /bin/sh -c "npm install && npm run watch"
+
+  redis:
+    image: redis:4-alpine
+    volumes:
+      - ./volumes/redis:/data
+
+  mysql:
+    image: mysql:8
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+
+
