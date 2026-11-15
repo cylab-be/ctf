@@ -26,7 +26,7 @@ class Registration extends Model
     }
     
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Submission>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Submission, $this>
      */
     public function submissions()
     {

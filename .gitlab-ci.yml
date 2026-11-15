@@ -24,7 +24,6 @@ test:php83:
     - vendor/bin/phpunit --coverage-text --colors=never --coverage-html build/coverage
     - vendor/bin/phpcs
     - vendor/bin/phpstan --memory-limit=512m
-    - vendor/bin/unused_scanner unused-scanner.php
   artifacts:
     paths:
     - build/

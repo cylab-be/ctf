@@ -27,11 +27,5 @@
     <main class="py-4">
         @yield('content')
     </main>
-
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function(){
-            {!! toastr()->options().toastr()->notificationsAsString() !!}
-        });
-    </script>
 </body>
 </html>
