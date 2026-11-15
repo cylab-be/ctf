@@ -16,7 +16,8 @@ $packages = [
     'fideloper/proxy',
     'tecnickcom/tcpdf',
     'laravel/tinker',
-    'erusev/parsedown'
+    'erusev/parsedown',
+    'laravel/ui'
 ];
 
 return [

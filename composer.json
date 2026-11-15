@@ -8,24 +8,24 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.3|^8.0",
         "doctrine/dbal": "^2.13.7",
         "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "^7.0",
-        "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0",
+        "laravel/framework": "^8.0",
+        "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.0",
         "tecnickcom/tcpdf": "^6.3",
         "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
-        "barryvdh/laravel-ide-helper": "^2.8",
-        "facade/ignition": "^2.0",
+        "barryvdh/laravel-ide-helper": "^2.10",
+        "facade/ignition": "^2.5.2",
         "fakerphp/faker": "^1.9.1",
         "insolita/unused-scanner": "^2.4",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^4.1",
+        "nunomaduro/collision": "^5.0",
         "nunomaduro/larastan": "^1.0",
         "phpunit/phpunit": "^8.5",
         "slevomat/coding-standard": "^7.2",
@@ -37,6 +37,17 @@
         "sort-packages": true,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "audit": {
+            "ignore": [
+                "PKSA-yxbx-3c9s-cjt9",
+                "PKSA-b41t-wbzk-9q51",
+                "PKSA-d5tc-s1qs-h781",
+                "PKSA-3r5d-mb8f-1qw9",
+                "PKSA-m5cs-t1y6-qpcs",
+                "PKSA-8qx3-n5y5-vvnd",
+                "PKSA-w9tt-7782-78jx"
+            ]
         }
     },
     "extra": {
