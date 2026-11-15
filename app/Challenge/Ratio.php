@@ -33,6 +33,7 @@ class Ratio implements Award
         }
         
         $correct = 0;
+        /** @var \App\Submission $submission */
         foreach ($registration->submissions as $submission) {
             if ($submission->isCorrect()) {
                 $correct++;
@@ -44,7 +45,9 @@ class Ratio implements Award
         if ($ratio > $this->ratio) {
             // found a new best
             $this->ratio = $ratio;
-            $this->submission = $registration->submissions->last();
+            /** @var \App\Submission $last */
+            $last = $registration->submissions->last();
+            $this->submission = $last;
         }
     }
 }

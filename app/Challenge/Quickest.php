@@ -29,6 +29,7 @@ class Quickest implements Award
         // time of last correct submission for this user
         $time_last_correct = $registration->challenge->time_start;
         
+        /** @var \App\Submission $submission */
         foreach ($registration->submissions as $submission) {
             if (! $submission->isCorrect()) {
                 continue;

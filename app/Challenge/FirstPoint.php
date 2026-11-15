@@ -28,6 +28,7 @@ class FirstPoint implements Award
     public function compareRegistration(Registration $registration) : void
     {
         
+        /** @var \App\Submission $submission */
         foreach ($registration->submissions as $submission) {
             if ($submission->created_at->timestamp > $this->time) {
                 return;

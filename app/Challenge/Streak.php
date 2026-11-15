@@ -29,6 +29,7 @@ class Streak implements Award
         // longest streak of correct answers for this user
         $user_count = 0;
         
+        /** @var \App\Submission $submission */
         foreach ($registration->submissions as $submission) {
             if ($submission->isCorrect()) {
                 $user_count++;

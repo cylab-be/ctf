@@ -25,6 +25,9 @@ class Registration extends Model
         return $this->belongsTo(Challenge::class);
     }
     
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Submission>
+     */
     public function submissions()
     {
         return $this->hasMany(Submission::class);
