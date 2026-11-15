@@ -11,8 +11,8 @@ cache:
     - composer-cache/
 
 # Test with PHP7.4
-test:php74:
-  image: cylab/php74
+test:php83:
+  image: cylab/php:8.3
   stage: test
   before_script:
     - cp env.gitlab-ci .env

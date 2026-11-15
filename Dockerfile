@@ -1,6 +1,6 @@
 #### Step 1 : composer
 
-FROM cylab/php:7.4 AS composer
+FROM cylab/php:8.3 AS composer
 
 COPY . /var/www/html
 WORKDIR /var/www/html
@@ -16,7 +16,7 @@ RUN npm --version && npm install && npm run prod
 
 #### Step 3 : the actual docker image
 
-FROM cylab/laravel:7.4
+FROM cylab/laravel:8.3
 
 ### Laravel application
 
