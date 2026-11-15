@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property Set $set
  * @property integer $points
- * @property Illuminate\Database\Eloquent\Collection<QuestionFile> $files
+ * @property \Illuminate\Database\Eloquent\Collection<QuestionFile> $files
  */
 class Question extends Model
 {
