@@ -11,10 +11,9 @@ class ExampleTest extends TestCase
     /**
      * Test verification of flag based on regular expressions
      *
-     * @group regex
-     *
      * @return void
      */
+    #[\PHPUnit\Framework\Attributes\Group('regex')]
     public function testVerifyQuestionWithRegex()
     {
         $question = new Question();

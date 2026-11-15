@@ -4,9 +4,7 @@ namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group tcpdf
- */
+#[\PHPUnit\Framework\Attributes\Group('tcpdf')]
 class TcpdfTest extends TestCase
 {
     /**
