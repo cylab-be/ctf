@@ -2,7 +2,6 @@
 
 use App\User;
 use App\Set;
-use App\Question;
 use App\Challenge;
 use App\Registration;
 use App\Submission;
@@ -50,11 +49,10 @@ class MassSeeder extends Seeder
         });
 
         // each user makes a single submission for each question
-        Registration::all()->each(function($registration) {
+        Registration::all()->each(function ($registration) {
             /** @var Registration $registration */
             foreach ($registration->challenge->sets as $set) {
                 foreach ($set->questions as $question) {
-
                     $submission = new Submission();
                     $submission->question_id = $question->id;
                     $submission->registration_id = $registration->id;
