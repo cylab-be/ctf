@@ -6,3 +6,12 @@ parameters:
         - app
 
     level: 5
+
+    # Larastan 1.x sets checkGenericClassInNonGenericObjectType: false,
+    # which is deprecated in PHPStan 1.11+. The codebase already carries
+    # proper generic typehints, so enable the check explicitly.
+    checkGenericClassInNonGenericObjectType: true
+    checkMissingIterableValueType: true
+    checkUninitializedProperties: true
+
+    reportUnmatchedIgnoredErrors: true
