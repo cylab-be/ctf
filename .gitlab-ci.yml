@@ -22,8 +22,7 @@ include:
   - component: gitlab.cylab.be/components/docker/build-and-push@1.4.2
     inputs:
       stage: release
-      docker_image: cylab/ctf:$CI_COMMIT_TAG
-      docker_image2: cylab/ctf:latest
+      docker_image: cylab/ctf:latest
       docker_username: $DOCKER_USERNAME
       docker_password: $DOCKER_PASSWORD
   - component: gitlab.cylab.be/components/generic/deploy@1.2.0
