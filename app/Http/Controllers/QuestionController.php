@@ -58,7 +58,7 @@ class QuestionController extends Controller
         $question->points = $request->points;
         $question->save();
 
-        toastr()->info("Question saved");
+        flash_info('Question saved');
 
         if (! is_null($request->input('save-add'))) {
             return redirect(action('QuestionController@create', ['set' => $question->set]));
@@ -92,7 +92,7 @@ class QuestionController extends Controller
         $file->question()->associate($question);
         $file->save();
 
-        toastr()->info("File uploaded and saved");
+        flash_info('File uploaded and saved');
         return redirect(action('QuestionController@edit', [
             'question' => $question,
             'set' => $question->set]));
@@ -103,7 +103,7 @@ class QuestionController extends Controller
         Storage::delete($file->filename);
         $file->delete();
         
-        toastr()->warning("File deleted");
+        flash_warning('File deleted');
         return redirect(action("QuestionController@edit", [
             "question" => $question,
             "set" => $set]));
@@ -152,7 +152,7 @@ class QuestionController extends Controller
         $question->set_id = $new_set_id;
         $question->save();
 
-        toastr()->info("Question was moved");
+        flash_info('Question was moved');
         return redirect(action("SetController@show", ['set' => $set]));
     }
 
@@ -164,7 +164,7 @@ class QuestionController extends Controller
     public function destroy(Set $set, $id)
     {
         Question::find($id)->delete();
-        toastr()->info("Question was deleted!");
+        flash_info('Question was deleted!');
         return redirect(action("SetController@show", ['set' => $set]));
     }
 }

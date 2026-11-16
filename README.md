@@ -36,7 +36,7 @@ frontend, and shipped as a single Docker image (`cylab/ctf`).
 | Backend   | PHP 8.2+, Laravel 12, Eloquent                          |
 | Database  | MySQL 8                                                 |
 | Runtime   | Redis (sessions, cache, queue)                          |
-| Frontend  | Bootstrap 4, jQuery, Sass — bundled with esbuild        |
+| Frontend  | Bootstrap 4, jQuery, Toastr, Sass — bundled with esbuild |
 | PDF       | TCPDF (completion certificates)                         |
 | Packaging | Docker (dev + production), CI/CD with GitLab            |
 

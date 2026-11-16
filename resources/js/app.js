@@ -30,4 +30,9 @@ jQuery.fn.preventDoubleSubmission = function () {
 
 $(document).ready(function () {
     $('form').preventDoubleSubmission();
+
+    // Show a flashed toastr message (flashed server-side, see app/helpers.php)
+    if (window.__flash) {
+        window.toastr[window.__flash.type](window.__flash.message);
+    }
 });

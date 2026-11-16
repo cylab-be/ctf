@@ -134,14 +134,14 @@ class UserChallengeController extends Controller
         }
 
         if (time() > $challenge->time_end) {
-            toastr()->error("Time is up!");
+            flash_error('Time is up!');
             return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
         }
         
         $set = $question->set;
 
         if ($request->flag == null) {
-            toastr()->error("Looks like you submitted an empty flag!");
+            flash_error('Looks like you submitted an empty flag!');
             return redirect(action("UserChallengeController@showSet", ["challenge" => $challenge, "set" => $set]));
         }
 
@@ -157,12 +157,12 @@ class UserChallengeController extends Controller
         $submission->save();
 
         if ($submission->isCorrect()) {
-            toastr()->success("<b>Correct</b> answer for " . $question->name . " !");
+            flash_success('<b>Correct</b> answer for ' . $question->name . ' !');
 
             $registration->score = $registration->score + $question->points;
             $registration->save();
         } else {
-            toastr()->error("<b>Wrong</b> answer for " . $question->name . " !");
+            flash_error('<b>Wrong</b> answer for ' . $question->name . ' !');
         }
 
         return redirect(action("UserChallengeController@showSet", ["challenge" => $challenge, "set" => $set]));

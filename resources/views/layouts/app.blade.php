@@ -15,6 +15,11 @@
         @endif
     </title>
 
+    <!-- Flashed toastr message (see app/helpers.php) -->
+    @if (session('flash'))
+        <script>window.__flash = @json(session('flash'));</script>
+    @endif
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 

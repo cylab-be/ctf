@@ -48,7 +48,7 @@ class AccountController extends Controller
         $user->email = $request->email;
         $user->save();
 
-        $request->session()->flash('info', 'Profile updated!');
+        flash_info('Profile updated!');
 
         return redirect(action('AccountController@show'));
     }
@@ -80,7 +80,7 @@ class AccountController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        $request->session()->flash('info', 'Password updated!');
+        flash_info('Password updated!');
 
         return redirect(action('AccountController@show'));
     }
