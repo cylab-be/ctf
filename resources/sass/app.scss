@@ -1,21 +1,21 @@
 // https://cylab.be/blog/159/laravel-optimization-self-hosted-fonts
 // @import url('https://fonts.googleapis.com/css?family=Nunito');
-@import "@fontsource/nunito";
-@import "~@fontsource/nunito/500.css";
+@import "@fontsource/nunito/index.css";
+@import "@fontsource/nunito/500.css";
 
-@import '@fontsource-variable/martian-mono';
+@import '@fontsource-variable/martian-mono/index.css';
 
 // Variables
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
 
 // Font awesome
-@import '~@fortawesome/fontawesome-free/css/all.css';
+@import "@fortawesome/fontawesome-free/css/all.css";
 
 
-@import 'toastr';
+@import 'toastr/toastr.scss';
 
 html {
     height: 100%;
