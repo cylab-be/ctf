@@ -1,0 +1,15 @@
+title = "gitleaks config for cylab/ctf"
+
+# Extend the default gitleaks ruleset (vendor/ and node_modules/ are
+# already allowlisted there).
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Example and development environment files that intentionally contain weak/example credentials"
+paths = [
+  '''env\.dev$''',
+  '''env\.app$''',
+  '''env\.gitlab-ci$''',
+  '''production/stack\.env$''',
+]
