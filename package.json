@@ -13,11 +13,9 @@
         "@fontsource-variable/martian-mono": "^5.0.12",
         "@fontsource/nunito": "^5.0.17",
         "@fortawesome/fontawesome-free": "^5.13.1",
-        "axios": "^0.19",
         "bootstrap": "^4.5.0",
         "jquery": "^3.5.1",
         "jquery-simple-timer": "^1.0.2",
-        "lodash": "^4.17.19",
         "popper.js": "^1.12",
         "toastr": "^2.1.4"
     }
