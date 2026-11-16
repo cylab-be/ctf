@@ -25,35 +25,35 @@ services:
       APACHE_RUN_USER: "#${UID}"
       APACHE_RUN_GROUP: "#${GID}"
 
-  queue:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    # defined in .env
-    user: "${UID}:${GID}"
-    depends_on:
-      - web
-    volumes:
-      - .:/var/www/html
-    command: ["/queue.sh"]
-    env_file: .env
-    environment:
-      WAIT_HOSTS: web:80
+#  queue:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.dev
+#    # defined in .env
+#    user: "${UID}:${GID}"
+#    depends_on:
+#      - web
+#    volumes:
+#      - .:/var/www/html
+#    command: ["/queue.sh"]
+#    env_file: .env
+#    environment:
+#      WAIT_HOSTS: web:80
 
-  scheduler:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    # defined in .env
-    user: "${UID}:${GID}"
-    depends_on:
-      - web
-    volumes:
-      - .:/var/www/html
-    command: ["/scheduler.sh"]
-    env_file: .env
-    environment:
-      WAIT_HOSTS: web:80
+#  scheduler:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.dev
+#    # defined in .env
+#    user: "${UID}:${GID}"
+#    depends_on:
+#      - web
+#    volumes:
+#      - .:/var/www/html
+#    command: ["/scheduler.sh"]
+#    env_file: .env
+#    environment:
+#      WAIT_HOSTS: web:80
 
 
   node:
