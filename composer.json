@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "cylab/ctf",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "A Capture The Flag (CTF) engine.",
     "keywords": [
         "framework",
         "laravel"
@@ -34,23 +34,6 @@
         "sort-packages": true,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
-        },
-        "audit": {
-            "ignore": [
-                "PKSA-yxbx-3c9s-cjt9",
-                "PKSA-b41t-wbzk-9q51",
-                "PKSA-d5tc-s1qs-h781",
-                "PKSA-3r5d-mb8f-1qw9",
-                "PKSA-m5cs-t1y6-qpcs",
-                "PKSA-8qx3-n5y5-vvnd",
-                "PKSA-w9tt-7782-78jx",
-                "PKSA-mdq4-51ck-6kdq"
-            ]
-        }
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
         }
     },
     "autoload": {
@@ -75,12 +58,6 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
         ]
     }
 }
