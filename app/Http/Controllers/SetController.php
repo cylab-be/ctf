@@ -62,6 +62,7 @@ class SetController extends Controller
         $set->description = $request->input('description', '');
         $set->user_id = Auth::id();
         $set->save();
+        flash_success('Set created');
         return redirect(action('SetController@show', ['set' => $set]));
     }
 
@@ -100,6 +101,7 @@ class SetController extends Controller
         $set->name = $request->name;
         $set->description = $request->input('description', '');
         $set->save();
+        flash_success('Set updated');
         return redirect(action('SetController@show', ['set' => $set]));
     }
 
@@ -111,6 +113,7 @@ class SetController extends Controller
     public function destroy($id)
     {
         Set::find($id)->delete();
+        flash_info('Set deleted');
         return redirect(action("SetController@index"));
     }
 }

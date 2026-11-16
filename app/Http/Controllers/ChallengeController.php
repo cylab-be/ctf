@@ -72,6 +72,8 @@ class ChallengeController extends Controller
         $challenge->time_end = Carbon::createFromFormat("Y/m/d H:i", $request->time_end)->getTimestamp();
         $challenge->save();
 
+        flash_success('Challenge created');
+
         return redirect(action('ChallengeController@show', ['challenge' => $challenge]));
     }
 
@@ -108,6 +110,7 @@ class ChallengeController extends Controller
     {
         $challenge->time_start = time();
         $challenge->save();
+        flash_success('Challenge started');
         return redirect(action('ChallengeController@show', ["challenge" => $challenge]));
     }
 
@@ -115,6 +118,7 @@ class ChallengeController extends Controller
     {
         $challenge->time_end = time();
         $challenge->save();
+        flash_warning('Challenge stopped');
         return redirect(action('ChallengeController@show', ["challenge" => $challenge]));
     }
 
@@ -142,6 +146,7 @@ class ChallengeController extends Controller
         $challenge->time_start = Carbon::createFromFormat("Y/m/d H:i", $request->time_start)->getTimestamp();
         $challenge->time_end = Carbon::createFromFormat("Y/m/d H:i", $request->time_end)->getTimestamp();
         $challenge->save();
+        flash_success('Challenge updated');
         return redirect(action('ChallengeController@index'));
     }
 
@@ -153,6 +158,7 @@ class ChallengeController extends Controller
     public function destroy($id)
     {
         Challenge::find($id)->delete();
+        flash_info('Challenge deleted');
         return redirect(action("ChallengeController@index"));
     }
 
@@ -160,12 +166,14 @@ class ChallengeController extends Controller
     {
         $set_id = $request->set_id;
         $challenge->sets()->attach($set_id);
+        flash_success('Set added to challenge');
         return redirect(action('ChallengeController@show', ['challenge' => $challenge]));
     }
 
     public function removeSet(Challenge $challenge, Set $set)
     {
         $challenge->sets()->detach([$set->id]);
+        flash_info('Set removed from challenge');
         return redirect(action('ChallengeController@show', ['challenge' => $challenge]));
     }
 
@@ -174,6 +182,7 @@ class ChallengeController extends Controller
         foreach ($challenge->registrations as $registration) {
             Mail::to($registration->user)->send(new ChallengeCompleted($registration));
         }
+        flash_success('Completion emails sent');
         return redirect(action('ChallengeController@show', ["challenge" => $challenge]));
     }
 }

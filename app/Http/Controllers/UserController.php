@@ -58,6 +58,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->save();
+        flash_success('User created');
         return redirect(action('UserController@index'));
     }
 
@@ -93,6 +94,7 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->save();
+        flash_success('User updated');
         return redirect(action('UserController@index'));
     }
 
@@ -105,10 +107,12 @@ class UserController extends Controller
     {
         if ($id == Auth::user()->id) {
             // you cannot destroy yourself!
+            flash_warning("You can't delete your own account");
             return redirect(action("UserController@index"));
         }
 
         User::find($id)->delete();
+        flash_info('User deleted');
         return redirect(action("UserController@index"));
     }
 
@@ -116,8 +120,10 @@ class UserController extends Controller
     {
         if ($user->isAdmin()) {
             $user->admin = false;
+            flash_info('Admin rights removed');
         } else {
             $user->admin = true;
+            flash_info('Admin rights granted');
         }
 
         $user->save();

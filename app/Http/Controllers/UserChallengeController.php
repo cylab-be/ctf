@@ -34,6 +34,7 @@ class UserChallengeController extends Controller
         // user has already joined...
         $registration = Registration::find($challenge, Auth::user());
         if ($registration != null) {
+            flash_info('You have already joined this challenge');
             return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
         }
 
@@ -50,6 +51,7 @@ class UserChallengeController extends Controller
         // user has already joined...
         $registration = Registration::find($challenge, Auth::user());
         if ($registration != null) {
+            flash_info('You have already joined this challenge');
             return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
         }
 
@@ -58,6 +60,9 @@ class UserChallengeController extends Controller
             $registration->challenge_id = $challenge->id;
             $registration->user_id = Auth::user()->id;
             $registration->save();
+            flash_success('You have joined the challenge');
+        } else {
+            flash_error('Invalid access code!');
         }
 
         return redirect(action('UserChallengeController@show', ['challenge' => $challenge]));
@@ -147,6 +152,11 @@ class UserChallengeController extends Controller
 
         if (!$question->isAvailableFor($registration->challenge)) {
             // too many submissions or already sent the correct answer
+            if ($question->isSolvedFor($registration->challenge)) {
+                flash_error('<b>Already solved</b> this question!');
+            } else {
+                flash_error('No more submissions left for this question!');
+            }
             return redirect(action("UserChallengeController@showSet", ["challenge" => $challenge, "set" => $set]));
         }
 
