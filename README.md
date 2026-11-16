@@ -5,8 +5,13 @@ events. An organizer creates a time-boxed challenge out of reusable question set
 publishes a short access code, and participants register, answer questions, and
 compete on a live scoreboard for points, awards and a certificate of completion.
 
-Built with [Laravel 12](https://laravel.com) (PHP 8.2+) and a Bootstrap/jQuery
-frontend, and shipped as a single Docker image (`cylab/ctf`).
+![Capture-the-Flag Challenges](documentation/capture-the-flag - challenges.png)
+
+
+![Capture-the-Flag Questions](documentation/capture-the-flag - questions.png)
+
+
+![Capture-the-Flag Scoreboard](documentation/capture-the-flag - scoreboard.png)
 
 ## Features
 
